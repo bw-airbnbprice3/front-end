@@ -46,7 +46,7 @@ const Add = ({ values, errors, touched }) => {
                 </div>
                 <button type='submit'>Submit</button>
             </Form>
-            <Link to='/user'>Return to Dashboard</Link>
+            <Link to='/listings'>Return to Listings</Link>
         </div>
 
     );

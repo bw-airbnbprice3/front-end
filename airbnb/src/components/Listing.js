@@ -30,9 +30,9 @@ const Listing = () => {
                 </ul>
             </div>
             <nav>
-                <Link to='/edit'>Edit Listing</Link>
+                <Link to='/listings/id/edit'>Edit Listing</Link>
                 <Link>Delete Listing</Link>
-                <Link to='../user'>Return to Dashboard</Link>
+                <Link to='/listings'>Return</Link>
             </nav>
 
         </div>
