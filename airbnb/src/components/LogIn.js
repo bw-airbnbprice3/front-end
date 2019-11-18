@@ -1,5 +1,7 @@
 import React from "react";
-import {withFormik, Form, Field} from "formik";
+import {withFormik, Form} from "formik";
+import {FormikTextField} from "formik-material-fields";
+import {Button, TextField} from "@material-ui/core";
 import * as Yup from "yup";
 import AxiosWithAuth from "../utils/AxiosWithAuth";
 
@@ -11,14 +13,12 @@ const LogIn = (props) => {
       <h2>Log In</h2>
       <Form>
         <div>
-          <Field type="text" name="username" placeholder="Username"/>
-          {touched.username && errors.username && <p>{errors.username}</p>}
+          <FormikTextField margin={"normal"} variant="outlined" label={"Username..."} type="text" name="username" placeholder="Username..."/>
         </div>
         <div>
-          <Field type="password" name="password" placeholder="Password"/>
-          {touched.password && errors.password && <p>{errors.password}</p>}
+          <FormikTextField margin={"normal"} variant="outlined" label={"Password..."} type="password" name="password" placeholder="Password..."/>
         </div>
-        <button type="submit">Log In</button>
+        <Button variant="contained" color={"primary"} size={"large"} margin={"normal"} type="submit">Log In</Button>
       </Form>
     </div>
   );
@@ -33,9 +33,9 @@ const LogInForm = withFormik({
   },
 
   validationSchema: Yup.object().shape({
-    username: Yup.string().required("Username required"),
+    username: Yup.string().required("Username is required"),
     password: Yup.string()
-      .min(3, "Password must be 6 characters or longer")
+      .min(6, "Password must be 6 characters or longer")
       .required("Password is required")
   }),
 
