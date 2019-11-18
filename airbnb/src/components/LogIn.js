@@ -1,13 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import {withFormik, Form, Field} from "formik";
 import * as Yup from "yup";
 import AxiosWithAuth from "../utils/AxiosWithAuth";
 
-const LogIn = ({values, errors, touched}) => {
-  const [loginCredentials, setLoginCredentials] = useState({
-    username: "",
-    password: ""
-  });
+const LogIn = (props) => {
+  const {errors, touched} = props;
 
   return (
     <div>
