@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { withFormik, Form, Field } from "formik";
+import React, {useState} from "react";
+import {withFormik, Form, Field} from "formik";
 import * as Yup from "yup";
 import AxiosWithAuth from "../utils/AxiosWithAuth";
 
-const LogIn = ({ values, errors, touched }) => {
+const LogIn = ({values, errors, touched}) => {
   const [loginCredentials, setLoginCredentials] = useState({
     username: "",
     password: ""
@@ -14,11 +14,11 @@ const LogIn = ({ values, errors, touched }) => {
       <h2>Log In</h2>
       <Form>
         <div>
-          <Field type="text" name="username" placeholder="Username" />
+          <Field type="text" name="username" placeholder="Username"/>
           {touched.username && errors.username && <p>{errors.username}</p>}
         </div>
         <div>
-          <Field type="password" name="password" placeholder="Password" />
+          <Field type="password" name="password" placeholder="Password"/>
           {touched.password && errors.password && <p>{errors.password}</p>}
         </div>
         <button type="submit">Log In</button>
@@ -28,7 +28,7 @@ const LogIn = ({ values, errors, touched }) => {
 };
 
 const LogInForm = withFormik({
-  mapPropsToValues({ username, password }) {
+  mapPropsToValues({username, password}) {
     return {
       username: username || "",
       password: password || ""
@@ -47,7 +47,7 @@ const LogInForm = withFormik({
     AxiosWithAuth()
       .post("/api/login/", values)
       .then(response => {
-        const { data } = response;
+        const {data} = response;
         sessionStorage.setItem("token", data.token);
         console.log(response);
       })
