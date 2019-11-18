@@ -25,10 +25,10 @@ const LogIn = (props) => {
 };
 
 const LogInForm = withFormik({
-  mapPropsToValues({username, password}) {
+  mapPropsToValues({username, password, history}) {
     return {
       username: username || "",
-      password: password || ""
+      password: password || "",
     };
   },
 
@@ -39,14 +39,15 @@ const LogInForm = withFormik({
       .required("Password is required")
   }),
 
-  handleSubmit(values) {
+  handleSubmit(values, props) {
     console.log(values);
     AxiosWithAuth()
       .post("/api/login/", values)
       .then(response => {
         const {data} = response;
         sessionStorage.setItem("token", data.token);
-        console.log(response);
+        // Had to pass in props.props because of the HOC that is referring back to the form
+        props.props.history.push("/listings");
       })
       .catch(error => console.log(error));
   }
