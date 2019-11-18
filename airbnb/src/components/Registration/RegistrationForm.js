@@ -1,11 +1,11 @@
 import React from 'react';
+import { withFormik } from 'formik';
 
 
-
-const RegistrationForm = () => {
+const RegistrationForm= () => {
     return(
         <div>
-
+            
         </div>
     )
 }
