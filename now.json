@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "name": "airbnboptimal",
+  "builds": [{ "src": "airbnb/package.json", "use": "@now/static-build", "config": {"distDir": "build"} }],
+  "routes": [
+    { "src": "/(.*)", "dest": "airbnb/$1" }
+  ]
+}
