@@ -10,6 +10,8 @@ function App() {
   return (
     <div className={"App"}>
       <Route exact path="/" component={LogInForm}/>
+
+      {/*Private routes can be added here. Just follow the basic template below. This will automatically check if the token is saved in storage. If not, it will redirect them to the login page*/}
       <Switch>
         <PrivateRoute path={"/listings"} component={ViewAllListings}/>
       </Switch>
