@@ -10,11 +10,13 @@ import UserEdit from './components/User/UserEdit';
 import ListingAdd from './components/Listings/ListingAdd';
 import Listing from './components/Listings/Listing';
 import ListingEdit from './components/Listings/ListingEdit';
+import RegistrationForm from './components/User/RegistrationForm';
 
 function App() {
   return (
     <div className={"App"}>
       <Route exact path="/" component={LogInForm}/>
+      <Route path="/register" component={RegistrationForm} />
 
       {/*Private routes can be added here. Just follow the basic template below. This will automatically check if the token is saved in storage. If not, it will redirect them to the login page*/}
       <Switch>
