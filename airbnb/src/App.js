@@ -5,11 +5,11 @@ import "./App.css";
 
 import LogInForm from "./components/LogIn";
 import ViewAllListings from "./components/Listings/ViewAllListings";
-import UserProfile from './components/UserProfile';
-import UserEdit from './components/UserEdit';
-import ListingAdd from './components/ListingAdd';
-import Listing from './components/Listing';
-import ListingEdit from './components/ListingEdit';
+import UserProfile from './components/Users/UserProfile';
+import UserEdit from './components/Users/UserEdit';
+import ListingAdd from './components/Listings/ListingAdd';
+import Listing from './components/Listings/Listing';
+import ListingEdit from './components/Listings/ListingEdit';
 
 function App() {
   return (
