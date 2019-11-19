@@ -3,7 +3,7 @@ import {Route, Switch} from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
 import "./App.css";
 
-import LogInForm from "./components/LogIn";
+import LogInForm from "./components/User/LogIn";
 import ViewAllListings from "./components/Listings/ViewAllListings";
 import UserProfile from './components/User/UserProfile';
 import UserEdit from './components/User/UserEdit';
