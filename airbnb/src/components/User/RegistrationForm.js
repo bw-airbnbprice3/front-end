@@ -1,21 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { withFormik } from 'formik';
 
 
-const RegistrationForm= ({values}) => {
-    const [ user, setUser] = useState();
-
-    const handleChanges = e => {
-        setUser({
-            ...user,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const submitForm = e => {
-        e.preventDefault();
-        console.log(user)
-    }
+const RegistrationForm= ({values, handleChange}) => {
 
     console.log(values);
 
@@ -27,13 +14,13 @@ const RegistrationForm= ({values}) => {
                 <label htmlFor="username" className="registraton-username-label">
                     User Name:
                 </label>
-                <input name="username"type="text" className="registration-form-input" value={values.username} />
+                <input name="username"type="text" className="registration-form-input" value={values.username} onChange={handleChange} />
                 </div>
                 <div className="password">
                 <label htmlFor="password" className="registraton-password-label">
                     Enter Password:
                 </label>
-                <input name="password" type="password" className="registration-form-input" value={values.password}/>
+                <input name="password" type="password" className="registration-form-input" value={values.password} onChange={handleChange}/>
                 </div>
                 {/* <div>
                 <label htmlFor="password2" className="registraton-password2-label">
