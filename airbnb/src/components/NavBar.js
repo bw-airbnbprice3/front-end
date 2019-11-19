@@ -1,5 +1,5 @@
 import React from "react";
-import {AppBar, Toolbar, IconButton, Typography, Button} from '@material-ui/core';
+import {AppBar, Toolbar, Button} from '@material-ui/core';
 
 const NavBar = props => {
     return (
@@ -11,10 +11,16 @@ const NavBar = props => {
                         <Button color="inherit" onClick={() => props.history.push("/listing/add")}>Add New Listing</Button>
                         <Button color="inherit" onClick={() => props.history.push("/user")}>User Profile</Button>
                     </div>
-                    <div>
-                        <Button color="inherit" onClick={() => props.history.push("/")}>Log In</Button>
-                        <Button color="inherit" onClick={() => props.history.push("/register")}>Register</Button>
-                    </div>
+                    {sessionStorage.getItem('token') ?
+                        <div>
+                            <Button color="inherit" onClick={() => props.history.push("/")}>Log Out</Button>
+                        </div>
+                    : 
+                        <div>
+                            <Button color="inherit" onClick={() => props.history.push("/")}>Log In</Button>
+                            <Button color="inherit" onClick={() => props.history.push("/register")}>Register</Button>
+                        </div>
+                    }
                 </nav>
             </Toolbar>
         </AppBar>

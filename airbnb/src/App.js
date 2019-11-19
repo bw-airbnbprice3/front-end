@@ -28,8 +28,6 @@ function App() {
         <PrivateRoute exact path='/user' component={UserProfile} />
       </Switch>
 
-      {/* <Route path='/register' component={NewUser} /> */}
-
     </div>
   );
 }
