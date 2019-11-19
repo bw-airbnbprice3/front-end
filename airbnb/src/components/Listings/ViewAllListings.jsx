@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import {Link} from "react-router-dom";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 
 const ViewAllListings = () => {
@@ -9,7 +10,22 @@ const ViewAllListings = () => {
   }, []);
 
   // Need to map over all of the listings here
-  return <h1>From View All Listings</h1>;
+  return (
+    <div>
+      <h1>Listings</h1>
+      <div className="allListings">
+
+        {/* map listings here; sample card below */}
+        <div className="listingCard">
+          <h3>Property Name</h3>
+          <p>Location</p>
+          <Link to="/listing/id">View Listing</Link>
+        </div>
+
+      </div>
+    </div>
+
+  );
 };
 
 export default ViewAllListings;
