@@ -5,8 +5,8 @@ import "./App.css";
 
 import LogInForm from "./components/LogIn";
 import ViewAllListings from "./components/Listings/ViewAllListings";
-import UserProfile from './components/Users/UserProfile';
-import UserEdit from './components/Users/UserEdit';
+import UserProfile from './components/User/UserProfile';
+import UserEdit from './components/User/UserEdit';
 import ListingAdd from './components/Listings/ListingAdd';
 import Listing from './components/Listings/Listing';
 import ListingEdit from './components/Listings/ListingEdit';
