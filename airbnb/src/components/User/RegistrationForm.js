@@ -27,8 +27,8 @@ const RegistrationForm= (props) => {
 const FormixRegistrationForm = withFormik({
     mapPropsToValues({username, password}){
         return {
-            username: username || " ",
-            password: password || " "
+            username: username || "",
+            password: password || ""
         };
     },
 
