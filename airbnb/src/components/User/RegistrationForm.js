@@ -24,7 +24,7 @@ const RegistrationForm= (props) => {
     )
 }
 
-const FormixRegistrationForm = withFormik({
+const FormikRegistrationForm = withFormik({
     mapPropsToValues({username, password}){
         return {
             username: username || "",
@@ -48,4 +48,4 @@ const FormixRegistrationForm = withFormik({
 
 })(RegistrationForm);
 
-export default FormixRegistrationForm;
+export default FormikRegistrationForm;
