@@ -3,7 +3,7 @@ import {withFormik, Form} from "formik";
 import {FormikTextField} from "formik-material-fields";
 import {Button} from "@material-ui/core";
 import * as Yup from "yup";
-import AxiosWithAuth from "../utils/AxiosWithAuth";
+import AxiosWithAuth from "../../utils/AxiosWithAuth";
 
 const LogIn = (props) => {
   return (

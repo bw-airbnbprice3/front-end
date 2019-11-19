@@ -3,13 +3,13 @@ import {Route, Switch} from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
 import "./App.css";
 
-import LogInForm from "./components/LogIn";
+import LogInForm from "./components/User/LogIn";
 import ViewAllListings from "./components/Listings/ViewAllListings";
-import UserProfile from './components/UserProfile';
-import UserEdit from './components/UserEdit';
-import ListingAdd from './components/ListingAdd';
-import Listing from './components/Listing';
-import ListingEdit from './components/ListingEdit';
+import UserProfile from './components/User/UserProfile';
+import UserEdit from './components/User/UserEdit';
+import ListingAdd from './components/Listings/ListingAdd';
+import Listing from './components/Listings/Listing';
+import ListingEdit from './components/Listings/ListingEdit';
 
 function App() {
   return (
