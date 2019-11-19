@@ -26,7 +26,7 @@ const Edit = ({values, errors, touched}) => {
           variant={"outlined"}
           label={"Property Type..."}
           type='text'
-          name='property_type'
+          name='room_type'
           placeholder='Type of property'
         />
 
@@ -77,7 +77,6 @@ const Edit = ({values, errors, touched}) => {
           label={"Property Price Per Night..."}
           InputProps={{
             startAdornment: <InputAdornment position="start">€</InputAdornment>,
-            value: null,
             placeholder: 'Property Price Per Night...'
           }}
           type='number'
@@ -108,19 +107,18 @@ const Edit = ({values, errors, touched}) => {
           variant={"outlined"}
           label={"Minimum Number of Night(s)..."}
           type='number'
-          name='minimun_nights'
-          placeholder={'0'}
+          name='minimum_nights'
         />
 
-          <FormikTextField
-            fullWidth
-            margin={"normal"}
-            variant={"outlined"}
-            label={"Property Amenities.."}
-            type='number'
-            name='property_amenities'
-            placeholder='Property Amenities (separate by comma)...'
-          />
+        <FormikTextField
+          fullWidth
+          margin={"normal"}
+          variant={"outlined"}
+          label={"Property Amenities..."}
+          type='text'
+          name='property_amenities'
+          placeholder='Property Amenities..'
+        />
 
         <Container>
           <Link to={"/listings"}>
@@ -139,31 +137,49 @@ const Edit = ({values, errors, touched}) => {
 };
 
 const ListingEdit = withFormik({
-  mapPropsToValues({property_name, property_type, property_location, property_price, minimun_stay}) {
+  mapPropsToValues({property_name, room_type, address, neighborhood_group, neighborhood, availability_of_year, property_price, bedroom_number, bathroom_number, minimum_nights, property_amenities}) {
     return {
       property_name: property_name || '',
-      property_type: property_type || '',
-      property_location: property_location || '',
-      property_price: property_price || 0,
-      minimun_stay: minimun_stay || 0
+      room_type: room_type || '',
+      address: address || '',
+      neighborhood_group: neighborhood_group || '',
+      neighborhood: neighborhood || '',
+      availability_of_year: availability_of_year || '',
+      property_price: property_price || '',
+      bedroom_number: bedroom_number || '',
+      bathroom_number: bathroom_number || '',
+      minimum_nights: minimum_nights || '',
+      property_amenities: property_amenities || ''
     };
   },
 
   validationSchema: Yup.object().shape({
     property_name: Yup.string()
       .required('Property name is required'),
-    property_type: Yup.string()
-      .required('Property type is required'),
-    property_location: Yup.string()
-      .required('Location is required'),
+      room_type: Yup.string()
+      .required('Room type is required'),
+    address: Yup.string()
+      .required('Address is required'),
+    neighborhood_group: Yup.string()
+      .required('Neighborhood group is required'),
+    neighborhood: Yup.string()
+      .required('Neighborhood is required'),
+    availability_of_year: Yup.string()
+      .required('Availability is required'),
     property_price: Yup.string()
-      .required('Price is required'),
-    minimun_stay: Yup.string()
-      .required('Price is required')
+      .required('Property price is required'),
+    bedroom_number: Yup.string()
+      .required('Bedroom number is required'),
+    bathroom_number: Yup.string()
+      .required('Bathroom number is required'),
+    minimum_nights: Yup.string()
+      .required('Minimum number of nights is required'),
+    property_amenities: Yup.string()
+      .required('Property amenities is required'),
   }),
 
   handleSubmit(values) {
-    console.log(values);
+    console.log('test', values);
   }
 })(Edit);
 
