@@ -6,7 +6,7 @@ import {FormikTextField} from "formik-material-fields";
 import * as Yup from 'yup';
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 
-const Add = ({values, errors, touched}) => {
+const Add = () => {
 
   return (
     <Container maxWidth={"md"} margin={"3%"}>
@@ -150,7 +150,7 @@ const ListingAdd = withFormik({
       bedroom_number: bedroom_number || '',
       bathroom_number: bathroom_number || '',
       minimum_nights: minimum_nights || '',
-      property_amenities: property_amenities || ''
+      property_amenities: property_amenities || '',
     };
   },
 
@@ -180,14 +180,14 @@ const ListingAdd = withFormik({
   }),
 
   handleSubmit(values) {
-
-    const username = sessionStorage.getItem('username');
-    console.log(username);
+    const sessionStorageUsername = sessionStorage.getItem('username');
+    values = ({...values, username: sessionStorageUsername});
+    console.log(values);
     AxiosWithAuth().post('api/listings/', values)
       .then(response => console.log(response))
       .catch(error => {
         // console.log(error.response.data.message);
-        console.log(error);
+        console.log('ERROR: ', error, values);
       });
   }
 })(Add);
