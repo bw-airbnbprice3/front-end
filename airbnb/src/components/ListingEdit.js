@@ -46,7 +46,7 @@ const Edit = ({ values, errors, touched }) => {
                 </div>
                 <button type='submit'>Submit</button>
             </Form>
-            <Link to='/listings'>Return to Listings</Link>
+            <Link to='/listings/id'>Return to Listing</Link>
         </div>
 
     );
