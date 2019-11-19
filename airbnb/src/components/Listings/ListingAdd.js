@@ -38,11 +38,22 @@ const Add = ({ values, errors, touched }) => {
                         <Field 
                             type='number'
                             name='property_price'
-                            placeholder='0'
+                            placeholder={0}
                         />
                         <p>per night</p>
                     </label>
                     {touched.property_price && errors.property_price && <p>{errors.property_price}</p>}
+                </div>
+                <div>
+                    <label>
+                        <Field 
+                            type='number'
+                            name='minimun_stay'
+                            placeholder={0}
+                        />
+                        <p>night(s)</p>
+                    </label>
+                    {touched.minimun_stay && errors.minimun_stay && <p>{errors.minimun_stay}</p>}
                 </div>
                 <button type='submit'>Submit</button>
             </Form>
@@ -53,12 +64,13 @@ const Add = ({ values, errors, touched }) => {
 };
 
 const ListingAdd = withFormik({
-    mapPropsToValues({ property_name, property_type, property_location, property_price }){
+    mapPropsToValues({ property_name, property_type, property_location, property_price, minimun_stay }){
         return {
             property_name: property_name || '',
             property_type: property_type || '',
             property_location: property_location || '',
-            property_price: property_price || ''
+            property_price: property_price || 0,
+            minimun_stay: minimun_stay || 0
         };
     },
 
@@ -70,6 +82,8 @@ const ListingAdd = withFormik({
         property_location: Yup.string()
             .required('Location is required'),
         property_price: Yup.string()
+            .required('Price is required'),
+        minimun_stay: Yup.string()
             .required('Price is required')
     }),
 
