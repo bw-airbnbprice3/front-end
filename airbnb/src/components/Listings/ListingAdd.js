@@ -181,7 +181,7 @@ const ListingAdd = withFormik({
 
   handleSubmit(values) {
     const sessionStorageUsername = sessionStorage.getItem('username');
-    values = ({...values, username: sessionStorageUsername});
+    values = ({...values, host_username: sessionStorageUsername});
     console.log(values);
     AxiosWithAuth().post('api/listings/', values)
       .then(response => console.log(response))
