@@ -40,3 +40,10 @@ a {
 a:hover {
   color: #000;
 }
+
+.listing-data {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}

@@ -9,7 +9,7 @@ const NavBar = props => {
                     {sessionStorage.getItem('token') ?
                         <div>
                             <Button color="inherit" onClick={() => props.history.push("/listings")}>View Listings</Button>
-                            <Button color="inherit" onClick={() => props.history.push("/listing/add")}>Add New Listing</Button>
+                            <Button color="inherit" onClick={() => props.history.push("/add")}>Add New Listing</Button>
                             <Button color="inherit" onClick={() => props.history.push("/user")}>User Profile</Button>
                         </div>
                     :

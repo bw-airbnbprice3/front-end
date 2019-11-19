@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
+import {Container, Button, Card} from '@material-ui/core';
 
 const Listing = props => {
     const [listings, setListings] = useState([])
@@ -21,56 +21,46 @@ const Listing = props => {
         <div>
             { currentListing ?  
                 (
-                    <div>
+                    <Container maxWidth="sm">
                         <h2>{currentListing.property_name}</h2>
-                        <div>
-                            <p>Room Type:</p>
-                            <p>{currentListing.room_type}</p>
-                        </div>
-                        <div>
-                            <p>Address:</p>
-                            <p>{currentListing.address}</p>
-                        </div>
-                        <div>
-                            <p>Neighborhood Group:</p>
-                            <p>{currentListing.neighborhood_group}</p>
-                        </div>
-                        <div>
-                            <p>Neighborhood:</p>
-                            <p>{currentListing.neighborhood}</p>
-                        </div>
-                        <div>
-                            <p>Availability:</p>
-                            <p>{currentListing.availability_of_year} days of the year</p>
-                        </div>
-                        <div>
-                            <p>Property Price:</p>
-                            <p>€{currentListing.property_price} per night</p>
-                        </div>
-                        <div>
-                            <p>Bedrooms:</p>
-                            <p>{currentListing.bedroom_number}</p>
-                        </div>
-                        <div>
-                            <p>Bathrooms:</p>
-                            <p>{currentListing.bathroom_number}</p>
-                        </div>
-                        <div>
-                            <p>Minimum Nights:</p>
-                            <p>{currentListing.minimum_nights}</p>
-                        </div>
-                        <div>
-                            <p>Amenities:</p>
-                            <p>{currentListing.property_amenities}</p>
-                        </div>
-                    </div>
+                        <Card className="listing-data">
+                            <p>Room Type: {currentListing.room_type}</p>
+                        </Card>
+                        <Card className="listing-data">
+                            <p>Address: {currentListing.address}</p>
+                        </Card>
+                        <Card className="listing-data">
+                            <p>Neighborhood Group: {currentListing.neighborhood_group}</p>
+                        </Card>
+                        <Card className="listing-data">
+                            <p>Neighborhood: {currentListing.neighborhood}</p>
+                        </Card>
+                        <Card className="listing-data">
+                            <p>Availability: {currentListing.availability_of_year} days of the year</p>
+                        </Card>
+                        <Card className="listing-data">
+                            <p>Property Price: €{currentListing.property_price} per night</p>
+                        </Card>
+                        <Card className="listing-data">
+                            <p>Bedrooms: {currentListing.bedroom_number}</p>
+                        </Card>
+                        <Card className="listing-data">
+                            <p>Bathrooms: {currentListing.bathroom_number}</p>
+                        </Card>
+                        <Card className="listing-data">
+                            <p>Minimum Nights: {currentListing.minimum_nights}</p>
+                        </Card>
+                        <Card className="listing-data">
+                            <p>Amenities: {currentListing.property_amenities}</p>
+                        </Card>
+                    </Container>
                 )
                 : <p>Loading...</p>
             }
             <nav>
-                <Link to='/listing/id/edit'>Edit Listing</Link>
-                <Link to="/listings">Delete Listing</Link>
-                <Link to='/listings'>Return</Link>
+                <Button size={"large"} margin={"normal"} variant={"contained"} color={"primary"} onClick={currentListing ? () => props.history.push(`/listing/${currentListing.id}/edit`) : null}>Edit Listing</Button>
+                <Button size={"large"} margin={"normal"} variant={"contained"} color={"secondary"} onClick={() => props.history.push("/listings")}>Delete Listing</Button>
+                <Button size={"large"} margin={"normal"} variant={"contained"} color={"primary"} onClick={() => props.history.push('/listings')}>Return</Button>
             </nav>
 
         </div>
