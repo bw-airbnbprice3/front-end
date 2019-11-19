@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
-const LogIn = ({ values, errors, touched }) => {
+const Edit = ({ values, errors, touched }) => {
     return (
         <div>
-            <h2>Log In</h2>
+            <h2>Edit Profile</h2>
             <Form>
                 <div>
                     <Field 
@@ -23,14 +24,15 @@ const LogIn = ({ values, errors, touched }) => {
                     />
                     {touched.password && errors.password && <p>{errors.password}</p>}
                 </div>
-                <button type='submit'>Log In</button>
+                <button type='submit'>Submit</button>
             </Form>
+            <Link to='/user'>Return to Dashboard</Link>
         </div>
 
     );
 };
 
-const LogInForm = withFormik({
+const UserEdit = withFormik({
     mapPropsToValues({ username, password }){
         return {
             username: username || '',
@@ -49,6 +51,6 @@ const LogInForm = withFormik({
     handleSubmit(values){
         console.log(values);
     }
-})(LogIn);
+})(Edit);
 
-export default LogInForm;
+export default UserEdit;
