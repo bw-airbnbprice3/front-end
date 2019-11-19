@@ -12,7 +12,10 @@ const RegistrationForm= () => {
         })
     }
 
-    console.log(user);
+    const submitForm = e => {
+        e.preventDefault();
+        console.log(user)
+    }
 
     return(
         <div className="registration">
