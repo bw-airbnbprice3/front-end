@@ -1,20 +1,21 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import {AppBar, Toolbar, IconButton, Typography, Button} from '@material-ui/core';
 
 const NavBar = props => {
     return (
         <AppBar position="static">
             <Toolbar>
-                <Typography variant="h6">
-                    <nav>
+                <nav className="nav-bar">
+                    <div>
                         <Button color="inherit" onClick={() => props.history.push("/listings")}>View Listings</Button>
-                        <Link to="/listing/add">Add New Listing</Link>
-                        <Link to="/user">User Profile</Link>
-                        <Link to="/">Log In</Link>
-                        <Link to="/register">Register</Link>
-                    </nav>
-                </Typography>
+                        <Button color="inherit" onClick={() => props.history.push("/listing/add")}>Add New Listing</Button>
+                        <Button color="inherit" onClick={() => props.history.push("/user")}>User Profile</Button>
+                    </div>
+                    <div>
+                        <Button color="inherit" onClick={() => props.history.push("/")}>Log In</Button>
+                        <Button color="inherit" onClick={() => props.history.push("/register")}>Register</Button>
+                    </div>
+                </nav>
             </Toolbar>
         </AppBar>
     )

@@ -5,10 +5,10 @@ const UserProfile = () => {
     return (
         <div>
             <h1>Welcome User</h1>
-            <nav>
+            <div>
                 <Link to='/user/edit'>Edit Profile</Link>
                 <Link to='/'>Log Out</Link>
-            </nav>
+            </div>
         </div>
     )
 };
