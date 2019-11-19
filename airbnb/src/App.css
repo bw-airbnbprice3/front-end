@@ -21,3 +21,9 @@
 .App-link {
   color: #09d3ac;
 }
+
+.nav-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
