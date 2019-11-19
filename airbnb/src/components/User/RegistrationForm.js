@@ -1,6 +1,7 @@
 import React from 'react';
-import { withFormik, Form, Field, } from 'formik';
+import { withFormik, Form } from 'formik';
 import {FormikTextField} from "formik-material-fields";
+import {Button} from "@material-ui/core";
 import * as yup from 'yup';
 import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
@@ -12,18 +13,12 @@ const RegistrationForm= (props) => {
             <h2>Create Your Account!</h2>
             <Form>
                 <div className="username-group">
-                <label htmlFor="username" className="registraton-username-label">
-                    User Name:
-                </label>
-                <Field name="username" type="text" placeholder="Create Username" />
+                    <FormikTextField margin={"normal"} variant="outlined" label={"Create Username"} type="text" name="username" placeholder="Create Username"/>
                 </div>
-                <div className="password">
-                <label htmlFor="password" className="registraton-password-label">
-                    Enter Password:
-                </label>
-                <Field name="password" type="password" placeholder="Enter Password" />
+                <div>
+                    <FormikTextField margin={"normal"} variant="outlined" label={"Create Password"} type="password" name="password" placeholder="Create Password"/>
                 </div>
-                <button type="submit" className="sumbit">Submit</button>
+                    <Button variant="contained" color={"primary"} size={"large"} margin={"normal"} type="submit">Register</Button>
             </Form>
         </div>
     )
