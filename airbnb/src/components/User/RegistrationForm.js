@@ -1,8 +1,9 @@
 import React from 'react';
 import { withFormik, Form, Field, } from 'formik';
+import * as yup from 'yup';
 
 
-const RegistrationForm= ({values}) => {
+const RegistrationForm= ({values, touched, errors}) => {
 
     console.log(values);
 
@@ -10,6 +11,10 @@ const RegistrationForm= ({values}) => {
         <div className="registration">
             <h2>Create Your Account!</h2>
             <Form>
+                <div className="errors">
+                {touched.username && errors.username && (<p>{errors.username}</p>)}
+                {touched.password && errors.password && (<p>{errors.password}</p>)}
+                </div>
                 <div className="username-group">
                 <label htmlFor="username" className="registraton-username-label">
                     User Name:
@@ -21,14 +26,7 @@ const RegistrationForm= ({values}) => {
                     Enter Password:
                 </label>
                 <Field name="password" type="password" placeholder="Enter Password"></Field>
-                {/* <input name="password" type="password" className="registration-form-input" value={values.password} onChange={handleChange}/> */}
                 </div>
-                {/* <div>
-                <label htmlFor="password2" className="registraton-password2-label">
-                    Confirm Password:
-                </label>
-                <input name="password2" type="password" className="registration-form-input" onChange={handleChanges}/>
-                </div> */}
                 <button type="submit" className="sumbit">Submit</button>
             </Form>
         </div>
@@ -41,7 +39,14 @@ const FormixRegistrationForm = withFormik({
             username: username || '',
             password: password || ''
         };
-    }
+    },
+
+    validationSchema: yup.object().shape({
+        username: yup.string().required('Please Enter A Username.'),
+        password: yup.string().required('Please Enter A Password.')
+    })
+
+
 })(RegistrationForm);
 
 export default FormixRegistrationForm;
