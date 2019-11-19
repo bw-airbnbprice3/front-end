@@ -3,7 +3,7 @@
   "name": "airbnboptimal",
   "builds": [{ "src": "airbnb/package.json", "use": "@now/static-build", "config": {"distDir": "build"} }],
   "routes": [
-    { "src": "/static/airbnb/(.*)", "dest": "airbnb/static/$1" },
+    { "src": "/(.*)", "dest": "airbnb/$1" },
     { "src": "/(.*)", "dest": "app/index.html" }
   ]
 }
