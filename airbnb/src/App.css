@@ -27,3 +27,16 @@
   display: flex;
   justify-content: space-between;
 }
+
+.login-form {
+  margin-bottom: 10px;
+}
+
+a {
+  color: #4169E1;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #000;
+}

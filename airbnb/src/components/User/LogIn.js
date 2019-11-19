@@ -10,7 +10,7 @@ const LogIn = (props) => {
   return (
     <div>
       <h2>Log In</h2>
-      <Form>
+      <Form className="login-form">
         <div>
           <FormikTextField margin={"normal"} variant="outlined" label={"Username..."} type="text" name="username" placeholder="Username..."/>
         </div>
