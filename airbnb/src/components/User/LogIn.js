@@ -44,7 +44,9 @@ const LogInForm = withFormik({
       .post("/api/login/", values)
       .then(response => {
         const {data} = response;
+        console.log(data);
         sessionStorage.setItem("token", data.token);
+        sessionStorage.setItem("username", data.username);
         // Had to pass in props.props because of the HOC that is referring back to the form where props are being drilled down
         props.props.history.push("/listings");
       })
