@@ -21,8 +21,60 @@ const roomTypes = [
   },
 ];
 
+const neighborhoodGroups = [
+  {
+    value: 1,
+    label: 'Mitte'
+  },
+  {
+    value: 2,
+    label: 'Pankow'
+  },
+  {
+    value: 3,
+    label: 'Tempelhof - Schöneberg'
+  },
+  {
+    value: 4,
+    label: 'Friedrichshain - Kreuzberg'
+  },
+  {
+    value: 5,
+    label: 'Charlottenburg-Wilm'
+  },
+  {
+    value: 6,
+    label: 'Neukölln'
+  },
+  {
+    value: 7,
+    label: 'Treptow - Köpenick'
+  },
+  {
+    value: 8,
+    label: 'Steglitz - Zehlendorf'
+  },
+  {
+    value: 9,
+    label: 'Reinickendorf'
+  },
+  {
+    value: 10,
+    label: 'Lichtenberg'
+  },
+  {
+    value: 11,
+    label: 'Marzahn - Hellersdorf'
+  },
+  {
+    value: 12,
+    label: 'Spandau'
+  },
+];
+
 const Add = () => {
   const [roomType, setRoomType] = useState(1);
+  const [neighborhoodGroup, setNeighborhoodGroup] = useState(1);
 
   const handleChange = event => {
     setRoomType(event.target.value);
@@ -71,14 +123,22 @@ const Add = () => {
         />
         ​
         <FormikTextField
+          select
           fullWidth
           margin={"normal"}
           variant={"outlined"}
-          label={"Neighborhood Group..."}
+          label={"Property Type..."}
           type='text'
           name='neighborhood_group'
-          placeholder='Neighborhood Group'
-        />
+          value={neighborhoodGroup}
+          onChange={handleChange}
+          helperText={'Please select your neighborhood group'}>
+          {neighborhoodGroups.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </FormikTextField>
         ​
         <FormikTextField
           fullWidth
