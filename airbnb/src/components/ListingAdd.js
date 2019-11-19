@@ -70,7 +70,7 @@ const ListingAdd = withFormik({
         property_location: Yup.string()
             .required('Location is required'),
         property_price: Yup.string()
-            .required('Property price is required')
+            .required('Price is required')
     }),
 
     handleSubmit(values){
