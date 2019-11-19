@@ -1,13 +1,11 @@
 import React from "react";
 import {withFormik, Form} from "formik";
 import {FormikTextField} from "formik-material-fields";
-import {Button, TextField} from "@material-ui/core";
+import {Button} from "@material-ui/core";
 import * as Yup from "yup";
 import AxiosWithAuth from "../utils/AxiosWithAuth";
 
 const LogIn = (props) => {
-  const {errors, touched} = props;
-
   return (
     <div>
       <h2>Log In</h2>
@@ -40,13 +38,13 @@ const LogInForm = withFormik({
   }),
 
   handleSubmit(values, props) {
-    console.log(values);
+    // console.log(values);
     AxiosWithAuth()
       .post("/api/login/", values)
       .then(response => {
         const {data} = response;
         sessionStorage.setItem("token", data.token);
-        // Had to pass in props.props because of the HOC that is referring back to the form
+        // Had to pass in props.props because of the HOC that is referring back to the form where props are being drilled down
         props.props.history.push("/listings");
       })
       .catch(error => console.log(error));
