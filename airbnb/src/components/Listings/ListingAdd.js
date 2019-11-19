@@ -121,7 +121,7 @@ const Add = ({ values, errors, touched }) => {
                 />
         ​
                 <Container>
-                <Link to={"/listing/id"}>
+                <Link to={"/listings"}>
                     <Button size={"large"} margin={"normal"} variant={"contained"} color={"secondary"}>Cancel</Button>
                 </Link>
         ​
