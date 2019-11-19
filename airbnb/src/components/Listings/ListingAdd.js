@@ -1,12 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {withFormik, Form} from 'formik';
-import {Button, InputAdornment, Container} from "@material-ui/core";
+import {Button, InputAdornment, Container, MenuItem} from "@material-ui/core";
 import {FormikTextField} from "formik-material-fields";
 import * as Yup from 'yup';
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 
+const roomTypes = [
+  {
+    value: 1,
+    label: 'Entire Home/Apartment'
+  },
+  {
+    value: 2,
+    label: 'Private Room'
+  },
+  {
+    value: 3,
+    label: 'Shared Room'
+  },
+];
+
 const Add = () => {
+  const [roomType, setRoomType] = useState(1);
+
+  const handleChange = event => {
+    setRoomType(event.target.value);
+  };
 
   return (
     <Container maxWidth={"md"} margin={"3%"}>
@@ -23,14 +43,22 @@ const Add = () => {
         />
         ​
         <FormikTextField
+          select
           fullWidth
           margin={"normal"}
           variant={"outlined"}
           label={"Property Type..."}
           type='text'
           name='room_type'
-          placeholder='Type of property'
-        />
+          value={roomType}
+          onChange={handleChange}
+          helperText={'Please select the type of property'}>
+          {roomTypes.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </FormikTextField>
         ​
         <FormikTextField
           fullWidth
@@ -187,7 +215,7 @@ const ListingAdd = withFormik({
       .then(response => console.log(response))
       .catch(error => {
         // console.log(error.response.data.message);
-        console.log('ERROR: ', error, values);
+        console.log(error);
       });
   }
 })(Add);
