@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {withFormik, Form} from "formik";
 import {FormikTextField} from "formik-material-fields";
 import {Button} from "@material-ui/core";
@@ -18,6 +19,7 @@ const LogIn = (props) => {
         </div>
         <Button variant="contained" color={"primary"} size={"large"} margin={"normal"} type="submit">Log In</Button>
       </Form>
+      <Link to="/register">New User? Register Here</Link>
     </div>
   );
 };
@@ -33,7 +35,6 @@ const LogInForm = withFormik({
   validationSchema: Yup.object().shape({
     username: Yup.string().required("Username is required"),
     password: Yup.string()
-      .min(6, "Password must be 6 characters or longer")
       .required("Password is required")
   }),
 
