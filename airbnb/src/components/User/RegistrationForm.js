@@ -1,26 +1,27 @@
 import React from 'react';
-import { withFormik } from 'formik';
+import { withFormik, Form, Field, } from 'formik';
 
 
-const RegistrationForm= ({values, handleChange}) => {
+const RegistrationForm= ({values}) => {
 
     console.log(values);
 
     return(
         <div className="registration">
             <h2>Create Your Account!</h2>
-            <form action="" className="registration-form">
+            <Form>
                 <div className="username-group">
                 <label htmlFor="username" className="registraton-username-label">
                     User Name:
                 </label>
-                <input name="username"type="text" className="registration-form-input" value={values.username} onChange={handleChange} />
+                <Field name="username" type="text" placeholder="Create Username" />
                 </div>
                 <div className="password">
                 <label htmlFor="password" className="registraton-password-label">
                     Enter Password:
                 </label>
-                <input name="password" type="password" className="registration-form-input" value={values.password} onChange={handleChange}/>
+                <Field name="password" type="password" placeholder="Enter Password"></Field>
+                {/* <input name="password" type="password" className="registration-form-input" value={values.password} onChange={handleChange}/> */}
                 </div>
                 {/* <div>
                 <label htmlFor="password2" className="registraton-password2-label">
@@ -29,18 +30,17 @@ const RegistrationForm= ({values, handleChange}) => {
                 <input name="password2" type="password" className="registration-form-input" onChange={handleChanges}/>
                 </div> */}
                 <button type="submit" className="sumbit">Submit</button>
-            </form>
+            </Form>
         </div>
     )
 }
-
 
 const FormixRegistrationForm = withFormik({
     mapPropsToValues({username, password}){
         return {
             username: username || '',
             password: password || ''
-        }
+        };
     }
 })(RegistrationForm);
 
