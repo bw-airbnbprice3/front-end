@@ -46,4 +46,6 @@ const RegistrationForm= () => {
 }
 
 
-export default RegistrationForm;
+const FormixRegistrationForm = withFormik(RegistrationForm);
+
+export default FormixRegistrationForm;
