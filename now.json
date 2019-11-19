@@ -4,6 +4,6 @@
   "builds": [{ "src": "airbnb/package.json", "use": "@now/static-build", "config": {"distDir": "build"} }],
   "routes": [
     { "src": "/(.*)", "dest": "airbnb/$1" },
-    {"src": "/listing/add", "dest": "airbnb/listing/add"},
+    { "src": "/(.*)", "dest": "app/index.html" }
   ]
 }
