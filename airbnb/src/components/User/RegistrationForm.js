@@ -5,16 +5,12 @@ import * as yup from 'yup';
 import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
 
-const RegistrationForm= ({values, touched, errors}) => {
+const RegistrationForm= (props) => {
 
     return(
         <div className="registration">
             <h2>Create Your Account!</h2>
             <Form>
-                <div className="errors">
-                {touched.username && errors.username && (<p>{errors.username}</p>)}
-                {touched.password && errors.password && (<p>{errors.password}</p>)}
-                </div>
                 <div className="username-group">
                 <label htmlFor="username" className="registraton-username-label">
                     User Name:
@@ -25,7 +21,7 @@ const RegistrationForm= ({values, touched, errors}) => {
                 <label htmlFor="password" className="registraton-password-label">
                     Enter Password:
                 </label>
-                <Field name="password" type="password" placeholder="Enter Password"></Field>
+                <Field name="password" type="password" placeholder="Enter Password" />
                 </div>
                 <button type="submit" className="sumbit">Submit</button>
             </Form>
@@ -46,9 +42,12 @@ const FormixRegistrationForm = withFormik({
         password: yup.string().required("Please Enter A Password.")
     }),
 
-    handleSubmit(values){
+    handleSubmit(values, props){
         AxiosWithAuth().post('/api/register/', values)
-        .then(response => console.log(response))
+        .then(response => {
+            console.log(response);
+            props.props.history.push("/");
+        })
         .catch(err => console.log(err));
     }
 
