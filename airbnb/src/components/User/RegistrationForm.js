@@ -1,11 +1,11 @@
 import React from 'react';
 import { withFormik, Form, Field, } from 'formik';
+import {FormikTextField} from "formik-material-fields";
 import * as yup from 'yup';
+import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
 
 const RegistrationForm= ({values, touched, errors}) => {
-
-    console.log(values);
 
     return(
         <div className="registration">
@@ -36,16 +36,21 @@ const RegistrationForm= ({values, touched, errors}) => {
 const FormixRegistrationForm = withFormik({
     mapPropsToValues({username, password}){
         return {
-            username: username || '',
-            password: password || ''
+            username: username || " ",
+            password: password || " "
         };
     },
 
     validationSchema: yup.object().shape({
-        username: yup.string().required('Please Enter A Username.'),
-        password: yup.string().required('Please Enter A Password.')
-    })
+        username: yup.string().required("Please Enter A Username."),
+        password: yup.string().required("Please Enter A Password.")
+    }),
 
+    handleSubmit(values){
+        AxiosWithAuth().post('/api/register/', values)
+        .then(response => console.log(response))
+        .catch(err => console.log(err));
+    }
 
 })(RegistrationForm);
 
