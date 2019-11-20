@@ -703,7 +703,7 @@ const Add = () => {
           variant={"outlined"}
           label={"Property Type..."}
           type='text'
-          name='neighborhood_group'
+          name='neighborhood'
           value={neighborhood}
           onChange={neighborhoodHandleChange}
           helperText={'Please select your neighborhood'}>
