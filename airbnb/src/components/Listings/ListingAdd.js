@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { withFormik, Form } from "formik";
-import { Button, InputAdornment, Container, MenuItem } from "@material-ui/core";
-import { FormikTextField } from "formik-material-fields";
+import React, {useState} from "react";
+import {Link} from "react-router-dom";
+import {withFormik, Form} from "formik";
+import {Button, InputAdornment, Container, MenuItem} from "@material-ui/core";
+import {FormikTextField} from "formik-material-fields";
 import * as Yup from "yup";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 import {
@@ -11,7 +11,8 @@ import {
   neighborhoods
 } from "../../utils/DataFiles";
 
-const Add = () => {
+const Add = (props) => {
+
   const [roomType, setRoomType] = useState(1);
   const [neighborhoodGroup, setNeighborhoodGroup] = useState(1);
   const [neighborhood, setNeighborhood] = useState(1);
@@ -183,18 +184,18 @@ const Add = () => {
 
 const ListingAdd = withFormik({
   mapPropsToValues({
-    property_name,
-    room_type,
-    address,
-    neighborhood_group,
-    neighborhood,
-    availability_of_year,
-    property_price,
-    bedroom_number,
-    bathroom_number,
-    minimum_nights,
-    property_amenities
-  }) {
+                     property_name,
+                     room_type,
+                     address,
+                     neighborhood_group,
+                     neighborhood,
+                     availability_of_year,
+                     property_price,
+                     bedroom_number,
+                     bathroom_number,
+                     minimum_nights,
+                     property_amenities
+                   }) {
     return {
       property_name: property_name || "",
       room_type: room_type || "",
@@ -228,7 +229,7 @@ const ListingAdd = withFormik({
 
   handleSubmit(values) {
     const sessionStorageUsername = sessionStorage.getItem("username");
-    values = { ...values, host_username: sessionStorageUsername };
+    values = {...values, host_username: sessionStorageUsername};
     console.log(values);
     AxiosWithAuth()
       .post("api/listings/", values)

@@ -1,13 +1,18 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-import {withFormik, Form} from 'formik';
-import {Button, InputAdornment, Container, MenuItem} from "@material-ui/core";
-import {FormikTextField} from "formik-material-fields";
-import * as Yup from 'yup';
+import {connect} from "react-redux";
+import {Button, InputAdornment, Container, MenuItem, TextField} from "@material-ui/core";
 import {neighborhoodGroups, neighborhoods, roomTypes} from "../../utils/DataFiles";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
+import {postListingData} from "../../actions";
 
-const Edit = () => {
+const Edit = (props) => {
+
+  useEffect(() => {
+    const id = props.match.params.id;
+    props.postListingData(id);
+  }, []);
+
   const [roomType, setRoomType] = useState(1);
   const [neighborhoodGroup, setNeighborhoodGroup] = useState(1);
   const [neighborhood, setNeighborhood] = useState(1);
@@ -24,21 +29,26 @@ const Edit = () => {
     setNeighborhood(event.target.value);
   };
 
+  // / Sets the proper data values here. Since some of the keys return an integer, and the value requires the string, sets the correct data
+
+
   return (
     <Container maxWidth={"md"} margin={"3%"}>
+      {props.isFetching && <h1>Test</h1>}
       <h2>Edit (Property Name)</h2>
-      <Form>
-        <FormikTextField
+      <form>
+        <TextField
           fullWidth
           margin={"normal"}
           variant={"outlined"}
-          label={"Property Name..."}
           type='text'
+          label={"Property Name..."}
           name='property_name'
-          placeholder='Name of property'
+          helperText='Name of property'
+          defaultValue={props.editingData.property_name}
         />
         ​
-        <FormikTextField
+        <TextField
           select
           fullWidth
           margin={"normal"}
@@ -54,19 +64,22 @@ const Edit = () => {
               {option.label}
             </MenuItem>
           ))}
-        </FormikTextField>
+        </TextField>
         ​
-        <FormikTextField
+        <TextField
+          required
           fullWidth
           margin={"normal"}
           variant={"outlined"}
           label={"Address..."}
           type='text'
           name='address'
-          placeholder='Address'
+          helperText='Address'
+          defaultValue={props.editingData.address}
         />
         ​
-        <FormikTextField
+        <TextField
+          required
           select
           fullWidth
           margin={"normal"}
@@ -82,9 +95,10 @@ const Edit = () => {
               {option.label}
             </MenuItem>
           ))}
-        </FormikTextField>
+        </TextField>
         ​
-        <FormikTextField
+        <TextField
+          required
           select
           fullWidth
           margin={"normal"}
@@ -100,19 +114,22 @@ const Edit = () => {
               {option.label}
             </MenuItem>
           ))}
-        </FormikTextField>
+        </TextField>
         ​
-        <FormikTextField
+        <TextField
+          required
           fullWidth
           margin={"normal"}
           variant={"outlined"}
           label={"Availability During Year.."}
           type='number'
           name='availability_of_year'
-          placeholder='Availability During Year...'
+          helperText='Availability During Year...'
+          defaultValue={props.editingData.availability_of_year}
         />
         ​
-        <FormikTextField
+        <TextField
+          required
           fullWidth
           margin={"normal"}
           variant={"outlined"}
@@ -123,36 +140,44 @@ const Edit = () => {
           }}
           type='number'
           name='property_price'
+          defaultValue={props.editingData.property_price}
         />
         ​
-        <FormikTextField
+        <TextField
+          required
           fullWidth
           margin={"normal"}
           variant={"outlined"}
           label={"Number of Bedroom(s)..."}
           type='number'
           name='bedroom_number'
+          defaultValue={props.editingData.bedroom_number}
         />
         ​
-        <FormikTextField
+        <TextField
           fullWidth
+          required
           margin={"normal"}
           variant={"outlined"}
           label={"Number of Bathroom(s)..."}
           type='number'
           name='bathroom_number'
+          defaultValue={props.editingData.bathroom_number}
         />
         ​
-        <FormikTextField
+        <TextField
           fullWidth
+          required
           margin={"normal"}
           variant={"outlined"}
           label={"Minimum Number of Night(s)..."}
           type='number'
           name='minimum_nights'
+          defaultValue={props.editingData.minimum_nights}
         />
         ​
-        <FormikTextField
+        <TextField
+          required
           fullWidth
           margin={"normal"}
           variant={"outlined"}
@@ -160,6 +185,7 @@ const Edit = () => {
           type='text'
           name='property_amenities'
           placeholder='Property Amenities..'
+          defaultValue={props.editingData.property_amenities}
         />
         ​
         <Container>
@@ -171,71 +197,21 @@ const Edit = () => {
             Listing</Button>
         </Container>
         ​
-      </Form>
+      </form>
       ​
     </Container>
 
   );
 };
 
-const ListingEdit = withFormik({
-  mapPropsToValues({
-                     property_name,
-                     room_type,
-                     address,
-                     neighborhood_group,
-                     neighborhood,
-                     availability_of_year,
-                     property_price,
-                     bedroom_number,
-                     bathroom_number,
-                     minimum_nights,
-                     property_amenities
-                   }) {
-    return {
-      property_name: property_name || "",
-      room_type: room_type || "",
-      address: address || "",
-      neighborhood_group: neighborhood_group || "",
-      neighborhood: neighborhood || "",
-      availability_of_year: availability_of_year || "",
-      property_price: property_price || "",
-      bedroom_number: bedroom_number || "",
-      bathroom_number: bathroom_number || "",
-      minimum_nights: minimum_nights || "",
-      property_amenities: property_amenities || ""
-    };
-  },
+const mapStateToProps = (state) => {
 
-  validationSchema: Yup.object().shape({
-    property_name: Yup.string().required("Property name is required"),
-    room_type: Yup.string().required("Room type is required"),
-    address: Yup.string().required("Address is required"),
-    neighborhood_group: Yup.string().required("Neighborhood group is required"),
-    neighborhood: Yup.string().required("Neighborhood is required"),
-    availability_of_year: Yup.string().required("Availability is required"),
-    property_price: Yup.string().required("Property price is required"),
-    bedroom_number: Yup.string().required("Bedroom number is required"),
-    bathroom_number: Yup.string().required("Bathroom number is required"),
-    minimum_nights: Yup.string().required(
-      "Minimum number of nights is required"
-    ),
-    property_amenities: Yup.string().required("Property amenities is required")
-  }),
+  return {
+    editingData: state.editingData,
+    isFetching: state.isFetching,
+    errors: state.errors,
+    editingValues: state.editingValues,
+  };
+};
 
-  handleSubmit(values) {
-    const sessionStorageUsername = sessionStorage.getItem("username");
-    values = {...values, host_username: sessionStorageUsername};
-    console.log(values);
-    // AxiosWithAuth()
-    //   .put("api/listings/", values)
-    //   .then(response => console.log(response))
-    //   .catch(error => {
-    //     // console.log(error.response.data.message);
-    //     console.log(error);
-    //   });
-  }
-})(Edit);
-;
-
-export default ListingEdit;
+export default connect(mapStateToProps, {postListingData})(Edit);
