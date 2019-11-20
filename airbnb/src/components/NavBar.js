@@ -3,18 +3,24 @@ import { AppBar, Toolbar, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
-  navContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-  navBar: {
-    width: "90%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
-  }
+    logo: {
+        width: "9%",
+        "&:hover": {
+            cursor: "pointer"
+        }
+    },
+    navContainer: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
+    navBar: {
+        width: "90%",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
+    }
 });
 
 const NavBar = props => {
@@ -29,7 +35,7 @@ const NavBar = props => {
   return (
     <AppBar position="static">
       <Toolbar className={classes.navContainer}>
-        <h1>Hostify</h1>
+        <h1 className={classes.logo} onClick={sessionStorage.getItem("token") ? () => props.history.push("/listings") : () => props.history.push("/")}>Hostify</h1>
         <nav className={classes.navBar}>
           {sessionStorage.getItem("token") ? (
             <>
