@@ -20,7 +20,7 @@ const LogIn = props => {
   const classes = useStyles();
 
   return (
-    <div>
+    <div className="fade-in">
       <h2>Log In</h2>
       <Form className={classes.formStyle}>
         <div>

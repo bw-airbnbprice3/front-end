@@ -38,7 +38,7 @@ const Add = props => {
   };
 
   return (
-    <Container maxWidth={"md"} margin={"3%"}>
+    <Container maxWidth={"md"} margin={"3%"} className="fade-in">
       <h2>Add Listing</h2>
       <Form>
         <FormikTextField

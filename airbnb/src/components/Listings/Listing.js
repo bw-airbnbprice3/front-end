@@ -40,7 +40,7 @@ const Listing = props => {
         <div>
             { currentListing ?  
                 (
-                    <Container maxWidth="sm">
+                    <Container maxWidth="sm" className="fade-in">
                         <h2>{currentListing.property_name}</h2>
                         <Card className={classes.dataStyle}>
                             <p>Room Type: {currentListing.room_type}</p>
@@ -72,15 +72,43 @@ const Listing = props => {
                         <Card className={classes.dataStyle}>
                             <p>Amenities: {currentListing.property_amenities}</p>
                         </Card>
+                    
+                        <nav>
+                            <Button
+                                className={classes.btn}
+                                size={"large"}
+                                margin={"normal"}
+                                variant={"contained"}
+                                color={"secondary"}
+                                onClick={() => deleteListing(currentListing.id)}
+                            >
+                                Delete Listing
+                            </Button>
+                            <Button
+                                className={classes.btn}
+                                size={"large"}
+                                margin={"normal"}
+                                variant={"contained"}
+                                color={"primary"}
+                                onClick={currentListing ? () => props.history.push(`/listing/${currentListing.id}/edit`) : null}
+                            >
+                                Edit Listing
+                            </Button>
+                            <Button
+                                className={classes.btn}
+                                size={"large"}
+                                margin={"normal"}
+                                variant={"contained"}
+                                color={"primary"}
+                                onClick={() => props.history.push('/listings')}
+                            >
+                                Return
+                            </Button>
+                        </nav>
                     </Container>
                 )
                 : <p>Loading...</p>
-            }
-            <nav>
-                <Button className={classes.btn} size={"large"} margin={"normal"} variant={"contained"} color={"secondary"} onClick={() => deleteListing(currentListing.id)}>Delete Listing</Button>
-                <Button className={classes.btn} size={"large"} margin={"normal"} variant={"contained"} color={"primary"} onClick={currentListing ? () => props.history.push(`/listing/${currentListing.id}/edit`) : null}>Edit Listing</Button>         <Button className={classes.btn} size={"large"} margin={"normal"} variant={"contained"} color={"primary"} onClick={() => props.history.push('/listings')}>Return</Button>
-            </nav>
-
+            }        
         </div>
     )
 }
