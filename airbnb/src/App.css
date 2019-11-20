@@ -1,6 +1,8 @@
 .App {
   text-align: center;
   margin-bottom: 2%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .App-logo {
@@ -22,9 +24,11 @@
   color: #09d3ac;
 }
 
-.nav-bar {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+a {
+  color: #4169E1;
+  text-decoration: none;
 }
 
+a:hover {
+  color: #000;
+}
