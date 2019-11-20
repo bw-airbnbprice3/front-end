@@ -16,12 +16,14 @@ const ViewAllListings = (props) => {
    
   }, []);
 
-  const deleteListing = id => {
+  const deleteListing = (id, props) => {
     AxiosWithAuth().delete(`api/listings/${id}`) 
-    .then(response => console.log(response))
+    .then(response => {
+      console.log(response);
+    
+    })
     .catch(error => console.log(error));
   }
-
 
   return (
     <Box className={classes.viewAllListingsContainer} >
@@ -48,7 +50,7 @@ const ViewAllListings = (props) => {
               <Link onClick={() => props.history.push(`/listing/${listing.id}/edit`)}>
                 <Button variant="contained" color="primary">Edit</Button>
               </Link>
-              <Button variant="contained" color="secondary" onClick={() => deleteListing(listing.id)}>Delete</Button>
+              <Button variant="contained" color="secondary" onClick={() => deleteListing(listing.id, props)}>Delete</Button>
             </CardActions>
           </Card>     
         ))
