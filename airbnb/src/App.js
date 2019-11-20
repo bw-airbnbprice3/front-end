@@ -11,14 +11,14 @@ import ListingAdd from './components/Listings/ListingAdd';
 import Listing from './components/Listings/Listing';
 import ListingEdit from './components/Listings/ListingEdit';
 import NavBar from "./components/NavBar";
-import RegistrationForm from './components/User/RegistrationForm';
+import FormikRegistrationForm from './components/User/RegistrationForm';
 
 function App() {
   return (
     <div className={"App"}>
       <Route path="/" component={NavBar} />
       <Route exact path="/" component={LogInForm}/>
-      <Route path="/register" component={RegistrationForm} />
+      <Route path="/register" component={FormikRegistrationForm} />
 
       {/*Private routes can be added here. Just follow the basic template below. This will automatically check if the token is saved in storage. If not, it will redirect them to the login page*/}
       <Switch>
