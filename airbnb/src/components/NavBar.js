@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
     logo: {
-        width: "9%",
         "&:hover": {
             cursor: "pointer"
         }
@@ -12,14 +11,36 @@ const useStyles = makeStyles({
     navContainer: {
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        "@media(max-width: 800px)": {
+            flexDirection: "column"
+        }
     },
     navBar: {
-        width: "90%",
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center"
+        justifyContent: "flex-end",
+        alignItems: "center",
+        "@media(max-width: 600px)":{
+            flexDirection: "column"
+        }
+    },
+    navLeft: {
+        "@media(max-width: 600px)":{
+            display: "flex",
+            flexDirection: "column"
+        }
+    },
+    navRight: {
+        "@media(max-width: 600px)":{
+            display: "flex",
+            flexDirection: "column"
+        }
+    },
+    btn: {
+        "@media(max-width: 800px)":{
+            marginBottom: 10
+        }
     }
 });
 
@@ -34,33 +55,33 @@ const NavBar = props => {
 
   return (
     <AppBar position="static">
-      <Toolbar className={classes.navContainer}>
+      <Toolbar className={`${classes.navContainer} nav-container`}>
         <h1 className={classes.logo} onClick={sessionStorage.getItem("token") ? () => props.history.push("/listings") : () => props.history.push("/")}>Hostify</h1>
         <nav className={classes.navBar}>
           {sessionStorage.getItem("token") ? (
             <>
-              <div>
-                <Button
+              <div className={classes.navLeft}>
+                <Button className={classes.btn}
                   color="inherit"
                   onClick={() => props.history.push("/listings")}
                 >
                   View Listings
                 </Button>
-                <Button
+                <Button className={classes.btn}
                   color="inherit"
                   onClick={() => props.history.push("/add")}
                 >
                   Add New Listing
                 </Button>
-                <Button
+                <Button className={classes.btn}
                   color="inherit"
                   onClick={() => props.history.push("/user")}
                 >
                   User Profile
                 </Button>
               </div>
-              <div>
-                <Button color="inherit" onClick={destroySessionStorage}>
+              <div className={classes.navRight}>
+                <Button className={classes.btn} color="inherit" onClick={destroySessionStorage}>
                   Log Out
                 </Button>
               </div>
@@ -68,11 +89,11 @@ const NavBar = props => {
           ) : (
             <>
               <div />
-              <div>
-                <Button color="inherit" onClick={() => props.history.push("/")}>
+              <div className={classes.navRight}>
+                <Button className={classes.btn} color="inherit" onClick={() => props.history.push("/")}>
                   Log In
                 </Button>
-                <Button
+                <Button className={classes.btn}
                   color="inherit"
                   onClick={() => props.history.push("/register")}
                 >
