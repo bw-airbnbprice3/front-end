@@ -16,28 +16,29 @@ const ViewAllListings = (props) => {
    
   }, []);
   console.log(listings);
+
+
   return (
     <Box className={classes.viewAllListingsContainer} >
 
       <Typography variant="h1" className={classes.viewAlllistingsHeading}>Current Listings</Typography>
-      
+
       {
         listings.map(listing => (
-          <Card  key={listing.id} display="flex" flexDirection="row" flexWrap="wrap" justifyContent="center" >
-             <Link onClick={() => props.history.push(`/listing/${listing.id}`)}>
-              <CardHeader title= {listing.property_name} />
+          <Card  key={listing.id} className={classes.viewAllListingsCard}>
+             <Link className={classes.viewAllListingsCardHeaderLink} onClick={() => props.history.push(`/listing/${listing.id}`)}>
+              <CardHeader titleTypographyProps={{variant:'h3' }} title= {listing.property_name}  className={classes.viewAllListingsCardHeader}/>
              </Link>
-            <CardContent>
-            <Typography variant="h4">{listing.address}</Typography>
-              
-                {/* <Typography variant="h3">
-                 
-                </Typography> */}
-             
-            
-            {/* <Link onClick={() => props.history.push(`/listing/${listing.id}`)}>
-              <Typography variant="h4">{listing.neighborhood}</Typography>
-            </Link> */}
+
+             {listings.length === 0 &&
+
+              <Box className={classes.viewAllListingsLoading}>
+                  <Typography variant="h4">Loading...</Typography>
+              </Box>
+            }
+
+            <CardContent className={classes.veiwAllListingsCardContent}>
+              <Typography variant="h4">{listing.address}</Typography>
             </CardContent>
             <CardActions>
               <Link onClick={() => props.history.push(`/listing/${listing.id}/edit`)}>
