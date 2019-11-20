@@ -9,6 +9,9 @@ const useStyles = makeStyles({
         justifyContent: "flex-start",
         padding: "10px 20px",
         marginBottom: 20
+    },
+    btn: {
+        margin: 10
     }
 });
 
@@ -20,6 +23,11 @@ const Listing = props => {
         listing => listing.id === Number(props.match.params.id)
     );
     console.log(currentListing);
+
+    const deleteListing = id => {
+        AxiosWithAuth().delete(`api/listings/${id}`);
+        props.history.push("/listings");
+    };
     
     useEffect(() => {
         AxiosWithAuth().get("api/listings/")
@@ -69,9 +77,8 @@ const Listing = props => {
                 : <p>Loading...</p>
             }
             <nav>
-                <Button size={"large"} margin={"normal"} variant={"contained"} color={"primary"} onClick={currentListing ? () => props.history.push(`/listing/${currentListing.id}/edit`) : null}>Edit Listing</Button>
-                <Button size={"large"} margin={"normal"} variant={"contained"} color={"secondary"} onClick={() => props.history.push("/listings")}>Delete Listing</Button>
-                <Button size={"large"} margin={"normal"} variant={"contained"} color={"primary"} onClick={() => props.history.push('/listings')}>Return</Button>
+                <Button className={classes.btn} size={"large"} margin={"normal"} variant={"contained"} color={"secondary"} onClick={() => deleteListing(currentListing.id)}>Delete Listing</Button>
+                <Button className={classes.btn} size={"large"} margin={"normal"} variant={"contained"} color={"primary"} onClick={currentListing ? () => props.history.push(`/listing/${currentListing.id}/edit`) : null}>Edit Listing</Button>         <Button className={classes.btn} size={"large"} margin={"normal"} variant={"contained"} color={"primary"} onClick={() => props.history.push('/listings')}>Return</Button>
             </nav>
 
         </div>
