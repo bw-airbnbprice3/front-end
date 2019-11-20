@@ -4,10 +4,11 @@ import {AppBar, Toolbar, Button} from '@material-ui/core';
 const NavBar = props => {
     return (
         <AppBar position="static">
-            <Toolbar>
-                <nav className="nav-bar">
+            <Toolbar className="nav-bar">
+                <h1>Hostify</h1>
+                <nav className="nav">                    
                     {sessionStorage.getItem('token') ?
-                        <div>
+                        <div>                            
                             <Button color="inherit" onClick={() => props.history.push("/listings")}>View Listings</Button>
                             <Button color="inherit" onClick={() => props.history.push("/add")}>Add New Listing</Button>
                             <Button color="inherit" onClick={() => props.history.push("/user")}>User Profile</Button>

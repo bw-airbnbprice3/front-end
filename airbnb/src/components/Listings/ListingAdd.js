@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 const Add = ({ values, errors, touched }) => {
     return (
         <Container maxWidth={"md"} margin={"3%"}>
-            <h2>Edit (Property Name)</h2>
+            <h2>Add Listing</h2>
             <Form>
                 <FormikTextField
                 fullWidth

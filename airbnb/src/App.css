@@ -1,6 +1,8 @@
 .App {
   text-align: center;
   margin-bottom: 2%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .App-logo {
@@ -22,10 +24,17 @@
   color: #09d3ac;
 }
 
-.nav-bar {
-  width: 100%;
+.nav-bar{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.nav {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .login-form {
