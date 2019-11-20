@@ -2,18 +2,32 @@ import React from "react";
 import { AppBar, Toolbar, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
-    logo: {
-        "&:hover": {
-            cursor: "pointer"
-        }
-    },
+const useStyles = makeStyles({    
     navContainer: {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         "@media(max-width: 800px)": {
             flexDirection: "column"
+        }
+    },
+    navTitle: {
+        display: "flex",
+        alignItems: "baseline",
+        "@media(max-width: 800px)": {
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center"
+        }
+    },
+    logo: {
+        marginRight: 20,
+        "&:hover": {
+            cursor: "pointer"
+        },
+        "@media(max-width: 800px)": {
+            marginRight: 0,
+            marginBottom: -15
         }
     },
     navBar: {
@@ -56,7 +70,10 @@ const NavBar = props => {
   return (
     <AppBar position="static">
       <Toolbar className={`${classes.navContainer} nav-container`}>
-        <h1 className={classes.logo} onClick={sessionStorage.getItem("token") ? () => props.history.push("/listings") : () => props.history.push("/")}>Hostify</h1>
+        <div className={classes.navTitle}>
+            <h1 className={classes.logo} onClick={sessionStorage.getItem("token") ? () => props.history.push("/listings") : () => props.history.push("/")}>Hostify</h1>
+            {sessionStorage.getItem("token") ? <p>Welcome, {sessionStorage.getItem("username")}!</p> : null}
+        </div>
         <nav className={classes.navBar}>
           {sessionStorage.getItem("token") ? (
             <>
@@ -72,12 +89,6 @@ const NavBar = props => {
                   onClick={() => props.history.push("/add")}
                 >
                   Add New Listing
-                </Button>
-                <Button className={classes.btn}
-                  color="inherit"
-                  onClick={() => props.history.push("/user")}
-                >
-                  User Profile
                 </Button>
               </div>
               <div className={classes.navRight}>
