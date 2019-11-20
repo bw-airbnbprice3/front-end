@@ -5,12 +5,21 @@ import {FormikTextField} from "formik-material-fields";
 import {Button} from "@material-ui/core";
 import * as Yup from "yup";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
+import {makeStyles} from "@material-ui/core/styles";
 
-const LogIn = (props) => {
+const useStyles = makeStyles({
+  formStyle: {
+    marginBottom: 10
+  }
+});
+
+const LogIn = props => {
+  const classes = useStyles();
+
   return (
     <div>
       <h2>Log In</h2>
-      <Form>
+      <Form className={classes.formStyle}>
         <div>
           <FormikTextField margin={"normal"} variant="outlined" label={"Username..."} type="text" name="username" placeholder="Username..."/>
         </div>
