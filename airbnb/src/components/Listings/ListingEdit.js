@@ -20,29 +20,31 @@ const Edit = (props) => {
 
   const roomTypeHandleChange = event => {
     setRoomType(event.target.value);
+    setUpdatedValues({...updatedValues, [event.target.name]: event.target.value});
   };
 
   const neighborhoodGroupHandleChange = event => {
     setNeighborhoodGroup(event.target.value);
+    setUpdatedValues({...updatedValues, [event.target.name]: event.target.value});
   };
 
   const neighborhoodHandleChange = event => {
     setNeighborhood(event.target.value);
+    setUpdatedValues({...updatedValues, [event.target.name]: event.target.value});
   };
 
   const handleChanges = event => {
     setUpdatedValues({...updatedValues, [event.target.name]: event.target.value});
-    console.log(updatedValues);
   };
 
-  const handleSubmit = event => {
+  const updatedListing = event => {
     event.preventDefault();
-    console.log(props.editingData);
-    // AxiosWithAuth()
-    //   .put('/api/listings/id')
-    //   .then(response => console.log(response))
-    //   .error(error => console.log(error))
-  }
+
+    AxiosWithAuth()
+      .put(`/api/listings/${updatedValues.id}`, updatedValues)
+      .then(response => console.log(response))
+      .error(error => console.log(error))
+  };
 
   // / Sets the proper data values here. Since some of the keys return an integer, and the value requires the string, sets the correct data
 
@@ -51,7 +53,7 @@ const Edit = (props) => {
     <Container maxWidth={"md"} margin={"3%"}>
       {props.isFetching && <h1>Test</h1>}
       <h2>Edit (Property Name)</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={updatedListing}>
         <TextField
           fullWidth
           margin={"normal"}
@@ -80,7 +82,6 @@ const Edit = (props) => {
               {option.label}
             </MenuItem>
           ))}
-          onChange=handleChanges
         </TextField>
         ​
         <TextField
@@ -113,7 +114,6 @@ const Edit = (props) => {
               {option.label}
             </MenuItem>
           ))}
-          onChange=handleChanges
         </TextField>
         ​
         <TextField
@@ -133,7 +133,6 @@ const Edit = (props) => {
               {option.label}
             </MenuItem>
           ))}
-          onChange=handleChanges
         </TextField>
         ​
         <TextField
@@ -236,7 +235,6 @@ const mapStateToProps = (state) => {
     editingData: state.editingData,
     isFetching: state.isFetching,
     errors: state.errors,
-    editingValues: state.editingValues,
   };
 };
 
