@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
-import {Link} from "react-router-dom";
-import {Container, Card, Typography, Link as MaterialLink} from '@material-ui/core';
+// import {Link} from "react-router-dom";
+import {Button, Card, Typography, Link } from '@material-ui/core';
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 
-const ViewAllListings = () => {
+const ViewAllListings = (props) => {
   const [listings, setListings] = useState([]);
   // Grabs all of the listings that are available from the data end points.
   useEffect(() => {
@@ -21,19 +21,17 @@ const ViewAllListings = () => {
       {
         listings.map(listing => (
           <Card key={listing.id}>
-            <Link to={`/listing/${listing.id}`}>
-            <Typography variant="h3">
-              <MaterialLink>
-              {listing.property_name}
-              </MaterialLink>
-            </Typography>
-            <Typography variant="h4">{listing.neighborhood}</Typography>
+            <Link onClick={() => props.history.push(`/listing/${listing.id}`)}>
+              <Typography variant="h3">
+                {listing.property_name}
+              </Typography>
+              <Typography variant="h4">{listing.neighborhood}</Typography>
             </Link>
             <div>
-              <Link to={`/listing/${listing.id}/edit`}>
-              <button>Edit</button>
+              <Link onClick={() => props.history.push(`/listing/${listing.id}/edit`)}>
+                <Button variant="contained" color="primary">Edit</Button>
               </Link>
-              <button>Delete</button>
+              <Button variant="contained" color="secondary">Delete</Button>
             </div>
           
           </Card>     
