@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import useStyles from './ListingMaterialUIStyles';
 import { Box, Button, Card, CardContent, CardHeader, CardActions, Typography, Link } from '@material-ui/core';
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
+import {ListingNeighborHood, ListingNeighborHoodGroup} from './ListingNeighborhoodInfo';
+
 
 const ViewAllListings = (props) => {
   const classes = useStyles();
@@ -25,6 +27,7 @@ const ViewAllListings = (props) => {
     .catch(error => console.log(error));
   }
 
+
   return (
     <Box className={classes.viewAllListingsContainer} >
 
@@ -44,7 +47,8 @@ const ViewAllListings = (props) => {
               }
 
             <CardContent className={classes.veiwAllListingsCardContent}>
-              <Typography variant="h4">{listing.address}</Typography>
+              <ListingNeighborHoodGroup listing={listing} />
+              <ListingNeighborHood listing={listing} />
             </CardContent>
             <CardActions>
               <Link onClick={() => props.history.push(`/listing/${listing.id}/edit`)}>
