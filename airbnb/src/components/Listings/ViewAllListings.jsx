@@ -25,9 +25,9 @@ const ViewAllListings = (props) => {
     
     })
     .catch(error => console.log(error));
-  }
+  }   
 
-
+  console.log(listings)
   return (
     <Box className={classes.viewAllListingsContainer} >
 
@@ -49,6 +49,7 @@ const ViewAllListings = (props) => {
             <CardContent className={classes.veiwAllListingsCardContent}>
               <ListingNeighborHoodGroup listing={listing} />
               <ListingNeighborHood listing={listing} />
+              <Typography variant="button">{listing.address}</Typography>
             </CardContent>
             <CardActions>
               <Link onClick={() => props.history.push(`/listing/${listing.id}/edit`)}>

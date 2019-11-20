@@ -11,14 +11,13 @@ const ListingNeighborHood = props => {
             {
                 neighborhoods.map((neighborhood, idx) => {
                     if(neighborhood.value === listing.neighborhood){
-                        return <Typography variant="h5" key={idx} className={classes}>{neighborhood.label}</Typography>
+                        return <Typography variant="caption" key={idx} className={classes}>{neighborhood.label}</Typography>
                     }
                 })
             }
         </div>
     )
 }
-
 
 const ListingNeighborHoodGroup = props => {
     const { listing, classes } = props;
@@ -28,7 +27,7 @@ const ListingNeighborHoodGroup = props => {
             {
             neighborhoodGroups.map((county, idx) => {
                 if(county.value === listing.neighborhood){
-                    return <Typography variant="h4" key={idx} className={classes}>{county.label}</Typography>
+                    return <Typography variant="subtitle1" key={idx} className={classes}>{county.label}</Typography>
                 }
             })
             }
