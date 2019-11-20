@@ -24,9 +24,9 @@ function App() {
       <Switch>
         <PrivateRoute path={"/listings"} component={ViewAllListings}/>
         <PrivateRoute path={"/user/edit"} component={UserEdit} />
-        <PrivateRoute path='/listing/add' component={ListingAdd} />
-        <PrivateRoute exact path='/listing/id' component={Listing} />
-        <PrivateRoute path='/listing/id/edit' component={ListingEdit} />
+        <PrivateRoute path='/add' component={ListingAdd} />
+        <PrivateRoute exact path='/listing/:id' component={Listing} />
+        <PrivateRoute path='/listing/:id/edit' component={ListingEdit} />
         <PrivateRoute exact path='/user' component={UserProfile} />
       </Switch>
 
