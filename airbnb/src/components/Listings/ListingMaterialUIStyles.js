@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     },
     viewAllListingsCard: {
       width: "25%",
-      margin: "0 10px",
+      margin: "20px 10px",
       padding: "20px",
       display: "flex",
       flexFlow: "row wrap",
