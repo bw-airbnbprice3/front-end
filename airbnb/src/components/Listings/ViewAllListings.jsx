@@ -15,7 +15,6 @@ const ViewAllListings = (props) => {
     .catch(error => console.log(error));
    
   }, []);
-  console.log(listings);
 
 
   return (
@@ -31,11 +30,10 @@ const ViewAllListings = (props) => {
              </Link>
 
              {listings.length === 0 &&
-
-              <Box className={classes.viewAllListingsLoading}>
-                  <Typography variant="h4">Loading...</Typography>
-              </Box>
-            }
+                <Box className={classes.viewAllListingsLoading}>
+                    <Typography variant="h4">Loading...</Typography>
+                </Box>
+              }
 
             <CardContent className={classes.veiwAllListingsCardContent}>
               <Typography variant="h4">{listing.address}</Typography>
