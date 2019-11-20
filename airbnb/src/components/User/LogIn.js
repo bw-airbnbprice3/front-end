@@ -9,7 +9,10 @@ import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   formStyle: {
-    marginBottom: 10
+    margin: 10
+  },
+  btn: {
+    margin: 10
   }
 });
 
@@ -26,7 +29,7 @@ const LogIn = props => {
         <div>
           <FormikTextField margin={"normal"} variant="outlined" label={"Password..."} type="password" name="password" placeholder="Password..."/>
         </div>
-        <Button variant="contained" color={"primary"} size={"large"} margin={"normal"} type="submit">Log In</Button>
+        <Button className={classes.btn} variant="contained" color={"primary"} size={"large"} margin={"normal"} type="submit" disabled={props.isSubmitting ? true : false}>Log In</Button>
       </Form>
       <Link to="/register">New User? Register Here</Link>
     </div>
