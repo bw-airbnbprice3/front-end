@@ -13,6 +13,7 @@ const Edit = (props) => {
     props.postListingData(id);
   }, []);
 
+  const [updatedValues, setUpdatedValues] = useState(props.editingData);
   const [roomType, setRoomType] = useState(1);
   const [neighborhoodGroup, setNeighborhoodGroup] = useState(1);
   const [neighborhood, setNeighborhood] = useState(1);
@@ -29,6 +30,20 @@ const Edit = (props) => {
     setNeighborhood(event.target.value);
   };
 
+  const handleChanges = event => {
+    setUpdatedValues({...updatedValues, [event.target.name]: event.target.value});
+    console.log(updatedValues);
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    console.log(props.editingData);
+    // AxiosWithAuth()
+    //   .put('/api/listings/id')
+    //   .then(response => console.log(response))
+    //   .error(error => console.log(error))
+  }
+
   // / Sets the proper data values here. Since some of the keys return an integer, and the value requires the string, sets the correct data
 
 
@@ -36,7 +51,7 @@ const Edit = (props) => {
     <Container maxWidth={"md"} margin={"3%"}>
       {props.isFetching && <h1>Test</h1>}
       <h2>Edit (Property Name)</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextField
           fullWidth
           margin={"normal"}
@@ -46,6 +61,7 @@ const Edit = (props) => {
           name='property_name'
           helperText='Name of property'
           defaultValue={props.editingData.property_name}
+          onChange={handleChanges}
         />
         ​
         <TextField
@@ -64,6 +80,7 @@ const Edit = (props) => {
               {option.label}
             </MenuItem>
           ))}
+          onChange=handleChanges
         </TextField>
         ​
         <TextField
@@ -76,6 +93,7 @@ const Edit = (props) => {
           name='address'
           helperText='Address'
           defaultValue={props.editingData.address}
+          onChange={handleChanges}
         />
         ​
         <TextField
@@ -95,6 +113,7 @@ const Edit = (props) => {
               {option.label}
             </MenuItem>
           ))}
+          onChange=handleChanges
         </TextField>
         ​
         <TextField
@@ -114,6 +133,7 @@ const Edit = (props) => {
               {option.label}
             </MenuItem>
           ))}
+          onChange=handleChanges
         </TextField>
         ​
         <TextField
@@ -126,6 +146,7 @@ const Edit = (props) => {
           name='availability_of_year'
           helperText='Availability During Year...'
           defaultValue={props.editingData.availability_of_year}
+          onChange={handleChanges}
         />
         ​
         <TextField
@@ -141,6 +162,7 @@ const Edit = (props) => {
           type='number'
           name='property_price'
           defaultValue={props.editingData.property_price}
+          onChange={handleChanges}
         />
         ​
         <TextField
@@ -152,6 +174,7 @@ const Edit = (props) => {
           type='number'
           name='bedroom_number'
           defaultValue={props.editingData.bedroom_number}
+          onChange={handleChanges}
         />
         ​
         <TextField
@@ -163,6 +186,7 @@ const Edit = (props) => {
           type='number'
           name='bathroom_number'
           defaultValue={props.editingData.bathroom_number}
+          onChange={handleChanges}
         />
         ​
         <TextField
@@ -174,6 +198,7 @@ const Edit = (props) => {
           type='number'
           name='minimum_nights'
           defaultValue={props.editingData.minimum_nights}
+          onChange={handleChanges}
         />
         ​
         <TextField
@@ -186,6 +211,7 @@ const Edit = (props) => {
           name='property_amenities'
           placeholder='Property Amenities..'
           defaultValue={props.editingData.property_amenities}
+          onChange={handleChanges}
         />
         ​
         <Container>
