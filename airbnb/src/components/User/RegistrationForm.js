@@ -1,8 +1,5 @@
-import React from 'react';
-import { withFormik, Form } from 'formik';
-import {FormikTextField} from "formik-material-fields";
-import {Button} from "@material-ui/core";
-import * as yup from 'yup';
+import React, {useState} from 'react';
+import {Button, Container, TextField} from "@material-ui/core";
 import AxiosWithAuth from '../../utils/AxiosWithAuth';
 import {makeStyles} from "@material-ui/core/styles";
 
@@ -15,47 +12,41 @@ const useStyles = makeStyles({
     }
   });
 
-const RegistrationForm= (props) => {
+const RegistrationForm = (props) => {
     const classes = useStyles();
+    const [loginCredentials, setLoginCredentials] = useState({username: '', password: ''});
+
+    const handleChange = event => {
+        setLoginCredentials({...loginCredentials, [event.target.name]: event.target.value});
+    };
+
+    const registerUser = event => {
+        event.preventDefault();
+
+        AxiosWithAuth()
+          .post('api/register/', loginCredentials)
+          .then(response => {
+              const {data} = response;
+              props.history.push("/");
+          })
+          .catch(error => console.log(error));
+    };
 
     return(
-        <div className="registration">
+        <Container maxWidth={"sm"} className="registration fade-in">
             <h2>Create Your Account!</h2>
-            <Form className={classes.formStyle}>
+            <form className={classes.formStyle} onSubmit={registerUser} >
                 <div className="username-group">
-                    <FormikTextField margin={"normal"} variant="outlined" label={"Create Username"} type="text" name="username" placeholder="Create Username"/>
+                    <TextField fullWidth margin={"normal"} variant="outlined" label={"Create Username"} type="text" name="username" placeholder="Create Username" onChange={handleChange} />
                 </div>
                 <div>
-                    <FormikTextField margin={"normal"} variant="outlined" label={"Create Password"} type="password" name="password" placeholder="Create Password"/>
+                    <TextField fullWidth margin={"normal"} variant="outlined" label={"Create Password"} type="password" name="password" placeholder="Create Password" onChange={handleChange} />
                 </div>
-                    <Button className={classes.btn} variant="contained" color={"primary"} size={"large"} margin={"normal"} type="submit" disabled={props.isSubmitting ? true : false}>Register</Button>
-            </Form>
-        </div>
+                    <Button fullWidth className={classes.btn} variant="contained" color={"primary"} size={"large"} margin={"normal"} type="submit">Register</Button>
+            </form>
+        </Container>
     )
 }
 
-const FormikRegistrationForm = withFormik({
-    mapPropsToValues({username, password}){
-        return {
-            username: username || "",
-            password: password || ""
-        };
-    },
 
-    validationSchema: yup.object().shape({
-        username: yup.string().required("Please Enter A Username."),
-        password: yup.string().required("Please Enter A Password.")
-    }),
-
-    handleSubmit(values, props){
-        AxiosWithAuth().post('/api/register/', values)
-        .then(response => {
-            console.log(response);
-            props.props.history.push("/");
-        })
-        .catch(err => console.log(err));
-    }
-
-})(RegistrationForm);
-
-export default FormikRegistrationForm;
+export default RegistrationForm;

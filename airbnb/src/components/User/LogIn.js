@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
 import {Button, Container, TextField} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
@@ -51,8 +50,9 @@ const LogIn = props => {
         </div>
         <Button fullWidth className={classes.btn} variant="contained" color={"primary"} size={"large"} margin={"normal"}
                 type="submit">Log In</Button>
+        <Button fullWidth className={classes.btn} variant="contained" color={"secondary"} size={"large"} margin={"normal"} href={"/register"}>New User? Register Here</Button>
       </form>
-      <Link to="/register">New User? Register Here</Link>
+
     </Container>
   );
 };
