@@ -61,12 +61,6 @@ const ViewAllListings = props => {
               />
             </Link>
 
-            {/*{listings.length === 0 && (*/}
-            {/*  <Box className={classes.viewAllListingsLoading}>*/}
-            {/*    <Typography variant="h4">Loading...</Typography>*/}
-            {/*  </Box>*/}
-            {/*)}*/}
-
             <CardContent className={classes.veiwAllListingsCardContent}>
               <ListingNeighborHoodGroup listing={listing}/>
               <ListingNeighborHood listing={listing}/>
