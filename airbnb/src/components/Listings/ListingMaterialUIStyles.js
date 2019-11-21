@@ -10,16 +10,11 @@ const useStyles = makeStyles({
       flexFlow: 'row wrap',
       justifyContent: 'center',
       alignContent: "center"
-    },
-    viewAllListingsLoading: {
-      margin: "100px auto",
-      fontSize: "7rem"
     }, 
     viewAlllistingsHeading: {
-      width: '100%',
+      width: "100%",
       marginBottom: "30px",
-      padding: '20px 0',
-      fontSize: '3rem'
+      padding: "20px 0"
     },
     viewAllListingsCardBox: {
       width: "80%",
@@ -33,8 +28,7 @@ const useStyles = makeStyles({
       padding: "20px",
       display: "flex",
       flexFlow: "row wrap",
-      justifyContent: "center",
-      alignContent: "center", 
+      justifyContent: "center", 
       borderRadius: "5px"
     },
     viewAllListingsCardHeader: {
@@ -42,6 +36,9 @@ const useStyles = makeStyles({
       margin: "10px 0",
       padding: " 0",
       fontSize: "2rem"
+    },
+    viewAllListingsCardMedia: {
+      border: "1px solid blue"
     },
     veiwAllListingsCardContent:{
       width: "100%",

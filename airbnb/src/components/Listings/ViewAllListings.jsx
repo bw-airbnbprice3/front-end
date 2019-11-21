@@ -57,12 +57,12 @@ const ViewAllListings = props => {
           {props.listingData.map(listing => (
             <Card key={listing.id} className={classes.viewAllListingsCard} raised>
               <CardHeader 
-                  titleTypographyProps={{ variant: "h4" }} 
+                  //titleTypographyProps={{ variant: "h6" }} 
                   title={listing.property_name}
                   subheader={listing.address}
                   className={classes.viewAllListingsCardHeader}
               />
-              <CardMedia component="img" image={CardImg} />
+              <CardMedia component="img" image={CardImg} className={classes.viewAllListingsCardMedia  } />
               <CardContent className={classes.veiwAllListingsCardContent}>
                 <ListingNeighborHoodGroup listing={listing} />
                 <ListingNeighborHood listing={listing} />
