@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {Redirect} from "react-router-dom";
 import {Button, Container, TextField} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
@@ -34,28 +35,33 @@ const LogIn = props => {
       .catch(error => console.log(error));
   };
 
-  return (
-    <Container maxWidth={"sm"} className="fade-in">
-      <h2>Log In</h2>
-      <form className={classes.formStyle} onSubmit={loginUser}>
-        <div>
-          <TextField required fullWidth onChange={handleChange} margin={"normal"} variant="outlined"
-                     label={"Username..."} type="text" name="username"
-                     placeholder="Username..."/>
-        </div>
-        <div>
-          <TextField required fullWidth onChange={handleChange} margin={"normal"} variant="outlined"
-                     label={"Password..."} type="password" name="password"
-                     placeholder="Password..."/>
-        </div>
-        <Button fullWidth className={classes.btn} variant="contained" color={"primary"} size={"large"} margin={"normal"}
-                type="submit">Log In</Button>
-        <Button fullWidth className={classes.btn} variant="contained" color={"secondary"} size={"large"}
-                margin={"normal"} href={"/register"}>New User? Register Here</Button>
-      </form>
+  if (sessionStorage.getItem('token')) {
+    return <Redirect to={"/listings"} />
+  } else {
+    return (
+      <Container maxWidth={"sm"} className="fade-in">
+        <h2>Log In</h2>
+        <form className={classes.formStyle} onSubmit={loginUser}>
+          <div>
+            <TextField required fullWidth onChange={handleChange} margin={"normal"} variant="outlined"
+                       label={"Username..."} type="text" name="username"
+                       placeholder="Username..."/>
+          </div>
+          <div>
+            <TextField required fullWidth onChange={handleChange} margin={"normal"} variant="outlined"
+                       label={"Password..."} type="password" name="password"
+                       placeholder="Password..."/>
+          </div>
+          <Button fullWidth className={classes.btn} variant="contained" color={"primary"} size={"large"}
+                  margin={"normal"}
+                  type="submit">Log In</Button>
+          <Button fullWidth className={classes.btn} variant="contained" color={"secondary"} size={"large"}
+                  margin={"normal"} href={"/register"}>New User? Register Here</Button>
+        </form>
 
-    </Container>
-  );
+      </Container>
+    );
+  }
 };
 
 export default LogIn;

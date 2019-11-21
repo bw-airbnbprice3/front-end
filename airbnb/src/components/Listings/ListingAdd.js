@@ -84,7 +84,6 @@ const Edit = (props) => {
       room_type: 2
     };
 
-    console.log(fixedUpdatedValues);
     // Sends the posted request to edit the listing ID, and then on successful completion, routes the user back to the listings page.
     AxiosWithAuth()
       .post(`/api/listings/${sessionStorageUsername}/`, fixedUpdatedValues)

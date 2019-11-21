@@ -25,17 +25,15 @@ const ViewAllListings = props => {
   useEffect(() => {
     const sessionStorageUsername = sessionStorage.getItem("username");
     props.fetchListingsData(sessionStorageUsername);
-    console.log(props);
-  }, [props.isEditing]);
+  }, [props.listingData.length]);
 
-  console.log(props.listingData);
 
   const deleteListing = listing => {
     const sessionStorageUsername = sessionStorage.getItem("username");
     AxiosWithAuth()
       .delete(`api/listings/${sessionStorageUsername}/${listing.id}`)
       .then(response => {
-        console.log(response);
+        props.fetchListingsData(sessionStorageUsername);
       })
       .catch(error => console.log(error));
   };

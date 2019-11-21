@@ -33,14 +33,12 @@ const Listing = props => {
     AxiosWithAuth().get(`api/listings/${sessionStorageUsername}/${props.match.params.id}`)
       .then(res => {
         setListings(res.data);
-      }).catch(err => {
-      console.log(err)
-    })
+      }).catch(err => {console.log(err)})
   }, []);
 
   return (
     <div>
-      {currentListing ?
+      { currentListing ?
         (
           <Container maxWidth="sm" className="fade-in">
             <h2>{currentListing.property_name}</h2>
@@ -102,7 +100,7 @@ const Listing = props => {
                 margin={"normal"}
                 variant={"contained"}
                 color={"primary"}
-                href={"/listings"}
+                onClick={() => props.history.push('/listings')}
               >
                 Return
               </Button>
