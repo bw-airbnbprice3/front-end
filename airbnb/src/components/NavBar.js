@@ -1,61 +1,61 @@
 import React from "react";
-import { AppBar, Toolbar, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {AppBar, Toolbar, Button} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 
-const useStyles = makeStyles({    
-    navContainer: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        "@media(max-width: 800px)": {
-            flexDirection: "column"
-        }
-    },
-    navTitle: {
-        display: "flex",
-        alignItems: "baseline",
-        "@media(max-width: 800px)": {
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center"
-        }
-    },
-    logo: {
-        marginRight: 20,
-        "&:hover": {
-            cursor: "pointer"
-        },
-        "@media(max-width: 800px)": {
-            marginRight: 0,
-            marginBottom: -15
-        }
-    },
-    navBar: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "flex-end",
-        alignItems: "center",
-        "@media(max-width: 600px)":{
-            flexDirection: "column"
-        }
-    },
-    navLeft: {
-        "@media(max-width: 600px)":{
-            display: "flex",
-            flexDirection: "column"
-        }
-    },
-    navRight: {
-        "@media(max-width: 600px)":{
-            display: "flex",
-            flexDirection: "column"
-        }
-    },
-    btn: {
-        "@media(max-width: 800px)":{
-            marginBottom: 10
-        }
+const useStyles = makeStyles({
+  navContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    "@media(max-width: 800px)": {
+      flexDirection: "column"
     }
+  },
+  navTitle: {
+    display: "flex",
+    alignItems: "baseline",
+    "@media(max-width: 800px)": {
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center"
+    }
+  },
+  logo: {
+    marginRight: 20,
+    "&:hover": {
+      cursor: "pointer"
+    },
+    "@media(max-width: 800px)": {
+      marginRight: 0,
+      marginBottom: -15
+    }
+  },
+  navBar: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    "@media(max-width: 600px)": {
+      flexDirection: "column"
+    }
+  },
+  navLeft: {
+    "@media(max-width: 600px)": {
+      display: "flex",
+      flexDirection: "column"
+    }
+  },
+  navRight: {
+    "@media(max-width: 600px)": {
+      display: "flex",
+      flexDirection: "column"
+    }
+  },
+  btn: {
+      "@media(max-width: 800px)": {
+          marginBottom: 10
+      },
+  },
 });
 
 const NavBar = props => {
@@ -71,22 +71,23 @@ const NavBar = props => {
     <AppBar position="static">
       <Toolbar className={`${classes.navContainer} nav-container`}>
         <div className={classes.navTitle}>
-            <h1 className={classes.logo} onClick={sessionStorage.getItem("token") ? () => props.history.push("/listings") : () => props.history.push("/")}>Hostify</h1>
-            {sessionStorage.getItem("token") ? <p>Welcome, {sessionStorage.getItem("username")}!</p> : null}
+          <h1 className={classes.logo}
+              onClick={sessionStorage.getItem("token") ? () => props.history.push("/listings") : () => props.history.push("/")}>Hostify</h1>
+          {sessionStorage.getItem("token") ? <p>Welcome, {sessionStorage.getItem("username")}!</p> : null}
         </div>
         <nav className={classes.navBar}>
           {sessionStorage.getItem("token") ? (
             <>
               <div className={classes.navLeft}>
+                  <Button className={classes.btn}
+                          color="inherit"
+                          href={"/listings"}
+                  >
+                    View Listings
+                  </Button>
                 <Button className={classes.btn}
-                  color="inherit"
-                  onClick={() => props.history.push("/listings")}
-                >
-                  View Listings
-                </Button>
-                <Button className={classes.btn}
-                  color="inherit"
-                  onClick={() => props.history.push("/add")}
+                        color="inherit"
+                        href={"/add"}
                 >
                   Add New Listing
                 </Button>
@@ -99,14 +100,14 @@ const NavBar = props => {
             </>
           ) : (
             <>
-              <div />
+              <div/>
               <div className={classes.navRight}>
-                <Button className={classes.btn} color="inherit" onClick={() => props.history.push("/")}>
+                <Button className={classes.btn} color="inherit" href={"/"} >
                   Log In
                 </Button>
                 <Button className={classes.btn}
-                  color="inherit"
-                  onClick={() => props.history.push("/register")}
+                        color="inherit"
+                        href={"/register"}
                 >
                   Register
                 </Button>

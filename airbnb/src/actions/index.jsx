@@ -21,12 +21,15 @@ export const POST_PRICE_OPTIMIZER_START = "POST_PRICE_OPTIMIZER_START";
 export const POST_PRICE_OPTIMIZER_SUCCESS = "POST_PRICE_OPTIMIZER_SUCCESS";
 export const POST_PRICE_OPTIMIZER_FAILURE = "POST_PRICE_OPTIMIZER_FAILURE";
 
-export const fetchListingsData = () => dispatch => {
+export const fetchListingsData = (listingUsername) => dispatch => {
   dispatch({type: FETCH_LISTINGS_START});
 
   AxiosWithAuth()
-    .get('/api/listings/')
-    .then(response => dispatch({type: FETCH_LISTINGS_SUCCESS, payload: response.data}))
+    .get(`/api/listings/${listingUsername}`)
+    .then(response => {
+      // console.log(response);
+      dispatch({type: FETCH_LISTINGS_SUCCESS, payload: response.data})
+      })
     .catch(error => dispatch({type: FETCH_LISTINGS_FAILURE, payload: error.message}));
 };
 
@@ -36,15 +39,19 @@ export const postLoginData = () => dispatch => {
   AxiosWithAuth()
     .get('/api/login')
     .then(response => dispatch({type: POST_LOGIN_SUCCESS, payload: response.data}))
-    .catch(error => dispatch({type: POST_LOGIN_FAILURE}));
+    .catch(error => dispatch({type: POST_LOGIN_FAILURE, payload: error.data}));
 };
 
 export const postListingData = (listingID) => dispatch => {
   dispatch({type: POST_LISTINGS_START});
+  const sessionStorageUsername = sessionStorage.getItem("username");
 
   AxiosWithAuth()
-    .get(`api/listings/${listingID}`)
-    .then(response => dispatch({type: POST_LISTINGS_SUCCESS, payload: response.data}))
+    .get(`/api/listings/${sessionStorageUsername}/${listingID}`)
+    .then(response => {
+      console.log(response.data[0]);
+      dispatch({type: POST_LISTINGS_SUCCESS, payload: response.data[0]})
+    })
     .catch(error => dispatch({type: POST_LISTINGS_FAILURE, payload: error.data}));
 };
 

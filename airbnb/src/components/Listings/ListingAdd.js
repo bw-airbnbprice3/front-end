@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { withFormik, Form } from "formik";
-import { Button, InputAdornment, Container, MenuItem } from "@material-ui/core";
-import { FormikTextField } from "formik-material-fields";
+import React, {useState} from "react";
+import {Link} from "react-router-dom";
+import {withFormik, Form} from "formik";
+import {Button, InputAdornment, Container, MenuItem} from "@material-ui/core";
+import {FormikTextField} from "formik-material-fields";
 import * as Yup from "yup";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
-import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
+import {makeStyles} from "@material-ui/core/styles";
 
 import {
   roomTypes,
@@ -211,18 +212,18 @@ const Add = props => {
 
 const ListingAdd = withFormik({
   mapPropsToValues({
-    property_name,
-    room_type,
-    address,
-    neighborhood_group,
-    neighborhood,
-    availability_of_year,
-    property_price,
-    bedroom_number,
-    bathroom_number,
-    minimum_nights,
-    property_amenities
-  }) {
+                     property_name,
+                     room_type,
+                     address,
+                     neighborhood_group,
+                     neighborhood,
+                     availability_of_year,
+                     property_price,
+                     bedroom_number,
+                     bathroom_number,
+                     minimum_nights,
+                     property_amenities
+                   }) {
     return {
       property_name: property_name || "",
       room_type: room_type || "",
@@ -256,10 +257,37 @@ const ListingAdd = withFormik({
 
   handleSubmit(values, props) {
     const sessionStorageUsername = sessionStorage.getItem("username");
-    values = { ...values, host_username: sessionStorageUsername };
-    console.log(values);
+    values = {...values, host_username: sessionStorageUsername};
+
+    console.log(values.length);
+
     AxiosWithAuth()
-      .post("api/listings/", values)
+      .get(`/api/listings/${sessionStorageUsername}`)
+      .then(response => {
+        const numberofListings = response.data.length;
+
+        const flaskEndPointsArray = {
+          neighborhood_group: values.neighborhood_group,
+          neighborhood: values.neighborhood,
+          room_type: values.room_type,
+          minimum_nights: values.minimum_nights,
+          calculated_host_listings_count: numberofListings + 1,
+          availability_of_year: values.availability_of_year,
+          bathroom_number: values.bathroom_number,
+          bedroom_number: values.bedroom_number
+        };
+
+        axios.post(`https://cors-anywhere.herokuapp.com/https://hostify.herokuapp.com/input`, flaskEndPointsArray).then(response => console.log(response)).catch(error => console.log(error));
+
+        console.log(flaskEndPointsArray);
+      })
+      .catch(error => console.log(error));
+
+
+
+
+    AxiosWithAuth()
+      .post(`api/listings/${sessionStorageUsername}`, values)
       .then(response => {
         console.log(response);
         props.props.history.push("/listings");

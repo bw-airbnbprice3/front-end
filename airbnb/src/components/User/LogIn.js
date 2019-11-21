@@ -1,69 +1,61 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import {withFormik, Form} from "formik";
-import {FormikTextField} from "formik-material-fields";
-import {Button} from "@material-ui/core";
-import * as Yup from "yup";
-import AxiosWithAuth from "../../utils/AxiosWithAuth";
+import React, {useState} from "react";
+import {Button, Container, TextField} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import AxiosWithAuth from "../../utils/AxiosWithAuth";
 
 const useStyles = makeStyles({
   formStyle: {
     margin: 10
   },
   btn: {
-    margin: 10
+    marginTop: "2%"
   }
 });
 
 const LogIn = props => {
   const classes = useStyles();
+  const [loginCredentials, setLoginCredentials] = useState({username: '', password: ''});
+
+  const handleChange = event => {
+    setLoginCredentials({...loginCredentials, [event.target.name]: event.target.value});
+  };
+
+  const loginUser = event => {
+    event.preventDefault();
+
+    AxiosWithAuth()
+      .post('api/login/', loginCredentials)
+      .then(response => {
+        const {data} = response;
+        sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('username', data.username);
+        props.history.push("/listings");
+      })
+      .catch(error => console.log(error));
+  };
 
   return (
-    <div className="fade-in">
+    <Container maxWidth={"sm"} className="fade-in">
       <h2>Log In</h2>
-      <Form className={classes.formStyle}>
+      <form className={classes.formStyle} onSubmit={loginUser}>
         <div>
-          <FormikTextField margin={"normal"} variant="outlined" label={"Username..."} type="text" name="username" placeholder="Username..."/>
+          <TextField required fullWidth onChange={handleChange} margin={"normal"} variant="outlined"
+                     label={"Username..."} type="text" name="username"
+                     placeholder="Username..."/>
         </div>
         <div>
-          <FormikTextField margin={"normal"} variant="outlined" label={"Password..."} type="password" name="password" placeholder="Password..."/>
+          <TextField required fullWidth onChange={handleChange} margin={"normal"} variant="outlined"
+                     label={"Password..."} type="password" name="password"
+                     placeholder="Password..."/>
         </div>
-        <Button className={classes.btn} variant="contained" color={"primary"} size={"large"} margin={"normal"} type="submit" disabled={props.isSubmitting ? true : false}>Log In</Button>
-      </Form>
-      <Link to="/register">New User? Register Here</Link>
-    </div>
+        <Button fullWidth className={classes.btn} variant="contained" color={"primary"} size={"large"} margin={"normal"}
+                type="submit">Log In</Button>
+        <Button fullWidth className={classes.btn} variant="contained" color={"secondary"} size={"large"}
+                margin={"normal"} href={"/register"}>New User? Register Here</Button>
+      </form>
+
+    </Container>
   );
 };
 
-const LogInForm = withFormik({
-  mapPropsToValues({username, password, history}) {
-    return {
-      username: username || "",
-      password: password || "",
-    };
-  },
-
-  validationSchema: Yup.object().shape({
-    username: Yup.string().required("Username is required"),
-    password: Yup.string()
-      .required("Password is required")
-  }),
-
-  handleSubmit(values, props) {
-    // console.log(values);
-    AxiosWithAuth()
-      .post("/api/login/", values)
-      .then(response => {
-        const {data} = response;
-        console.log(data);
-        sessionStorage.setItem("token", data.token);
-        sessionStorage.setItem("username", data.username);
-        // Had to pass in props.props because of the HOC that is referring back to the form where props are being drilled down
-        props.props.history.push("/listings");
-      })
-      .catch(error => console.log(error));
-  }
-})(LogIn);
-
-export default LogInForm;
+export default LogIn;
