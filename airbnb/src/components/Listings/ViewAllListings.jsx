@@ -46,7 +46,7 @@ const ViewAllListings = props => {
 
       {props.isFetching === false && (
         <>
-          <Typography variant="h1" className={classes.viewAlllistingsHeading}>
+          <Typography variant="h1" className={`${classes.viewAlllistingsHeading} fade-in`}>
             Current Listings
           </Typography>
 
@@ -63,7 +63,7 @@ const ViewAllListings = props => {
                 />
               </Link>
 
-              <CardContent className={classes.veiwAllListingsCardContent}>
+              <CardContent className={`${classes.veiwAllListingsCardContent} fade-in`}>
                 <ListingNeighborHoodGroup listing={listing} />
                 <ListingNeighborHood listing={listing} />
                 <Typography variant="button">{listing.address}</Typography>

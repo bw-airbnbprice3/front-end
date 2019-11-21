@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
-import {Container, Button, Card} from '@material-ui/core';
+import {Container, Button, Card, CircularProgress} from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -107,7 +107,7 @@ const Listing = props => {
                         </nav>
                     </Container>
                 )
-                : <p>Loading...</p>
+                : <CircularProgress color="primary" style={{ marginTop: "3%" }} />
             }        
         </div>
     )
