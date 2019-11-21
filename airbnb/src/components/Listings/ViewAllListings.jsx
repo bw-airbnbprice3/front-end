@@ -21,8 +21,9 @@ const ViewAllListings = props => {
   const [listings, setListings] = useState([]);
 
   useEffect(() => {
+    const sessionStorageUsername = sessionStorage.getItem("username");
     AxiosWithAuth()
-      .get("api/listings/")
+      .get(`api/listings/${sessionStorageUsername}`)
       .then(response => {
         setListings(response.data);
       })
@@ -70,7 +71,7 @@ const ViewAllListings = props => {
           </CardContent>
           <CardActions>
             <Link
-              onClick={() => props.history.push(`/listing/${listing.id}/edit`)}
+              href={`/listing/${listing.id}/edit`}
             >
               <Button variant="contained" color="primary">
                 Edit

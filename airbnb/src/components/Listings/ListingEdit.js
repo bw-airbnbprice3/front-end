@@ -9,16 +9,19 @@ import {postListingData} from "../../actions";
 const Edit = (props) => {
 
   // Sets the state for various components. The dropdowns need their own state to allow them to change their input and value
-  const [updatedValues, setUpdatedValues] = useState(props.listingData);
+  // const [updatedValues, setUpdatedValues] = useState(props.listingData);
+  //
+  const sessionStorageUsername = sessionStorage.getItem('username');
+  const [updatedValues, setUpdatedValues] = useState([]);
 
   useEffect(() => {
-    const id = props.match.params.id;
-    props.postListingData(id);
+    props.postListingData(props.match.params.id);
   }, []);
 
-  const [roomType, setRoomType] = useState(props.listingData.room_type);
-  const [neighborhoodGroup, setNeighborhoodGroup] = useState(props.listingData.neighborhood_group);
-  const [neighborhood, setNeighborhood] = useState(props.listingData.neighborhood);
+  console.log(props.listingData.room_type);
+  const [roomType, setRoomType] = useState(1);
+  const [neighborhoodGroup, setNeighborhoodGroup] = useState(1);
+  const [neighborhood, setNeighborhood] = useState(1);
 
   const roomTypeHandleChange = event => {
     setRoomType(event.target.value);
@@ -41,15 +44,15 @@ const Edit = (props) => {
 
   const updatedListing = event => {
     event.preventDefault();
-    console.log();
+    console.log(props.match.params.id);
 
     // Sends the update request to edit the listing ID, and then on successful completion, routes the user back to the listings page.
     AxiosWithAuth()
-      .put(`/api/listings/${updatedValues.id}`, updatedValues)
+      .put(`/api/listings/${sessionStorageUsername}/${props.match.params.id}`, updatedValues)
       .then(response => {
         props.history.push('/listings')
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error, updatedValues));
   };
 
   // / Sets the proper data values here. Since some of the keys return an integer, and the value requires the string, sets the correct data
@@ -245,7 +248,6 @@ const Edit = (props) => {
 };
 
 const mapStateToProps = (state) => {
-
   return {
     listingData: state.listingData,
     isFetching: state.isFetching,

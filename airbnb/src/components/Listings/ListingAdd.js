@@ -259,7 +259,7 @@ const ListingAdd = withFormik({
     values = { ...values, host_username: sessionStorageUsername };
     console.log(values);
     AxiosWithAuth()
-      .post("api/listings/", values)
+      .post(`api/listings/${sessionStorageUsername}`, values)
       .then(response => {
         console.log(response);
         props.props.history.push("/listings");

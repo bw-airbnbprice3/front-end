@@ -41,10 +41,14 @@ export const postLoginData = () => dispatch => {
 
 export const postListingData = (listingID) => dispatch => {
   dispatch({type: POST_LISTINGS_START});
+  const sessionStorageUsername = sessionStorage.getItem("username");
 
   AxiosWithAuth()
-    .get(`api/listings/${listingID}`)
-    .then(response => dispatch({type: POST_LISTINGS_SUCCESS, payload: response.data}))
+    .get(`/api/listings/${sessionStorageUsername}/${listingID}`)
+    .then(response => {
+      console.log(response.data[0]);
+      dispatch({type: POST_LISTINGS_SUCCESS, payload: response.data[0]})
+    })
     .catch(error => dispatch({type: POST_LISTINGS_FAILURE, payload: error.data}));
 };
 

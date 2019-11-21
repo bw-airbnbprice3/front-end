@@ -29,6 +29,7 @@ const LogIn = props => {
       .then(response => {
         const {data} = response;
         sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('username', data.username);
         props.history.push("/listings");
       })
       .catch(error => console.log(error));
