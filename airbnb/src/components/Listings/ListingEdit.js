@@ -1,186 +1,255 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-import {withFormik, Form} from 'formik';
-import {Button, InputAdornment, Container} from "@material-ui/core";
-import {FormikTextField} from "formik-material-fields";
-import * as Yup from 'yup';
+import {connect} from "react-redux";
+import {Button, InputAdornment, Container, MenuItem, TextField, CircularProgress} from "@material-ui/core";
+import {neighborhoodGroups, neighborhoods, roomTypes} from "../../utils/DataFiles";
+import AxiosWithAuth from "../../utils/AxiosWithAuth";
+import {postListingData} from "../../actions";
 
-const Edit = ({ values, errors, touched }) => {
-    return (
-        <Container maxWidth={"md"} margin={"3%"}>
-            <h2>Edit (Property Name)</h2>
-            <Form>
-                <FormikTextField
-                fullWidth
-                margin={"normal"}
-                variant={"outlined"}
-                label={"Property Name..."}
-                type='text'
-                name='property_name'
-                placeholder='Name of property'
-                />
-        ​
-                <FormikTextField
-                fullWidth
-                margin={"normal"}
-                variant={"outlined"}
-                label={"Property Type..."}
-                type='text'
-                name='room_type'
-                placeholder='Type of property'
-                />
-        ​
-                <FormikTextField
-                fullWidth
-                margin={"normal"}
-                variant={"outlined"}
-                label={"Address..."}
-                type='text'
-                name='address'
-                placeholder='Address'
-                />
-        ​
-                <FormikTextField
-                fullWidth
-                margin={"normal"}
-                variant={"outlined"}
-                label={"Neighborhood Group..."}
-                type='text'
-                name='neighborhood_group'
-                placeholder='Neighborhood Group'
-                />
-        ​
-                <FormikTextField
-                fullWidth
-                margin={"normal"}
-                variant={"outlined"}
-                label={"Neighborhood..."}
-                type='text'
-                name='neighborhood'
-                placeholder='Neighborhood'
-                />
-        ​
-                <FormikTextField
-                fullWidth
-                margin={"normal"}
-                variant={"outlined"}
-                label={"Availability During Year.."}
-                type='number'
-                name='availability_of_year'
-                placeholder='Availability During Year...'
-                />
-        ​
-                <FormikTextField
-                fullWidth
-                margin={"normal"}
-                variant={"outlined"}
-                label={"Property Price Per Night..."}
-                InputProps={{
-                    startAdornment: <InputAdornment position="start">€</InputAdornment>,
-                    placeholder: 'Property Price Per Night...'
-                }}
-                type='number'
-                name='property_price'
-                />
-        ​
-                <FormikTextField
-                fullWidth
-                margin={"normal"}
-                variant={"outlined"}
-                label={"Number of Bedroom(s)..."}
-                type='number'
-                name='bedroom_number'
-                />
-        ​
-                <FormikTextField
-                fullWidth
-                margin={"normal"}
-                variant={"outlined"}
-                label={"Number of Bathroom(s)..."}
-                type='number'
-                name='bathroom_number'
-                />
-        ​
-                <FormikTextField
-                fullWidth
-                margin={"normal"}
-                variant={"outlined"}
-                label={"Minimum Number of Night(s)..."}
-                type='number'
-                name='minimum_nights'
-                />
-        ​
-                <FormikTextField
-                fullWidth
-                margin={"normal"}
-                variant={"outlined"}
-                label={"Property Amenities..."}
-                type='text'
-                name='property_amenities'
-                placeholder='Property Amenities..'
-                />
-        ​
-                <Container>
-                <Link to={"/listing/id"}>
-                    <Button size={"large"} margin={"normal"} variant={"contained"} color={"secondary"}>Cancel</Button>
-                </Link>
-        ​
-                <Button size={"large"} margin={"normal"} variant={"contained"} color={"primary"} type='submit'>Submit
-                    Changes</Button>
-                </Container>
-        ​
-            </Form>
-        ​
-        </Container>
+const Edit = (props) => {
 
-    );
+  // Sets the state for various components. The dropdowns need their own state to allow them to change their input and value
+  const [updatedValues, setUpdatedValues] = useState(props.listingData);
+  const [roomType, setRoomType] = useState(1);
+  const [neighborhoodGroup, setNeighborhoodGroup] = useState(1);
+  const [neighborhood, setNeighborhood] = useState(1);
+
+  useEffect(() => {
+    const id = props.match.params.id;
+    props.postListingData(id);
+  }, []);
+
+  const roomTypeHandleChange = event => {
+    setRoomType(event.target.value);
+    setUpdatedValues({...updatedValues, [event.target.name]: event.target.value});
+  };
+
+  const neighborhoodGroupHandleChange = event => {
+    setNeighborhoodGroup(event.target.value);
+    setUpdatedValues({...updatedValues, [event.target.name]: event.target.value});
+  };
+
+  const neighborhoodHandleChange = event => {
+    setNeighborhood(event.target.value);
+    setUpdatedValues({...updatedValues, [event.target.name]: event.target.value});
+  };
+
+  const handleChanges = event => {
+    setUpdatedValues({...updatedValues, [event.target.name]: event.target.value});
+  };
+
+  const updatedListing = event => {
+    event.preventDefault();
+    console.log();
+
+    // Sends the update request to edit the listing ID, and then on successful completion, routes the user back to the listings page.
+    AxiosWithAuth()
+      .put(`/api/listings/${updatedValues.id}`, updatedValues)
+      .then(response => {
+        props.history.push('/listings')
+      })
+      .catch(error => console.log(error));
+  };
+
+  // / Sets the proper data values here. Since some of the keys return an integer, and the value requires the string, sets the correct data
+
+
+  return (
+
+    <Container maxWidth={"md"} margin={"3%"}>
+
+      {props.isFetching && <CircularProgress color="primary" style={{marginTop: "3%"}}/>}
+
+      {props.isFetching === false &&
+      <>
+        <h2>Edit (Property Name)</h2>
+        <form onSubmit={updatedListing}>
+          <TextField
+            required
+            fullWidth
+            margin={"normal"}
+            variant={"outlined"}
+            type='text'
+            label={"Property Name..."}
+            name='property_name'
+            helperText='Name of property'
+            defaultValue={props.listingData.property_name}
+            onChange={handleChanges}
+          />
+          ​
+          <TextField
+            required
+            select
+            fullWidth
+            margin={"normal"}
+            variant={"outlined"}
+            label={"Property Type..."}
+            type='text'
+            name='room_type'
+            value={roomType}
+            onChange={roomTypeHandleChange}
+            helperText={'Please select the type of property'}>
+            {roomTypes.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+          ​
+          <TextField
+            required
+            fullWidth
+            margin={"normal"}
+            variant={"outlined"}
+            label={"Address..."}
+            type='text'
+            name='address'
+            helperText='Address'
+            defaultValue={props.listingData.address}
+            onChange={handleChanges}
+          />
+          ​
+          <TextField
+            required
+            select
+            fullWidth
+            margin={"normal"}
+            variant={"outlined"}
+            label={"Neighborhood Group..."}
+            type='text'
+            name='neighborhood_group'
+            value={neighborhoodGroup}
+            onChange={neighborhoodGroupHandleChange}
+            helperText={'Please select your neighborhood group'}>
+            {neighborhoodGroups.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+          ​
+          <TextField
+            required
+            select
+            fullWidth
+            margin={"normal"}
+            variant={"outlined"}
+            label={"Neighborhood..."}
+            type='text'
+            name='neighborhood'
+            value={neighborhood}
+            onChange={neighborhoodHandleChange}
+            helperText={'Please select your neighborhood'}>
+            {neighborhoods.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+          ​
+          <TextField
+            required
+            fullWidth
+            margin={"normal"}
+            variant={"outlined"}
+            label={"Availability During Year.."}
+            type='number'
+            name='availability_of_year'
+            helperText='Availability During Year...'
+            defaultValue={props.listingData.availability_of_year}
+            onChange={handleChanges}
+          />
+          ​
+          <TextField
+            required
+            fullWidth
+            margin={"normal"}
+            variant={"outlined"}
+            label={"Property Price Per Night..."}
+            InputProps={{
+              startAdornment: <InputAdornment position="start">€</InputAdornment>,
+              placeholder: 'Property Price Per Night...'
+            }}
+            type='number'
+            name='property_price'
+            defaultValue={props.listingData.property_price}
+            onChange={handleChanges}
+          />
+          ​
+          <TextField
+            required
+            fullWidth
+            margin={"normal"}
+            variant={"outlined"}
+            label={"Number of Bedroom(s)..."}
+            type='number'
+            name='bedroom_number'
+            defaultValue={props.listingData.bedroom_number}
+            onChange={handleChanges}
+          />
+          ​
+          <TextField
+            fullWidth
+            required
+            margin={"normal"}
+            variant={"outlined"}
+            label={"Number of Bathroom(s)..."}
+            type='number'
+            name='bathroom_number'
+            defaultValue={props.listingData.bathroom_number}
+            onChange={handleChanges}
+          />
+          ​
+          <TextField
+            fullWidth
+            required
+            margin={"normal"}
+            variant={"outlined"}
+            label={"Minimum Number of Night(s)..."}
+            type='number'
+            name='minimum_nights'
+            defaultValue={props.listingData.minimum_nights}
+            onChange={handleChanges}
+          />
+          ​
+          <TextField
+            required
+            fullWidth
+            margin={"normal"}
+            variant={"outlined"}
+            label={"Property Amenities..."}
+            type='text'
+            name='property_amenities'
+            placeholder='Property Amenities..'
+            defaultValue={props.listingData.property_amenities}
+            onChange={handleChanges}
+          />
+          ​
+          <Container>
+            <Link to={"/listing/id"}>
+              <Button size={"large"} margin={"normal"} variant={"contained"} color={"secondary"}>Cancel</Button>
+            </Link>
+            ​
+            <Button size={"large"} margin={"normal"} variant={"contained"} color={"primary"} type='submit'>Submit
+              Listing</Button>
+          </Container>
+          ​
+        </form>
+        ​</>
+      }
+    </Container>
+
+
+  );
 };
 
-const ListingEdit = withFormik({
-    mapPropsToValues({property_name, room_type, address, neighborhood_group, neighborhood, availability_of_year, property_price, bedroom_number, bathroom_number, minimum_nights, property_amenities}) {
-      return {
-        property_name: property_name || '',
-        room_type: room_type || '',
-        address: address || '',
-        neighborhood_group: neighborhood_group || '',
-        neighborhood: neighborhood || '',
-        availability_of_year: availability_of_year || '',
-        property_price: property_price || '',
-        bedroom_number: bedroom_number || '',
-        bathroom_number: bathroom_number || '',
-        minimum_nights: minimum_nights || '',
-        property_amenities: property_amenities || ''
-      };
-    },
+const mapStateToProps = (state) => {
 
-    validationSchema: Yup.object().shape({
-      property_name: Yup.string()
-        .required('Property name is required'),
-        room_type: Yup.string()
-        .required('Room type is required'),
-      address: Yup.string()
-        .required('Address is required'),
-      neighborhood_group: Yup.string()
-        .required('Neighborhood group is required'),
-      neighborhood: Yup.string()
-        .required('Neighborhood is required'),
-      availability_of_year: Yup.string()
-        .required('Availability is required'),
-      property_price: Yup.string()
-        .required('Property price is required'),
-      bedroom_number: Yup.string()
-        .required('Bedroom number is required'),
-      bathroom_number: Yup.string()
-        .required('Bathroom number is required'),
-      minimum_nights: Yup.string()
-        .required('Minimum number of nights is required'),
-      property_amenities: Yup.string()
-        .required('Property amenities is required'),
-    }),
-    
-    handleSubmit(values) {
-      console.log('test', values);
-    }
-})(Edit);
+  return {
+    listingData: state.listingData,
+    isFetching: state.isFetching,
+    errors: state.errors,
+  };
+};
 
-export default ListingEdit;
+export default connect(mapStateToProps, {postListingData})(Edit);
