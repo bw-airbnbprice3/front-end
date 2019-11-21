@@ -1,19 +1,21 @@
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchListingsData } from "../../actions";
 import useStyles from "./ListingMaterialUIStyles";
 import {
   Box,
   Button,
+  ButtonGroup,
   Card,
   CardContent,
   CardHeader,
+  CardMedia,
   CardActions,
   Typography,
-  Link,
   CircularProgress
 } from "@material-ui/core";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
+import CardImg from "../../imgs/apartment.jpg";
 import {
   ListingNeighborHood,
   ListingNeighborHoodGroup
@@ -26,7 +28,6 @@ const ViewAllListings = props => {
   useEffect(() => {
     props.fetchListingsData(sessionStorageUsername);
   }, [sessionStorageUsername]);
-
 
   const deleteListing = listing => {
     const sessionStorageUsername = sessionStorage.getItem("username");
@@ -47,44 +48,56 @@ const ViewAllListings = props => {
 
       {props.isFetching === false && (
         <>
-          <Typography variant="h1" className={classes.viewAlllistingsHeading}>
+          <Typography
+            variant="h1"
+            className={`${classes.viewAlllistingsHeading} fade-in`}
+          >
             Current Listings
           </Typography>
-
-          {props.listingData.length !== 0 && props.listingData.map(listing => (
-            <Card key={listing.id} className={classes.viewAllListingsCard}>
-              <Link
-                className={classes.viewAllListingsCardHeaderLink}
-                onClick={() => props.history.push(`/listing/${listing.id}`)}
-              >
-                <CardHeader
-                  titleTypographyProps={{ variant: "h4" }}
-                  title={listing.property_name}
-                  className={classes.viewAllListingsCardHeader}
-                />
-              </Link>
-
-              <CardContent className={classes.veiwAllListingsCardContent}>
-                <ListingNeighborHoodGroup listing={listing} />
-                <ListingNeighborHood listing={listing} />
-                <Typography variant="button">{listing.address}</Typography>
-              </CardContent>
-              <CardActions>
-                <Link href={`/listing/${listing.id}/edit`}>
-                  <Button variant="contained" color="primary">
-                    Edit
-                  </Button>
-                </Link>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => deleteListing(listing)}
+          <Box className={classes.viewAllListingsCardBox}>
+            {props.listingData.length !== 0 &&
+              props.listingData.map(listing => (
+                <Card
+                  key={listing.id}
+                  className={classes.viewAllListingsCard}
+                  raised
                 >
-                  Delete
-                </Button>
-              </CardActions>
-            </Card>
-          ))}
+                  <CardHeader
+                    titleTypographyProps={{ variant: "h6" }}
+                    title={listing.property_name}
+                    subheader={listing.address}
+                    className={classes.viewAllListingsCardHeader}
+                  />
+                  <CardMedia
+                    component="img"
+                    image={CardImg}
+                    className={`${classes.veiwAllListingsCardContent} fade-in`}
+                  />
+                  <CardContent className={classes.veiwAllListingsCardContent}>
+                    <ListingNeighborHoodGroup listing={listing} />
+                    <ListingNeighborHood listing={listing} />
+                  </CardContent>
+                  <CardActions>
+                    <ButtonGroup
+                      variant="contained"
+                      size="large"
+                      aria-label="small contained button group"
+                    >
+                      <Button href={`/listing/${listing.id}`} color="primary">
+                        View
+                      </Button>
+                      <Button href={`/listing/${listing.id}/edit`}>Edit</Button>
+                      <Button
+                        color="secondary"
+                        onClick={() => deleteListing(listing)}
+                      >
+                        Delete
+                      </Button>
+                    </ButtonGroup>
+                  </CardActions>
+                </Card>
+              ))}
+          </Box>
         </>
       )}
     </Box>

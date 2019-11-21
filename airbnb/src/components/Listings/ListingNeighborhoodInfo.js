@@ -5,7 +5,7 @@ import {neighborhoods, neighborhoodGroups} from '../../utils/DataFiles';
 
 const ListingNeighborHood = props => {
   const {listing, classes} = props;
-
+ 
   return (
     <div>
       {
@@ -21,13 +21,14 @@ const ListingNeighborHood = props => {
 
 const ListingNeighborHoodGroup = props => {
   const {listing, classes} = props;
-
+  console.log(listing)
   return (
     <div>
       {
         neighborhoodGroups.map((county, idx) => {
-          if (county.value === listing.neighborhood) {
-            return <Typography variant="subtitle1" key={idx} className={classes}>{county.label}</Typography>
+          if (county.value === listing.neighborhood_group) {
+          
+          return <Typography variant="subtitle1" key={idx} className={classes}>{county.label}</Typography>
           }
         })
       }

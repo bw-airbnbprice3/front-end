@@ -3,42 +3,46 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
     viewAllListingsContainer: {
-      width: '80%',
-      margin: '20px auto',
+      width: "80%",
+      margin: "20px auto",
+      padding: "0 30px",
       display: 'flex',
-      flexFlow: 'row wrap',
-      justifyContent: 'center',
+      flexFlow: "row wrap",
+      justifyContent: "center",
       alignContent: "center"
-    },
-    viewAllListingsLoading: {
-      margin: "100px auto",
-      fontSize: "7rem"
     }, 
     viewAlllistingsHeading: {
-      width: '100%',
-      marginBottom: "50px",
-      padding: '20px 0',
-      fontSize: '5rem'
+      width: "100%",
+      marginBottom: "30px",
+      padding: "20px 0",
+      fontSize: "3.5rem"
+    },
+    viewAllListingsCardBox: {
+      width: "80%",
+      display: "flex",
+      flexFlow: "row wrap",
+      alignContent: "center"
     },
     viewAllListingsCard: {
       width: "25%",
-      margin: "20px 10px",
+      margin: "20px 24px",
       padding: "20px",
       display: "flex",
       flexFlow: "row wrap",
-      justifyContent: "center",
-      alignContent: "center", 
-      border: "1px solid #eee",
+      justifyContent: "center", 
       borderRadius: "5px"
-    },
-    viewAllListingsCardHeaderLink: {
-      width: "100%"
     },
     viewAllListingsCardHeader: {
       width: "100%",
-      margin: "10px 0",
+      height: "100px",
+      margin: " 0 0 10px 0",
       padding: " 0",
-      fontSize: "2rem"
+      fontSize: "5rem",
+      textOverflow: "ellipsis"
+    },
+    viewAllListingsCardMedia: {
+      width: "100%",
+      height: "200px"
     },
     veiwAllListingsCardContent:{
       width: "100%",
