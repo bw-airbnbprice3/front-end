@@ -277,7 +277,7 @@ const ListingAdd = withFormik({
           bedroom_number: values.bedroom_number
         };
 
-        axios.post(`https://cors-anywhere.herokuapp.com/https://hostify.herokuapp.com/input/${flaskEndPointsArray}`).then(response => console.log(response)).catch(error => console.log(error));
+        axios.post(`https://cors-anywhere.herokuapp.com/https://hostify.herokuapp.com/input`, flaskEndPointsArray).then(response => console.log(response)).catch(error => console.log(error));
 
         console.log(flaskEndPointsArray);
       })
