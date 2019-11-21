@@ -29,9 +29,7 @@ const ViewAllListings = ({props, updateListings}) => {
   console.log(listings)
   return (
     <Box className={classes.viewAllListingsContainer} >
-
       <Typography variant="h1" className={classes.viewAlllistingsHeading}>Current Listings</Typography>
-
       {
         listings.map(listing => (
           <Card  key={listing.id} className={classes.viewAllListingsCard}>
@@ -53,7 +51,6 @@ const ViewAllListings = ({props, updateListings}) => {
         ))
       }
     </Box>
-
   );
 };
 
