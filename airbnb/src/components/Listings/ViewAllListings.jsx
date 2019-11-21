@@ -1,6 +1,6 @@
-import React, {useEffect} from "react";
-import {connect} from "react-redux";
-import {fetchListingsData} from "../../actions";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { fetchListingsData } from "../../actions";
 import useStyles from "./ListingMaterialUIStyles";
 import {
   Box,
@@ -10,7 +10,8 @@ import {
   CardHeader,
   CardActions,
   Typography,
-  Link, CircularProgress
+  Link,
+  CircularProgress
 } from "@material-ui/core";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 import {
@@ -37,55 +38,54 @@ const ViewAllListings = props => {
   };
 
   return (
-
     <Box className={classes.viewAllListingsContainer}>
-      {props.isFetching && <CircularProgress color="primary" style={{marginTop: "3%"}}/>}
+      {props.isFetching && (
+        <CircularProgress color="primary" style={{ marginTop: "3%" }} />
+      )}
       {props.errors && <div>{props.errors}</div>}
 
-      {props.isFetching === false &&
-      <>
-        <Typography variant="h1" className={classes.viewAlllistingsHeading}>
-          Current Listings
-        </Typography>
+      {props.isFetching === false && (
+        <>
+          <Typography variant="h1" className={classes.viewAlllistingsHeading}>
+            Current Listings
+          </Typography>
 
-        {props.listingData.map(listing => (
-          <Card key={listing.id} className={classes.viewAllListingsCard}>
-            <Link
-              className={classes.viewAllListingsCardHeaderLink}
-              onClick={() => props.history.push(`/listing/${listing.id}`)}
-            >
-              <CardHeader
-                titleTypographyProps={{variant: "h4"}}
-                title={listing.property_name}
-                className={classes.viewAllListingsCardHeader}
-              />
-            </Link>
-
-            <CardContent className={classes.veiwAllListingsCardContent}>
-              <ListingNeighborHoodGroup listing={listing}/>
-              <ListingNeighborHood listing={listing}/>
-              <Typography variant="button">{listing.address}</Typography>
-            </CardContent>
-            <CardActions>
+          {props.listingData.map(listing => (
+            <Card key={listing.id} className={classes.viewAllListingsCard}>
               <Link
-                href={`/listing/${listing.id}/edit`}
+                className={classes.viewAllListingsCardHeaderLink}
+                onClick={() => props.history.push(`/listing/${listing.id}`)}
               >
-                <Button variant="contained" color="primary">
-                  Edit
-                </Button>
+                <CardHeader
+                  titleTypographyProps={{ variant: "h4" }}
+                  title={listing.property_name}
+                  className={classes.viewAllListingsCardHeader}
+                />
               </Link>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => deleteListing(listing)}
-              >
-                Delete
-              </Button>
-            </CardActions>
-          </Card>
-        ))}
-      </>
-      }
+
+              <CardContent className={classes.veiwAllListingsCardContent}>
+                <ListingNeighborHoodGroup listing={listing} />
+                <ListingNeighborHood listing={listing} />
+                <Typography variant="button">{listing.address}</Typography>
+              </CardContent>
+              <CardActions>
+                <Link href={`/listing/${listing.id}/edit`}>
+                  <Button variant="contained" color="primary">
+                    Edit
+                  </Button>
+                </Link>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => deleteListing(listing)}
+                >
+                  Delete
+                </Button>
+              </CardActions>
+            </Card>
+          ))}
+        </>
+      )}
     </Box>
   );
 };
@@ -98,4 +98,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {fetchListingsData})(ViewAllListings);
+export default connect(mapStateToProps, { fetchListingsData })(ViewAllListings);
