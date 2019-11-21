@@ -275,7 +275,7 @@ const Edit = (props) => {
 
             <Button className={classes.btn} size={"large"} margin={"normal"} variant={"outlined"} color={"primary"} onClick={obtainOptimalPricing} >Optimize Price</Button>
 
-            <Link to={"/listing/id"}>
+            <Link to={"/listings"}>
               <Button
                 className={classes.btn}
                 size={"large"}

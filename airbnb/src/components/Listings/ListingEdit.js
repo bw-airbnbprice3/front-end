@@ -231,7 +231,7 @@ const Edit = (props) => {
           />
           ​
           <Container>
-            <Link to={"/listing/id"}>
+            <Link to={`/listing/${props.match.params.id}`}>
               <Button size={"large"} margin={"normal"} variant={"contained"} color={"secondary"}>Cancel</Button>
             </Link>
             ​
