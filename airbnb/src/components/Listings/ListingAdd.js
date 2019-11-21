@@ -1,12 +1,11 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import {withFormik, Form} from "formik";
-import {Button, InputAdornment, Container, MenuItem} from "@material-ui/core";
+import {Button, ButtonGroup, InputAdornment, Container, MenuItem} from "@material-ui/core";
 import {FormikTextField} from "formik-material-fields";
 import * as Yup from "yup";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 import axios from "axios";
-import {makeStyles} from "@material-ui/core/styles";
 
 import {
   roomTypes,
@@ -14,14 +13,7 @@ import {
   neighborhoods
 } from "../../utils/DataFiles";
 
-const useStyles = makeStyles({
-  btn: {
-    margin: 10
-  }
-});
-
 const Add = props => {
-  const classes = useStyles();
   const [roomType, setRoomType] = useState(1);
   const [neighborhoodGroup, setNeighborhoodGroup] = useState(1);
   const [neighborhood, setNeighborhood] = useState(1);
@@ -179,21 +171,17 @@ const Add = props => {
           placeholder="Property Amenities.."
         />
         ​
-        <Container>
-          <Link to={"/listings"}>
-            <Button
-              className={classes.btn}
+        <ButtonGroup style={{ marginTop: 20 }}>
+          <Button
               size={"large"}
               margin={"normal"}
               variant={"contained"}
               color={"secondary"}
-            >
+              onClick={() => props.history.push('/listings')}
+          >
               Cancel
-            </Button>
-          </Link>
-          ​
+          </Button>          ​
           <Button
-            className={classes.btn}
             size={"large"}
             margin={"normal"}
             variant={"contained"}
@@ -202,7 +190,7 @@ const Add = props => {
           >
             Submit Listing
           </Button>
-        </Container>
+        </ButtonGroup>
         ​
       </Form>
       ​

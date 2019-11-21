@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
-import {Container, Button, Card} from '@material-ui/core';
+import {Container, Button, ButtonGroup, Card, CircularProgress} from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -9,9 +9,6 @@ const useStyles = makeStyles({
         justifyContent: "flex-start",
         padding: "10px 20px",
         marginBottom: 20
-    },
-    btn: {
-        margin: 10
     }
 });
 
@@ -73,29 +70,8 @@ const Listing = props => {
                             <p>Amenities: {currentListing.property_amenities}</p>
                         </Card>
                     
-                        <nav>
+                        <ButtonGroup>
                             <Button
-                                className={classes.btn}
-                                size={"large"}
-                                margin={"normal"}
-                                variant={"contained"}
-                                color={"secondary"}
-                                onClick={() => deleteListing(currentListing.id)}
-                            >
-                                Delete Listing
-                            </Button>
-                            <Button
-                                className={classes.btn}
-                                size={"large"}
-                                margin={"normal"}
-                                variant={"contained"}
-                                color={"primary"}
-                                onClick={currentListing ? () => props.history.push(`/listing/${currentListing.id}/edit`) : null}
-                            >
-                                Edit Listing
-                            </Button>
-                            <Button
-                                className={classes.btn}
                                 size={"large"}
                                 margin={"normal"}
                                 variant={"contained"}
@@ -103,11 +79,29 @@ const Listing = props => {
                                 onClick={() => props.history.push('/listings')}
                             >
                                 Return
+                            </Button>                            
+                            <Button
+                                size={"large"}
+                                margin={"normal"}
+                                variant={"contained"}
+                                color={"default"}
+                                onClick={currentListing ? () => props.history.push(`/listing/${currentListing.id}/edit`) : null}
+                            >
+                                Edit
                             </Button>
-                        </nav>
+                            <Button
+                                size={"large"}
+                                margin={"normal"}
+                                variant={"contained"}
+                                color={"secondary"}
+                                onClick={() => deleteListing(currentListing.id)}
+                            >
+                                Delete
+                            </Button>
+                        </ButtonGroup>
                     </Container>
                 )
-                : <p>Loading...</p>
+                : <CircularProgress color="primary" style={{ marginTop: "3%" }} />
             }        
         </div>
     )

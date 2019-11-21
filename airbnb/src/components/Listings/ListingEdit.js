@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
 import {connect} from "react-redux";
-import {Button, InputAdornment, Container, MenuItem, TextField, CircularProgress} from "@material-ui/core";
+import {Button, ButtonGroup, InputAdornment, Container, MenuItem, TextField, CircularProgress} from "@material-ui/core";
 import {neighborhoodGroups, neighborhoods, roomTypes} from "../../utils/DataFiles";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 import {postListingData} from "../../actions";
@@ -65,7 +64,7 @@ const Edit = (props) => {
 
       {props.isFetching === false &&
       <>
-        <h2>Edit (Property Name)</h2>
+        <h2>Edit {props.listingData.property_name}</h2>
         <form onSubmit={updatedListing}>
           <TextField
             required
@@ -228,14 +227,26 @@ const Edit = (props) => {
             onChange={handleChanges}
           />
           ​
-          <Container>
-            <Link to={`/listing/${props.match.params.id}`}>
-              <Button size={"large"} margin={"normal"} variant={"contained"} color={"secondary"}>Cancel</Button>
-            </Link>
-            ​
-            <Button size={"large"} margin={"normal"} variant={"contained"} color={"primary"} type='submit'>Submit
-              Listing</Button>
-          </Container>
+          <ButtonGroup style={{ marginTop: 20 }}>
+            <Button
+              size={"large"}
+              margin={"normal"}
+              variant={"contained"}
+              color={"secondary"}
+              onClick={() => props.history.push(`/listing/${props.match.params.id}`)}
+            >
+              Cancel
+            </Button>            ​
+            <Button
+              size={"large"}
+              margin={"normal"}
+              variant={"contained"}
+              color={"primary"}
+              type='submit'
+            >
+              Submit Listing
+            </Button>
+          </ButtonGroup>
           ​
         </form>
         ​</>

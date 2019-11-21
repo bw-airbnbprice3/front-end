@@ -8,7 +8,7 @@ const useStyles = makeStyles({
       margin: 10
     },
     btn: {
-      margin: 10
+      marginTop: 10
     }
   });
 
@@ -41,7 +41,9 @@ const RegistrationForm = (props) => {
                 <div>
                     <TextField required fullWidth margin={"normal"} variant="outlined" label={"Create Password"} type="password" name="password" placeholder="Create Password" onChange={handleChange} required />
                 </div>
+                <div>
                     <Button fullWidth className={classes.btn} variant="contained" color={"primary"} size={"large"} margin={"normal"} type="submit">Register</Button>
+                </div>
             </form>
         </Container>
     )

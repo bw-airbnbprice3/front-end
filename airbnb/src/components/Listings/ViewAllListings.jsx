@@ -50,7 +50,7 @@ const ViewAllListings = props => {
 
       {props.isFetching === false && (
         <>
-          <Typography variant="h1" className={classes.viewAlllistingsHeading}>
+          <Typography variant="h1" className={`${classes.viewAlllistingsHeading} fade-in`}>
             Current Listings
           </Typography>
           <Box className={classes.viewAllListingsCardBox}>
@@ -62,7 +62,7 @@ const ViewAllListings = props => {
                   subheader={listing.address}
                   className={classes.viewAllListingsCardHeader}
               />
-              <CardMedia component="img" image={CardImg} className={classes.viewAllListingsCardMedia  } />
+              <CardMedia component="img" image={CardImg} className={`${classes.veiwAllListingsCardContent} fade-in`} />
               <CardContent className={classes.veiwAllListingsCardContent}>
                 <ListingNeighborHoodGroup listing={listing} />
                 <ListingNeighborHood listing={listing} />
