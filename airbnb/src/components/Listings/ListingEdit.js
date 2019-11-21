@@ -49,9 +49,11 @@ const Edit = (props) => {
     AxiosWithAuth()
       .put(`/api/listings/${sessionStorageUsername}/${props.match.params.id}`, updatedValues)
       .then(response => {
-        props.history.push('/listings')
+        props.history.push(`/listing/${props.match.params.id}`);
       })
       .catch(error => console.log(error, updatedValues));
+
+    console.log(props.listingData);
   };
 
   // / Sets the proper data values here. Since some of the keys return an integer, and the value requires the string, sets the correct data

@@ -24,6 +24,7 @@ const Edit = (props) => {
   const [roomType, setRoomType] = useState(0);
   const [neighborhoodGroup, setNeighborhoodGroup] = useState(0);
   const [neighborhood, setNeighborhood] = useState(0);
+  const [optimalPrice, setOptimalPrice] = useState('');
 
   const roomTypeHandleChange = event => {
     setRoomType(event.target.value);
@@ -39,7 +40,7 @@ const Edit = (props) => {
     setNeighborhood(event.target.value);
     setUpdatedValues({...updatedValues, [event.target.name]: event.target.value});
   };
-  const handleUpdates = event => {
+  const handleChanges = event => {
     setUpdatedValues({...updatedValues, [event.target.name]: event.target.value});
   };
 
@@ -58,23 +59,41 @@ const Edit = (props) => {
       bedroom_number: updatedValues.bedroom_number
     };
 
-    axios.post(`https://cors-anywhere.herokuapp.com/https://hostify.herokuapp.com/input`, flaskEndPointsArray).then(response => console.log(response)).catch(error => console.log(error));
-  };
-
-  const handleChanges = event => {
-    setUpdatedValues({...updatedValues, [event.target.name]: event.target.value});
+    axios
+      .post(`https://cors-anywhere.herokuapp.com/https://hostify.herokuapp.com/input`, flaskEndPointsArray)
+      .then(response => {
+        setOptimalPrice(response.data);
+        console.log(optimalPrice);
+      })
+      .catch(error => console.log(error));
   };
 
   const addPropertyListing = event => {
     event.preventDefault();
 
+    const fixedUpdatedValues = {
+      host_username: sessionStorageUsername,
+      address: updatedValues.address,
+      availability_of_year: Number(updatedValues.availability_of_year),
+      bathroom_number: Number(updatedValues.bathroom_number),
+      bedroom_number: Number(updatedValues.bedroom_number),
+      minimum_nights: Number(updatedValues.minimum_nights),
+      neighborhood: 5,
+      neighborhood_group: 4,
+      property_amenities: "Parking, shared bathroom, WiFi",
+      property_name: "Updated Room Name",
+      property_price: Number(updatedValues.property_price),
+      room_type: 2
+    };
+
+    console.log(fixedUpdatedValues);
     // Sends the posted request to edit the listing ID, and then on successful completion, routes the user back to the listings page.
     AxiosWithAuth()
-      .put(`/api/listings/${sessionStorageUsername}`, updatedValues)
+      .post(`/api/listings/${sessionStorageUsername}`, fixedUpdatedValues)
       .then(response => {
         props.history.push('/listings');
       })
-      .catch(error => console.log(error, updatedValues));
+      .catch(error => console.log(error));
   };
 
   // / Sets the proper data values here. Since some of the keys return an integer, and the value requires the string, sets the correct data
@@ -91,28 +110,30 @@ const Edit = (props) => {
         <h2>Add New Listing</h2>
         <form onSubmit={addPropertyListing}>
           <TextField
+            required
             fullWidth
             margin={"normal"}
             variant={"outlined"}
+            type='text'
             label={"Property Name..."}
-            type="text"
-            name="property_name"
-            placeholder="Name of property"
-            onChange={handleUpdates}
+            name='property_name'
+            helperText='Name of property'
+            defaultValue={props.listingData.property_name}
+            onChange={handleChanges}
           />
           ​
           <TextField
+            required
             select
             fullWidth
             margin={"normal"}
             variant={"outlined"}
             label={"Property Type..."}
-            type="text"
-            name="room_type"
+            type='text'
+            name='room_type'
             value={roomType}
             onChange={roomTypeHandleChange}
-            helperText={"Please select the type of property"}
-          >
+            helperText={'Please select the type of property'}>
             {roomTypes.map(option => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
@@ -121,28 +142,30 @@ const Edit = (props) => {
           </TextField>
           ​
           <TextField
+            required
             fullWidth
             margin={"normal"}
             variant={"outlined"}
             label={"Address..."}
-            type="text"
-            name="address"
-            placeholder="Address"
-            onChange={handleUpdates}
+            type='text'
+            name='address'
+            helperText='Address'
+            defaultValue={props.listingData.address}
+            onChange={handleChanges}
           />
           ​
           <TextField
+            required
             select
             fullWidth
             margin={"normal"}
             variant={"outlined"}
             label={"Neighborhood Group..."}
-            type="text"
-            name="neighborhood_group"
+            type='text'
+            name='neighborhood_group'
             value={neighborhoodGroup}
             onChange={neighborhoodGroupHandleChange}
-            helperText={"Please select your neighborhood group"}
-          >
+            helperText={'Please select your neighborhood group'}>
             {neighborhoodGroups.map(option => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
@@ -151,17 +174,17 @@ const Edit = (props) => {
           </TextField>
           ​
           <TextField
+            required
             select
             fullWidth
             margin={"normal"}
             variant={"outlined"}
             label={"Neighborhood..."}
-            type="text"
-            name="neighborhood"
+            type='text'
+            name='neighborhood'
             value={neighborhood}
             onChange={neighborhoodHandleChange}
-            helperText={"Please select your neighborhood"}
-          >
+            helperText={'Please select your neighborhood'}>
             {neighborhoods.map(option => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
@@ -170,69 +193,81 @@ const Edit = (props) => {
           </TextField>
           ​
           <TextField
+            required
             fullWidth
             margin={"normal"}
             variant={"outlined"}
             label={"Availability During Year.."}
-            type="number"
-            name="availability_of_year"
-            placeholder="Availability During Year..."
-            onChange={handleUpdates}
+            type='number'
+            name='availability_of_year'
+            helperText='Availability During Year...'
+            defaultValue={props.listingData.availability_of_year}
+            onChange={handleChanges}
           />
           ​
           <TextField
+            required
             fullWidth
             margin={"normal"}
             variant={"outlined"}
             label={"Property Price Per Night..."}
             InputProps={{
               startAdornment: <InputAdornment position="start">€</InputAdornment>,
-              placeholder: "Property Price Per Night..."
+              placeholder: 'Property Price Per Night...'
             }}
-            type="number"
-            name="property_price"
-            onChange={handleUpdates}
+            type='number'
+            name='property_price'
+            defaultValue={props.listingData.property_price}
+            onChange={handleChanges}
           />
           ​
           <TextField
+            required
             fullWidth
             margin={"normal"}
             variant={"outlined"}
             label={"Number of Bedroom(s)..."}
-            type="number"
-            name="bedroom_number"
-            onChange={handleUpdates}
+            type='number'
+            name='bedroom_number'
+            defaultValue={props.listingData.bedroom_number}
+            onChange={handleChanges}
           />
           ​
           <TextField
             fullWidth
+            required
             margin={"normal"}
             variant={"outlined"}
             label={"Number of Bathroom(s)..."}
-            type="number"
-            name="bathroom_number"
-            onChange={handleUpdates}
+            type='number'
+            name='bathroom_number'
+            defaultValue={props.listingData.bathroom_number}
+            onChange={handleChanges}
           />
           ​
           <TextField
             fullWidth
+            required
             margin={"normal"}
             variant={"outlined"}
             label={"Minimum Number of Night(s)..."}
-            type="number"
-            name="minimum_nights"
-            onChange={handleUpdates}
+            type='number'
+            name='minimum_nights'
+            defaultValue={props.listingData.minimum_nights}
+            onChange={handleChanges}
           />
           ​
           <TextField
+            required
             fullWidth
             margin={"normal"}
             variant={"outlined"}
             label={"Property Amenities..."}
-            type="text"
-            name="property_amenities"
-            placeholder="Property Amenities.."
-            onChange={handleUpdates}
+            type='text'
+            name='property_amenities'
+            placeholder='Property Amenities..'
+            defaultValue={props.listingData.property_amenities}
+            onChange={handleChanges}
           />
           ​
           <Container>

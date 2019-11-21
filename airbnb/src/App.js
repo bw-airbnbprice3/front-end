@@ -12,6 +12,7 @@ import ListingAdd from "./components/Listings/ListingAdd";
 import Listing from "./components/Listings/Listing";
 import ListingEdit from "./components/Listings/ListingEdit";
 import NavBar from "./components/NavBar";
+import ConfirmUpdate from "./components/Listings/ConfirmUpdate";
 import FormikRegistrationForm from "./components/User/RegistrationForm";
 
 const theme = createMuiTheme({
@@ -41,12 +42,13 @@ function App() {
   
         {/*Private routes can be added here. Just follow the basic template below. This will automatically check if the token is saved in storage. If not, it will redirect them to the login page*/}
         <Switch>
-          <PrivateRoute path={"/listings"} component={ViewAllListings} />
+          <PrivateRoute exact path={"/listings"} component={ViewAllListings} />
           <PrivateRoute path={"/user/edit"} component={UserEdit} />
           <PrivateRoute path="/add" component={ListingAdd} />
           <PrivateRoute exact path="/listing/:id" component={Listing} />
           <PrivateRoute path="/listing/:id/edit" component={ListingEdit} />
           <PrivateRoute exact path="/user" component={UserProfile} />
+          <PrivateRoute exact path={"/confirmation"} component={ConfirmUpdate} />
         </Switch>
       </div>
     </MuiThemeProvider>

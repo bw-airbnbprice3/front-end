@@ -25,7 +25,10 @@ const ViewAllListings = props => {
   useEffect(() => {
     const sessionStorageUsername = sessionStorage.getItem("username");
     props.fetchListingsData(sessionStorageUsername);
-  }, []);
+    console.log(props);
+  }, [props.isEditing]);
+
+  console.log(props.listingData);
 
   const deleteListing = listing => {
     const sessionStorageUsername = sessionStorage.getItem("username");
@@ -50,7 +53,7 @@ const ViewAllListings = props => {
             Current Listings
           </Typography>
 
-          {props.listingData.map(listing => (
+          {props.listingData.length !== 0 && props.listingData.map(listing => (
             <Card key={listing.id} className={classes.viewAllListingsCard}>
               <Link
                 className={classes.viewAllListingsCardHeaderLink}
@@ -91,10 +94,12 @@ const ViewAllListings = props => {
 };
 
 const mapStateToProps = state => {
+  // console.log('MAP STATE TO PROPS: ', state);
   return {
     listingData: state.listingData,
     isFetching: state.isFetching,
-    errors: state.errors
+    errors: state.errors,
+    isEditing: state.isEditing
   };
 };
 

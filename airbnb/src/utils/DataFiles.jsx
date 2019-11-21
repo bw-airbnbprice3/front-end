@@ -75,7 +75,7 @@ export const neighborhoodGroups = [
 export const neighborhoods = [
   {
     value: 0,
-    label: 'Please select a neighorhood'
+    label: 'Please select a neighborhood'
   },
   {
     value: 1,
