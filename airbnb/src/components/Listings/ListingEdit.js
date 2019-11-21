@@ -8,16 +8,15 @@ import {postListingData} from "../../actions";
 
 const Edit = (props) => {
 
-  useEffect(() => {
-    const id = props.match.params.id;
-    props.postListingData(id);
-    console.log(id);
-  }, []);
-
   const [updatedValues, setUpdatedValues] = useState(props.editingData);
   const [roomType, setRoomType] = useState(1);
   const [neighborhoodGroup, setNeighborhoodGroup] = useState(1);
   const [neighborhood, setNeighborhood] = useState(1);
+
+  useEffect(() => {
+    const id = props.match.params.id;
+    props.postListingData(id);
+  }, []);
 
   const roomTypeHandleChange = event => {
     setRoomType(event.target.value);
@@ -58,7 +57,9 @@ const Edit = (props) => {
 
     <Container maxWidth={"md"} margin={"3%"}>
 
-      {props.isFetching && <h2>⏰ Loading... ⏰</h2>}
+      {props.isFetching && <h2><span role={"img"} aria-label={"Loading Clock..."}>⏰</span> Loading... <span role={"img"}
+                                                                                                            aria-label={"Loading Clock..."}>⏰</span>
+      </h2>}
 
       {props.isFetching === false &&
       <>
