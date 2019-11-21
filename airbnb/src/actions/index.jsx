@@ -21,12 +21,15 @@ export const POST_PRICE_OPTIMIZER_START = "POST_PRICE_OPTIMIZER_START";
 export const POST_PRICE_OPTIMIZER_SUCCESS = "POST_PRICE_OPTIMIZER_SUCCESS";
 export const POST_PRICE_OPTIMIZER_FAILURE = "POST_PRICE_OPTIMIZER_FAILURE";
 
-export const fetchListingsData = () => dispatch => {
+export const fetchListingsData = (listingUsername) => dispatch => {
   dispatch({type: FETCH_LISTINGS_START});
 
   AxiosWithAuth()
-    .get('/api/listings/')
-    .then(response => dispatch({type: FETCH_LISTINGS_SUCCESS, payload: response.data}))
+    .get(`/api/listings/${listingUsername}`)
+    .then(response => {
+      // console.log(response);
+      dispatch({type: FETCH_LISTINGS_SUCCESS, payload: response.data})
+      })
     .catch(error => dispatch({type: FETCH_LISTINGS_FAILURE, payload: error.message}));
 };
 

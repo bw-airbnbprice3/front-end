@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from "react";
+import {connect} from "react-redux";
+import {fetchListingsData} from "../../actions";
 import useStyles from "./ListingMaterialUIStyles";
 import {
   Box,
@@ -22,12 +24,7 @@ const ViewAllListings = props => {
 
   useEffect(() => {
     const sessionStorageUsername = sessionStorage.getItem("username");
-    AxiosWithAuth()
-      .get(`api/listings/${sessionStorageUsername}`)
-      .then(response => {
-        setListings(response.data);
-      })
-      .catch(error => console.log(error));
+    props.fetchListingsData(sessionStorageUsername);
   }, []);
 
   const deleteListing = listing => {
@@ -40,7 +37,11 @@ const ViewAllListings = props => {
   };
 
   return (
+
     <Box className={classes.viewAllListingsContainer}>
+      {props.isFetching && <span>Loading State...</span>}
+      {props.errors && <div>{props.errors}</div>}
+
       <Typography variant="h1" className={classes.viewAlllistingsHeading}>
         Current Listings
       </Typography>
@@ -91,4 +92,12 @@ const ViewAllListings = props => {
   );
 };
 
-export default ViewAllListings;
+const mapStateToProps = state => {
+  return {
+    listingData: state.listingData,
+    isFetching: state.isFetching,
+    errors: state.errors
+  };
+};
+
+export default connect(mapStateToProps, {fetchListingsData})(ViewAllListings);

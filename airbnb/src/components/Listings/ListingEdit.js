@@ -9,8 +9,7 @@ import {postListingData} from "../../actions";
 const Edit = (props) => {
 
   // Sets the state for various components. The dropdowns need their own state to allow them to change their input and value
-  // const [updatedValues, setUpdatedValues] = useState(props.listingData);
-  //
+
   const sessionStorageUsername = sessionStorage.getItem('username');
   const [updatedValues, setUpdatedValues] = useState([]);
 

@@ -50,7 +50,8 @@ const LogIn = props => {
         </div>
         <Button fullWidth className={classes.btn} variant="contained" color={"primary"} size={"large"} margin={"normal"}
                 type="submit">Log In</Button>
-        <Button fullWidth className={classes.btn} variant="contained" color={"secondary"} size={"large"} margin={"normal"} href={"/register"}>New User? Register Here</Button>
+        <Button fullWidth className={classes.btn} variant="contained" color={"secondary"} size={"large"}
+                margin={"normal"} href={"/register"}>New User? Register Here</Button>
       </form>
 
     </Container>
