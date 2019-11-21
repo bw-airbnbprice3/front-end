@@ -10,14 +10,15 @@ const Edit = (props) => {
 
   // Sets the state for various components. The dropdowns need their own state to allow them to change their input and value
   const [updatedValues, setUpdatedValues] = useState(props.listingData);
-  const [roomType, setRoomType] = useState(1);
-  const [neighborhoodGroup, setNeighborhoodGroup] = useState(1);
-  const [neighborhood, setNeighborhood] = useState(1);
 
   useEffect(() => {
     const id = props.match.params.id;
     props.postListingData(id);
   }, []);
+
+  const [roomType, setRoomType] = useState(props.listingData.room_type);
+  const [neighborhoodGroup, setNeighborhoodGroup] = useState(props.listingData.neighborhood_group);
+  const [neighborhood, setNeighborhood] = useState(props.listingData.neighborhood);
 
   const roomTypeHandleChange = event => {
     setRoomType(event.target.value);

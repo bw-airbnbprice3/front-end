@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import useStyles from "./ListingMaterialUIStyles";
 import {
   Box,
@@ -19,8 +19,6 @@ import {
 const ViewAllListings = props => {
   const classes = useStyles();
   const [listings, setListings] = useState([]);
-  // Grabs all of the listings that are available from the data end points.
-  console.log(listings);
 
   useEffect(() => {
     AxiosWithAuth()
@@ -40,7 +38,6 @@ const ViewAllListings = props => {
       .catch(error => console.log(error));
   };
 
-  console.log(listings);
   return (
     <Box className={classes.viewAllListingsContainer}>
       <Typography variant="h1" className={classes.viewAlllistingsHeading}>
@@ -54,7 +51,7 @@ const ViewAllListings = props => {
             onClick={() => props.history.push(`/listing/${listing.id}`)}
           >
             <CardHeader
-              titleTypographyProps={{ variant: "h4" }}
+              titleTypographyProps={{variant: "h4"}}
               title={listing.property_name}
               className={classes.viewAllListingsCardHeader}
             />
@@ -67,8 +64,8 @@ const ViewAllListings = props => {
           )}
 
           <CardContent className={classes.veiwAllListingsCardContent}>
-            <ListingNeighborHoodGroup listing={listing} />
-            <ListingNeighborHood listing={listing} />
+            <ListingNeighborHoodGroup listing={listing}/>
+            <ListingNeighborHood listing={listing}/>
             <Typography variant="button">{listing.address}</Typography>
           </CardContent>
           <CardActions>

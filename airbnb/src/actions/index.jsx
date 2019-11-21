@@ -36,7 +36,7 @@ export const postLoginData = () => dispatch => {
   AxiosWithAuth()
     .get('/api/login')
     .then(response => dispatch({type: POST_LOGIN_SUCCESS, payload: response.data}))
-    .catch(error => dispatch({type: POST_LOGIN_FAILURE}));
+    .catch(error => dispatch({type: POST_LOGIN_FAILURE, payload: error.data}));
 };
 
 export const postListingData = (listingID) => dispatch => {
