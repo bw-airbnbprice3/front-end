@@ -21,11 +21,11 @@ import {
 
 const ViewAllListings = props => {
   const classes = useStyles();
+  const sessionStorageUsername = sessionStorage.getItem("username");
 
   useEffect(() => {
-    const sessionStorageUsername = sessionStorage.getItem("username");
     props.fetchListingsData(sessionStorageUsername);
-  }, [props.listingData.length]);
+  }, [sessionStorageUsername]);
 
 
   const deleteListing = listing => {

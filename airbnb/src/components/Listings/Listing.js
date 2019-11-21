@@ -34,7 +34,7 @@ const Listing = props => {
       .then(res => {
         setListings(res.data);
       }).catch(err => {console.log(err)})
-  }, []);
+  }, [props.match.params.id, sessionStorageUsername]);
 
   return (
     <div>

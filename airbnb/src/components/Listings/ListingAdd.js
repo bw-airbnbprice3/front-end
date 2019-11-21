@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from "react-redux";
 import {Button, InputAdornment, Container, MenuItem, TextField, CircularProgress, Typography} from "@material-ui/core";
