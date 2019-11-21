@@ -43,3 +43,7 @@ a {
 .fade-in {
   animation: fadeIn ease 1s;
 }
+
+h2 {
+  color: #885b5f;
+}
