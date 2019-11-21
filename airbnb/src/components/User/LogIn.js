@@ -1,9 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import {Button, Container, TextField, CircularProgress} from "@material-ui/core";
+import {Button, Container, TextField} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
-import {postLoginData} from "../../actions";
 
 const useStyles = makeStyles({
   formStyle: {
