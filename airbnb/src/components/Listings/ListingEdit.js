@@ -64,7 +64,7 @@ const Edit = (props) => {
 
       {props.isFetching === false &&
       <>
-        <h2>Edit (Property Name)</h2>
+        <h2>Edit {props.listingData.property_name}</h2>
         <form onSubmit={updatedListing}>
           <TextField
             required
