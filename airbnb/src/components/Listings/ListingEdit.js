@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from "react-redux";
-import {Button, InputAdornment, Container, MenuItem, TextField} from "@material-ui/core";
+import {Button, InputAdornment, Container, MenuItem, TextField, CircularProgress} from "@material-ui/core";
 import {neighborhoodGroups, neighborhoods, roomTypes} from "../../utils/DataFiles";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 import {postListingData} from "../../actions";
@@ -57,15 +57,14 @@ const Edit = (props) => {
 
     <Container maxWidth={"md"} margin={"3%"}>
 
-      {props.isFetching && <h2><span role={"img"} aria-label={"Loading Clock..."}>⏰</span> Loading... <span role={"img"}
-                                                                                                            aria-label={"Loading Clock..."}>⏰</span>
-      </h2>}
+      {props.isFetching && <CircularProgress color="primary" style={{marginTop: "3%"}}/> }
 
       {props.isFetching === false &&
       <>
         <h2>Edit (Property Name)</h2>
         <form onSubmit={updatedListing}>
           <TextField
+            required
             fullWidth
             margin={"normal"}
             variant={"outlined"}
@@ -78,6 +77,7 @@ const Edit = (props) => {
           />
           ​
           <TextField
+            required
             select
             fullWidth
             margin={"normal"}
