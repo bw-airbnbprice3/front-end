@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardActions,
   Typography,
-  Link
+  Link, CircularProgress
 } from "@material-ui/core";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 import {
@@ -39,55 +39,59 @@ const ViewAllListings = props => {
   return (
 
     <Box className={classes.viewAllListingsContainer}>
-      {props.isFetching && <span>Loading State...</span>}
+      {props.isFetching && <CircularProgress color="primary" style={{marginTop: "3%"}}/>}
       {props.errors && <div>{props.errors}</div>}
 
-      <Typography variant="h1" className={classes.viewAlllistingsHeading}>
-        Current Listings
-      </Typography>
+      {props.isFetching === false &&
+      <>
+        <Typography variant="h1" className={classes.viewAlllistingsHeading}>
+          Current Listings
+        </Typography>
 
-      {listings.map(listing => (
-        <Card key={listing.id} className={classes.viewAllListingsCard}>
-          <Link
-            className={classes.viewAllListingsCardHeaderLink}
-            onClick={() => props.history.push(`/listing/${listing.id}`)}
-          >
-            <CardHeader
-              titleTypographyProps={{variant: "h4"}}
-              title={listing.property_name}
-              className={classes.viewAllListingsCardHeader}
-            />
-          </Link>
-
-          {listings.length === 0 && (
-            <Box className={classes.viewAllListingsLoading}>
-              <Typography variant="h4">Loading...</Typography>
-            </Box>
-          )}
-
-          <CardContent className={classes.veiwAllListingsCardContent}>
-            <ListingNeighborHoodGroup listing={listing}/>
-            <ListingNeighborHood listing={listing}/>
-            <Typography variant="button">{listing.address}</Typography>
-          </CardContent>
-          <CardActions>
+        {props.listingData.map(listing => (
+          <Card key={listing.id} className={classes.viewAllListingsCard}>
             <Link
-              href={`/listing/${listing.id}/edit`}
+              className={classes.viewAllListingsCardHeaderLink}
+              onClick={() => props.history.push(`/listing/${listing.id}`)}
             >
-              <Button variant="contained" color="primary">
-                Edit
-              </Button>
+              <CardHeader
+                titleTypographyProps={{variant: "h4"}}
+                title={listing.property_name}
+                className={classes.viewAllListingsCardHeader}
+              />
             </Link>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => deleteListing(listing)}
-            >
-              Delete
-            </Button>
-          </CardActions>
-        </Card>
-      ))}
+
+            {/*{listings.length === 0 && (*/}
+            {/*  <Box className={classes.viewAllListingsLoading}>*/}
+            {/*    <Typography variant="h4">Loading...</Typography>*/}
+            {/*  </Box>*/}
+            {/*)}*/}
+
+            <CardContent className={classes.veiwAllListingsCardContent}>
+              <ListingNeighborHoodGroup listing={listing}/>
+              <ListingNeighborHood listing={listing}/>
+              <Typography variant="button">{listing.address}</Typography>
+            </CardContent>
+            <CardActions>
+              <Link
+                href={`/listing/${listing.id}/edit`}
+              >
+                <Button variant="contained" color="primary">
+                  Edit
+                </Button>
+              </Link>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => deleteListing(listing)}
+              >
+                Delete
+              </Button>
+            </CardActions>
+          </Card>
+        ))}
+      </>
+      }
     </Box>
   );
 };
