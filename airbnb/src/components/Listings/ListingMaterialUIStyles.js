@@ -38,7 +38,7 @@ const useStyles = makeStyles({
       width: "100%",
       margin: "10px 0",
       padding: " 0",
-      fontSize: "4rem"
+      fontSize: "2rem"
     },
     veiwAllListingsCardContent:{
       width: "100%",
