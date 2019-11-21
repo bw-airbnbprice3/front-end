@@ -17,20 +17,20 @@ const useStyles = makeStyles({
 
 const Listing = props => {
     const classes = useStyles();
-    const [listings, setListings] = useState([])
+    const [listings, setListings] = useState([]);
+    const sessionStorageUsername = sessionStorage.getItem('username');
 
     const currentListing = listings.find(
         listing => listing.id === Number(props.match.params.id)
     );
-    console.log(currentListing);
 
-    const deleteListing = id => {
-        AxiosWithAuth().delete(`api/listings/${id}`);
+    const deleteListing = () => {
+        AxiosWithAuth().delete(`api/listings/${sessionStorageUsername}/${props.match.params.id}`);
         props.history.push("/listings");
     };
     
     useEffect(() => {
-        AxiosWithAuth().get("api/listings/")
+        AxiosWithAuth().get(`api/listings/${sessionStorageUsername}/${props.match.params.id}`)
         .then(res => {
             setListings(res.data);
         }).catch(err => {console.log(err)})
