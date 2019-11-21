@@ -1,5 +1,9 @@
 export const roomTypes = [
   {
+    value: 0,
+    label: 'Please select a room type'
+  },
+  {
     value: 1,
     label: 'Entire Home/Apartment'
   },
@@ -14,6 +18,10 @@ export const roomTypes = [
 ];
 
 export const neighborhoodGroups = [
+  {
+    value: 0,
+    label: 'Please select a neighborhood group'
+  },
   {
     value: 1,
     label: 'Mitte'
@@ -65,6 +73,10 @@ export const neighborhoodGroups = [
 ];
 
 export const neighborhoods = [
+  {
+    value: 0,
+    label: 'Please select a neighorhood'
+  },
   {
     value: 1,
     label: 'Brunnenstr Süd',

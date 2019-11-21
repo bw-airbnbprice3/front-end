@@ -65,11 +65,11 @@ export const updateListingData = (listing) => dispatch => {
 };
 
 // this is a template URL until the data science end points are created. Using a fake template in the meantime
-export const postPriceOptimizer = () => dispatch => {
+export const postPriceOptimizer = (pricingModelData) => dispatch => {
   dispatch({type: POST_PRICE_OPTIMIZER_START});
 
   axios
-    .post('https://jsonplaceholder.typicode.com/posts')
+    .post('https://cors-anywhere.herokuapp.com/https://hostify.herokuapp.com/input', pricingModelData)
     .then(response => dispatch({type: POST_PRICE_OPTIMIZER_SUCCESS, payload: response.data}))
     .catch(error => dispatch({type: POST_PRICE_OPTIMIZER_FAILURE, payload: error.data}));
 };
