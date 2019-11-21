@@ -57,7 +57,7 @@ const ViewAllListings = props => {
           {props.listingData.map(listing => (
             <Card key={listing.id} className={classes.viewAllListingsCard} raised>
               <CardHeader 
-                  //titleTypographyProps={{ variant: "h6" }} 
+                  titleTypographyProps={{ variant: "h6" }} 
                   title={listing.property_name}
                   subheader={listing.address}
                   className={classes.viewAllListingsCardHeader}

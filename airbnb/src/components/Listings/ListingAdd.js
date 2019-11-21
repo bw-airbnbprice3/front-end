@@ -180,7 +180,7 @@ const Add = props => {
         />
         ​
         <Container>
-          <Link to={"/listing/id"}>
+          <Link to={"/listings"}>
             <Button
               className={classes.btn}
               size={"large"}
