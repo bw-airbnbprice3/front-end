@@ -20,6 +20,8 @@ const ViewAllListings = props => {
   const classes = useStyles();
   const [listings, setListings] = useState([]);
   // Grabs all of the listings that are available from the data end points.
+  console.log(listings);
+
   useEffect(() => {
     AxiosWithAuth()
       .get("api/listings/")
