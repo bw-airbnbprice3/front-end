@@ -11,7 +11,7 @@ const ViewAllListings = ({props, updateListings}) => {
   
   // Grabs all of the listings that are available from the data end points.
   useEffect(() => {
-    AxiosWithAuth().get('api/listings/CoreyG').then(response => {
+    AxiosWithAuth().get('api/listings').then(response => {
       setListings(response.data);
     })
     .catch(error => console.log(error));
