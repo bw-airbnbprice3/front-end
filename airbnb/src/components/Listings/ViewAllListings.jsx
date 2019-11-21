@@ -11,7 +11,7 @@ const ViewAllListings = ({props, updateListings}) => {
   
   // Grabs all of the listings that are available from the data end points.
   useEffect(() => {
-    AxiosWithAuth().get('api/listings/CoreyG').then(response => {
+    AxiosWithAuth().get('api/listings').then(response => {
       setListings(response.data);
     })
     .catch(error => console.log(error));
@@ -38,13 +38,6 @@ const ViewAllListings = ({props, updateListings}) => {
              <Link className={classes.viewAllListingsCardHeaderLink} onClick={() => props.history.push(`/listing/${listing.id}`)}>
               <CardHeader titleTypographyProps={{variant:'h4' }} title= {listing.property_name}  className={classes.viewAllListingsCardHeader}/>
              </Link>
-
-             {listings.length === 0 &&
-                <Box className={classes.viewAllListingsLoading}>
-                    <Typography variant="h4">Loading...</Typography>
-                </Box>
-              }
-
             <CardContent className={classes.veiwAllListingsCardContent}>
               <ListingNeighborHoodGroup listing={listing} />
               <ListingNeighborHood listing={listing} />
