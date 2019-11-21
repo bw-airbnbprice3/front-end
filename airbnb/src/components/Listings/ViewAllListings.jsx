@@ -27,8 +27,9 @@ const ViewAllListings = props => {
   }, []);
 
   const deleteListing = listing => {
+    const sessionStorageUsername = sessionStorage.getItem("username");
     AxiosWithAuth()
-      .delete(`api/listings/${listing.id}`)
+      .delete(`api/listings/${sessionStorageUsername}/${listing.id}`)
       .then(response => {
         console.log(response);
       })
