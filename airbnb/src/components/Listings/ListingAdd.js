@@ -5,13 +5,22 @@ import { Button, InputAdornment, Container, MenuItem } from "@material-ui/core";
 import { FormikTextField } from "formik-material-fields";
 import * as Yup from "yup";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
+import {makeStyles} from "@material-ui/core/styles";
+
 import {
   roomTypes,
   neighborhoodGroups,
   neighborhoods
 } from "../../utils/DataFiles";
 
-const Add = () => {
+const useStyles = makeStyles({
+  btn: {
+      margin: 10
+  }
+});
+
+const Add = props => {
+  const classes = useStyles();
   const [roomType, setRoomType] = useState(1);
   const [neighborhoodGroup, setNeighborhoodGroup] = useState(1);
   const [neighborhood, setNeighborhood] = useState(1);
@@ -29,7 +38,7 @@ const Add = () => {
   };
 
   return (
-    <Container maxWidth={"md"} margin={"3%"}>
+    <Container maxWidth={"md"} margin={"3%"} className="fade-in">
       <h2>Add Listing</h2>
       <Form>
         <FormikTextField
@@ -168,10 +177,10 @@ const Add = () => {
         ​
         <Container>
           <Link to={"/listing/id"}>
-            <Button size={"large"} margin={"normal"} variant={"contained"} color={"secondary"}>Cancel</Button>
+            <Button className={classes.btn} size={"large"} margin={"normal"} variant={"contained"} color={"secondary"}>Cancel</Button>
           </Link>
           ​
-          <Button size={"large"} margin={"normal"} variant={"contained"} color={"primary"} type='submit'>Submit
+          <Button className={classes.btn} size={"large"} margin={"normal"} variant={"contained"} color={"primary"} type='submit'>Submit
             Listing</Button>
         </Container>
         ​
@@ -226,13 +235,16 @@ const ListingAdd = withFormik({
     property_amenities: Yup.string().required("Property amenities is required")
   }),
 
-  handleSubmit(values) {
+  handleSubmit(values, props) {
     const sessionStorageUsername = sessionStorage.getItem("username");
     values = { ...values, host_username: sessionStorageUsername };
     console.log(values);
     AxiosWithAuth()
       .post("api/listings/", values)
-      .then(response => console.log(response))
+      .then(response => {
+        console.log(response);
+        props.props.history.push("/listings");
+      })
       .catch(error => {
         // console.log(error.response.data.message);
         console.log(error);

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+
 .App {
   text-align: center;
   margin-bottom: 2%;
@@ -25,10 +27,23 @@
 }
 
 a {
-  color: #4169E1;
+  color: #f44336;
   text-decoration: none;
 }
 
 a:hover {
   color: #000;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn ease 1s;
 }
