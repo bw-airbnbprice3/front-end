@@ -53,7 +53,7 @@ const ViewAllListings = props => {
           <Typography variant="h1" className={classes.viewAlllistingsHeading}>
             Current Listings
           </Typography>
-
+          <Box className={classes.viewAllListingsCardBox}>
           {props.listingData.map(listing => (
             <Card key={listing.id} className={classes.viewAllListingsCard} raised>
               <CardHeader 
@@ -76,6 +76,7 @@ const ViewAllListings = props => {
               </CardActions>
             </Card>
           ))}
+          </Box>
         </>
       )}
     </Box>
