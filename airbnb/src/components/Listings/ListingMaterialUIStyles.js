@@ -28,11 +28,7 @@ const useStyles = makeStyles({
       flexFlow: "row wrap",
       justifyContent: "center",
       alignContent: "center", 
-      border: "1px solid #eee",
       borderRadius: "5px"
-    },
-    viewAllListingsCardHeaderLink: {
-      width: "100%"
     },
     viewAllListingsCardHeader: {
       width: "100%",

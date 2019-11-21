@@ -5,15 +5,18 @@ import useStyles from "./ListingMaterialUIStyles";
 import {
   Box,
   Button,
+  ButtonGroup,
   Card,
   CardContent,
   CardHeader,
+  CardMedia,
   CardActions,
   Typography,
   Link,
   CircularProgress
 } from "@material-ui/core";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
+import CardImg from '../../imgs/apartment.jpg';
 import {
   ListingNeighborHood,
   ListingNeighborHoodGroup
@@ -21,6 +24,7 @@ import {
 
 const ViewAllListings = props => {
   const classes = useStyles();
+  
 
   useEffect(() => {
     const sessionStorageUsername = sessionStorage.getItem("username");
@@ -51,36 +55,24 @@ const ViewAllListings = props => {
           </Typography>
 
           {props.listingData.map(listing => (
-            <Card key={listing.id} className={classes.viewAllListingsCard}>
-              <Link
-                className={classes.viewAllListingsCardHeaderLink}
-                onClick={() => props.history.push(`/listing/${listing.id}`)}
-              >
-                <CardHeader
-                  titleTypographyProps={{ variant: "h4" }}
+            <Card key={listing.id} className={classes.viewAllListingsCard} raised>
+              <CardHeader 
+                  titleTypographyProps={{ variant: "h4" }} 
                   title={listing.property_name}
+                  subheader={listing.address}
                   className={classes.viewAllListingsCardHeader}
-                />
-              </Link>
-
+              />
+              <CardMedia component="img" image={CardImg} />
               <CardContent className={classes.veiwAllListingsCardContent}>
                 <ListingNeighborHoodGroup listing={listing} />
                 <ListingNeighborHood listing={listing} />
-                <Typography variant="button">{listing.address}</Typography>
               </CardContent>
               <CardActions>
-                <Link href={`/listing/${listing.id}/edit`}>
-                  <Button variant="contained" color="primary">
-                    Edit
-                  </Button>
-                </Link>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => deleteListing(listing)}
-                >
-                  Delete
-                </Button>
+                <ButtonGroup variant="contained" size="large" aria-label="small contained button group">
+                  <Button href={`/listing/${listing.id}`} color="primary">View</Button>
+                  <Button href={`/listing/${listing.id}/edit`}>Edit</Button>
+                  <Button  color="secondary" onClick={() => deleteListing(listing)}>Delete</Button>
+                </ButtonGroup>
               </CardActions>
             </Card>
           ))}
