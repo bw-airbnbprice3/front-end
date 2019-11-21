@@ -10,7 +10,7 @@ import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   btn: {
-    margin: 10
+    margin: 10,
   }
 });
 
@@ -78,10 +78,10 @@ const Edit = (props) => {
       bathroom_number: Number(updatedValues.bathroom_number),
       bedroom_number: Number(updatedValues.bedroom_number),
       minimum_nights: Number(updatedValues.minimum_nights),
-      neighborhood: 5,
-      neighborhood_group: 4,
-      property_amenities: "Parking, shared bathroom, WiFi",
-      property_name: "Updated Room Name",
+      neighborhood: updatedValues.neighborhood,
+      neighborhood_group: updatedValues.neighborhood_group,
+      property_amenities: updatedValues.property_amenities,
+      property_name: updatedValues.property_name,
       property_price: Number(updatedValues.property_price),
       room_type: 2
     };
@@ -89,7 +89,7 @@ const Edit = (props) => {
     console.log(fixedUpdatedValues);
     // Sends the posted request to edit the listing ID, and then on successful completion, routes the user back to the listings page.
     AxiosWithAuth()
-      .post(`/api/listings/${sessionStorageUsername}`, fixedUpdatedValues)
+      .post(`/api/listings/${sessionStorageUsername}/`, fixedUpdatedValues)
       .then(response => {
         props.history.push('/listings');
       })

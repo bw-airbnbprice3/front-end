@@ -12,7 +12,6 @@ import ListingAdd from "./components/Listings/ListingAdd";
 import Listing from "./components/Listings/Listing";
 import ListingEdit from "./components/Listings/ListingEdit";
 import NavBar from "./components/NavBar";
-import ConfirmUpdate from "./components/Listings/ConfirmUpdate";
 import FormikRegistrationForm from "./components/User/RegistrationForm";
 
 const theme = createMuiTheme({
@@ -48,7 +47,6 @@ function App() {
           <PrivateRoute exact path="/listing/:id" component={Listing} />
           <PrivateRoute path="/listing/:id/edit" component={ListingEdit} />
           <PrivateRoute exact path="/user" component={UserProfile} />
-          <PrivateRoute exact path={"/confirmation"} component={ConfirmUpdate} />
         </Switch>
       </div>
     </MuiThemeProvider>
