@@ -1,18 +1,26 @@
-import React, {useState} from "react";
-import {Link} from "react-router-dom";
-import {withFormik, Form} from "formik";
-import {Button, InputAdornment, Container, MenuItem} from "@material-ui/core";
-import {FormikTextField} from "formik-material-fields";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { withFormik, Form } from "formik";
+import { Button, InputAdornment, Container, MenuItem } from "@material-ui/core";
+import { FormikTextField } from "formik-material-fields";
 import * as Yup from "yup";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
+import { makeStyles } from "@material-ui/core/styles";
+
 import {
   roomTypes,
   neighborhoodGroups,
   neighborhoods
 } from "../../utils/DataFiles";
 
-const Add = (props) => {
+const useStyles = makeStyles({
+  btn: {
+    margin: 10
+  }
+});
 
+const Add = props => {
+  const classes = useStyles();
   const [roomType, setRoomType] = useState(1);
   const [neighborhoodGroup, setNeighborhoodGroup] = useState(1);
   const [neighborhood, setNeighborhood] = useState(1);
@@ -30,7 +38,7 @@ const Add = (props) => {
   };
 
   return (
-    <Container maxWidth={"md"} margin={"3%"}>
+    <Container maxWidth={"md"} margin={"3%"} className="fade-in">
       <h2>Add Listing</h2>
       <Form>
         <FormikTextField
@@ -38,9 +46,9 @@ const Add = (props) => {
           margin={"normal"}
           variant={"outlined"}
           label={"Property Name..."}
-          type='text'
-          name='property_name'
-          placeholder='Name of property'
+          type="text"
+          name="property_name"
+          placeholder="Name of property"
         />
         ​
         <FormikTextField
@@ -49,11 +57,12 @@ const Add = (props) => {
           margin={"normal"}
           variant={"outlined"}
           label={"Property Type..."}
-          type='text'
-          name='room_type'
+          type="text"
+          name="room_type"
           value={roomType}
           onChange={roomTypeHandleChange}
-          helperText={'Please select the type of property'}>
+          helperText={"Please select the type of property"}
+        >
           {roomTypes.map(option => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
@@ -66,9 +75,9 @@ const Add = (props) => {
           margin={"normal"}
           variant={"outlined"}
           label={"Address..."}
-          type='text'
-          name='address'
-          placeholder='Address'
+          type="text"
+          name="address"
+          placeholder="Address"
         />
         ​
         <FormikTextField
@@ -77,11 +86,12 @@ const Add = (props) => {
           margin={"normal"}
           variant={"outlined"}
           label={"Neighborhood Group..."}
-          type='text'
-          name='neighborhood_group'
+          type="text"
+          name="neighborhood_group"
           value={neighborhoodGroup}
           onChange={neighborhoodGroupHandleChange}
-          helperText={'Please select your neighborhood group'}>
+          helperText={"Please select your neighborhood group"}
+        >
           {neighborhoodGroups.map(option => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
@@ -95,11 +105,12 @@ const Add = (props) => {
           margin={"normal"}
           variant={"outlined"}
           label={"Neighborhood..."}
-          type='text'
-          name='neighborhood'
+          type="text"
+          name="neighborhood"
           value={neighborhood}
           onChange={neighborhoodHandleChange}
-          helperText={'Please select your neighborhood'}>
+          helperText={"Please select your neighborhood"}
+        >
           {neighborhoods.map(option => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
@@ -112,9 +123,9 @@ const Add = (props) => {
           margin={"normal"}
           variant={"outlined"}
           label={"Availability During Year.."}
-          type='number'
-          name='availability_of_year'
-          placeholder='Availability During Year...'
+          type="number"
+          name="availability_of_year"
+          placeholder="Availability During Year..."
         />
         ​
         <FormikTextField
@@ -124,10 +135,10 @@ const Add = (props) => {
           label={"Property Price Per Night..."}
           InputProps={{
             startAdornment: <InputAdornment position="start">€</InputAdornment>,
-            placeholder: 'Property Price Per Night...'
+            placeholder: "Property Price Per Night..."
           }}
-          type='number'
-          name='property_price'
+          type="number"
+          name="property_price"
         />
         ​
         <FormikTextField
@@ -135,8 +146,8 @@ const Add = (props) => {
           margin={"normal"}
           variant={"outlined"}
           label={"Number of Bedroom(s)..."}
-          type='number'
-          name='bedroom_number'
+          type="number"
+          name="bedroom_number"
         />
         ​
         <FormikTextField
@@ -144,8 +155,8 @@ const Add = (props) => {
           margin={"normal"}
           variant={"outlined"}
           label={"Number of Bathroom(s)..."}
-          type='number'
-          name='bathroom_number'
+          type="number"
+          name="bathroom_number"
         />
         ​
         <FormikTextField
@@ -153,8 +164,8 @@ const Add = (props) => {
           margin={"normal"}
           variant={"outlined"}
           label={"Minimum Number of Night(s)..."}
-          type='number'
-          name='minimum_nights'
+          type="number"
+          name="minimum_nights"
         />
         ​
         <FormikTextField
@@ -162,18 +173,34 @@ const Add = (props) => {
           margin={"normal"}
           variant={"outlined"}
           label={"Property Amenities..."}
-          type='text'
-          name='property_amenities'
-          placeholder='Property Amenities..'
+          type="text"
+          name="property_amenities"
+          placeholder="Property Amenities.."
         />
         ​
         <Container>
           <Link to={"/listing/id"}>
-            <Button size={"large"} margin={"normal"} variant={"contained"} color={"secondary"}>Cancel</Button>
+            <Button
+              className={classes.btn}
+              size={"large"}
+              margin={"normal"}
+              variant={"contained"}
+              color={"secondary"}
+            >
+              Cancel
+            </Button>
           </Link>
           ​
-          <Button size={"large"} margin={"normal"} variant={"contained"} color={"primary"} type='submit'>Submit
-            Listing</Button>
+          <Button
+            className={classes.btn}
+            size={"large"}
+            margin={"normal"}
+            variant={"contained"}
+            color={"primary"}
+            type="submit"
+          >
+            Submit Listing
+          </Button>
         </Container>
         ​
       </Form>
@@ -184,18 +211,18 @@ const Add = (props) => {
 
 const ListingAdd = withFormik({
   mapPropsToValues({
-                     property_name,
-                     room_type,
-                     address,
-                     neighborhood_group,
-                     neighborhood,
-                     availability_of_year,
-                     property_price,
-                     bedroom_number,
-                     bathroom_number,
-                     minimum_nights,
-                     property_amenities
-                   }) {
+    property_name,
+    room_type,
+    address,
+    neighborhood_group,
+    neighborhood,
+    availability_of_year,
+    property_price,
+    bedroom_number,
+    bathroom_number,
+    minimum_nights,
+    property_amenities
+  }) {
     return {
       property_name: property_name || "",
       room_type: room_type || "",
@@ -227,13 +254,16 @@ const ListingAdd = withFormik({
     property_amenities: Yup.string().required("Property amenities is required")
   }),
 
-  handleSubmit(values) {
+  handleSubmit(values, props) {
     const sessionStorageUsername = sessionStorage.getItem("username");
-    values = {...values, host_username: sessionStorageUsername};
+    values = { ...values, host_username: sessionStorageUsername };
     console.log(values);
     AxiosWithAuth()
       .post("api/listings/", values)
-      .then(response => console.log(response))
+      .then(response => {
+        console.log(response);
+        props.props.history.push("/listings");
+      })
       .catch(error => {
         // console.log(error.response.data.message);
         console.log(error);
