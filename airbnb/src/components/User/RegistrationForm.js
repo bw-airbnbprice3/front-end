@@ -36,10 +36,10 @@ const RegistrationForm = (props) => {
             <h2>Create Your Account!</h2>
             <form className={classes.formStyle} onSubmit={registerUser} >
                 <div className="username-group">
-                    <TextField required fullWidth margin={"normal"} variant="outlined" label={"Create Username"} type="text" name="username" placeholder="Create Username" onChange={handleChange} />
+                    <TextField required fullWidth margin={"normal"} variant="outlined" label={"Create Username"} type="text" name="username" placeholder="Create Username" onChange={handleChange} required />
                 </div>
                 <div>
-                    <TextField required fullWidth margin={"normal"} variant="outlined" label={"Create Password"} type="password" name="password" placeholder="Create Password" onChange={handleChange} />
+                    <TextField required fullWidth margin={"normal"} variant="outlined" label={"Create Password"} type="password" name="password" placeholder="Create Password" onChange={handleChange} required />
                 </div>
                     <Button fullWidth className={classes.btn} variant="contained" color={"primary"} size={"large"} margin={"normal"} type="submit">Register</Button>
             </form>
