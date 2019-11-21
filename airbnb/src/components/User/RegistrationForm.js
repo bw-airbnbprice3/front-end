@@ -26,7 +26,6 @@ const RegistrationForm = (props) => {
         AxiosWithAuth()
           .post('api/register/', loginCredentials)
           .then(response => {
-              const {data} = response;
               props.history.push("/");
           })
           .catch(error => console.log(error));

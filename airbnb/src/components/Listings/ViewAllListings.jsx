@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {fetchListingsData} from "../../actions";
 import useStyles from "./ListingMaterialUIStyles";
@@ -20,7 +20,6 @@ import {
 
 const ViewAllListings = props => {
   const classes = useStyles();
-  const [listings, setListings] = useState([]);
 
   useEffect(() => {
     const sessionStorageUsername = sessionStorage.getItem("username");
