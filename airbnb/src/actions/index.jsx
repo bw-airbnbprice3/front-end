@@ -39,22 +39,22 @@ export const postLoginData = () => dispatch => {
     .catch(error => dispatch({type: POST_LOGIN_FAILURE}));
 };
 
-export const postListingData = () => dispatch => {
+export const postListingData = (listingID) => dispatch => {
   dispatch({type: POST_LISTINGS_START});
 
   AxiosWithAuth()
-    .get('api/listings/')
+    .get(`api/listings/${listingID}`)
     .then(response => dispatch({type: POST_LISTINGS_SUCCESS, payload: response.data}))
-    .catch(response => dispatch({type: POST_LISTINGS_FAILURE, payload: response.data}));
+    .catch(error => dispatch({type: POST_LISTINGS_FAILURE, payload: error.data}));
 };
 
-export const updateListingData = () => dispatch => {
+export const updateListingData = (listing) => dispatch => {
   dispatch({type: UPDATE_LISTINGS_START});
 
   AxiosWithAuth()
-    .put('api/listings/')
+    .put('api/listings/', listing)
     .then(response => dispatch({type: UPDATE_LISTINGS_SUCCESS, payload: response.data}))
-    .catch(response => dispatch({type: UPDATE_LISTINGS_FAILURE, payload: response.data}));
+    .catch(error => dispatch({type: UPDATE_LISTINGS_FAILURE, payload: error.data}));
 };
 
 // this is a template URL until the data science end points are created. Using a fake template in the meantime

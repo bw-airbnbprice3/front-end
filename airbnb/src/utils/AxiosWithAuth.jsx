@@ -7,7 +7,7 @@ const AxiosWithAuth = () => {
     baseURL: 'https://cors-anywhere.herokuapp.com/https://airbnb-optimal-price-app.herokuapp.com',
     headers: {authorization: token,
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,PUSH,POST,PATCH,DELETE,OPTIONS'}
+    'Access-Control-Allow-Methods': 'GET,PUSH,POST,PATCH,DELETE,OPTIONS,PUT'}
   })
 };
 
