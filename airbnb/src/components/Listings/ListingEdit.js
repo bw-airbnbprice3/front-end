@@ -8,7 +8,8 @@ import {postListingData} from "../../actions";
 
 const Edit = (props) => {
 
-  const [updatedValues, setUpdatedValues] = useState(props.editingData);
+  // Sets the state for various components. The dropdowns need their own state to allow them to change their input and value
+  const [updatedValues, setUpdatedValues] = useState(props.listingData);
   const [roomType, setRoomType] = useState(1);
   const [neighborhoodGroup, setNeighborhoodGroup] = useState(1);
   const [neighborhood, setNeighborhood] = useState(1);
@@ -41,6 +42,7 @@ const Edit = (props) => {
     event.preventDefault();
     console.log();
 
+    // Sends the update request to edit the listing ID, and then on successful completion, routes the user back to the listings page.
     AxiosWithAuth()
       .put(`/api/listings/${updatedValues.id}`, updatedValues)
       .then(response => {
@@ -54,10 +56,9 @@ const Edit = (props) => {
 
   return (
 
-
     <Container maxWidth={"md"} margin={"3%"}>
 
-      {props.isFetching && <CircularProgress color="primary" style={{marginTop: "3%"}}/> }
+      {props.isFetching && <CircularProgress color="primary" style={{marginTop: "3%"}}/>}
 
       {props.isFetching === false &&
       <>
@@ -72,7 +73,7 @@ const Edit = (props) => {
             label={"Property Name..."}
             name='property_name'
             helperText='Name of property'
-            defaultValue={props.editingData.property_name}
+            defaultValue={props.listingData.property_name}
             onChange={handleChanges}
           />
           ​
@@ -104,7 +105,7 @@ const Edit = (props) => {
             type='text'
             name='address'
             helperText='Address'
-            defaultValue={props.editingData.address}
+            defaultValue={props.listingData.address}
             onChange={handleChanges}
           />
           ​
@@ -155,7 +156,7 @@ const Edit = (props) => {
             type='number'
             name='availability_of_year'
             helperText='Availability During Year...'
-            defaultValue={props.editingData.availability_of_year}
+            defaultValue={props.listingData.availability_of_year}
             onChange={handleChanges}
           />
           ​
@@ -171,7 +172,7 @@ const Edit = (props) => {
             }}
             type='number'
             name='property_price'
-            defaultValue={props.editingData.property_price}
+            defaultValue={props.listingData.property_price}
             onChange={handleChanges}
           />
           ​
@@ -183,7 +184,7 @@ const Edit = (props) => {
             label={"Number of Bedroom(s)..."}
             type='number'
             name='bedroom_number'
-            defaultValue={props.editingData.bedroom_number}
+            defaultValue={props.listingData.bedroom_number}
             onChange={handleChanges}
           />
           ​
@@ -195,7 +196,7 @@ const Edit = (props) => {
             label={"Number of Bathroom(s)..."}
             type='number'
             name='bathroom_number'
-            defaultValue={props.editingData.bathroom_number}
+            defaultValue={props.listingData.bathroom_number}
             onChange={handleChanges}
           />
           ​
@@ -207,7 +208,7 @@ const Edit = (props) => {
             label={"Minimum Number of Night(s)..."}
             type='number'
             name='minimum_nights'
-            defaultValue={props.editingData.minimum_nights}
+            defaultValue={props.listingData.minimum_nights}
             onChange={handleChanges}
           />
           ​
@@ -220,7 +221,7 @@ const Edit = (props) => {
             type='text'
             name='property_amenities'
             placeholder='Property Amenities..'
-            defaultValue={props.editingData.property_amenities}
+            defaultValue={props.listingData.property_amenities}
             onChange={handleChanges}
           />
           ​
@@ -245,7 +246,7 @@ const Edit = (props) => {
 const mapStateToProps = (state) => {
 
   return {
-    editingData: state.editingData,
+    listingData: state.listingData,
     isFetching: state.isFetching,
     errors: state.errors,
   };
