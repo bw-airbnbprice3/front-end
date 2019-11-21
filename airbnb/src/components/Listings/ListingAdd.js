@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from "react-redux";
-import {Button, InputAdornment, Container, MenuItem, TextField, CircularProgress} from "@material-ui/core";
+import {Button, InputAdornment, Container, MenuItem, TextField, CircularProgress, Typography} from "@material-ui/core";
 import {neighborhoodGroups, neighborhoods, roomTypes} from "../../utils/DataFiles";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 import axios from "axios";
@@ -45,7 +45,6 @@ const Edit = (props) => {
   };
 
   const obtainOptimalPricing = () => {
-    console.log(updatedValues);
     // console.log(updatedValues);
 
     const flaskEndPointsArray = {
@@ -63,7 +62,6 @@ const Edit = (props) => {
       .post(`https://cors-anywhere.herokuapp.com/https://hostify.herokuapp.com/input`, flaskEndPointsArray)
       .then(response => {
         setOptimalPrice(response.data);
-        console.log(optimalPrice);
       })
       .catch(error => console.log(error));
   };
@@ -269,6 +267,9 @@ const Edit = (props) => {
             defaultValue={props.listingData.property_amenities}
             onChange={handleChanges}
           />
+
+          {optimalPrice && <Typography variant={"h5"} color={"primary"}>{optimalPrice}</Typography>}
+
           ​
           <Container>
 
