@@ -37,7 +37,8 @@ const useStyles = makeStyles({
     viewAllListingsCardHeader: {
       width: "100%",
       margin: "10px 0",
-      padding: " 0"
+      padding: " 0",
+      fontSize: "2rem"
     },
     veiwAllListingsCardContent:{
       width: "100%",
