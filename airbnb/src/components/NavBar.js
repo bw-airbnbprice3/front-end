@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import {AppBar, Toolbar, Button} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
@@ -71,8 +72,7 @@ const NavBar = props => {
     <AppBar position="static">
       <Toolbar className={`${classes.navContainer} nav-container`}>
         <div className={classes.navTitle}>
-          <h1 className={classes.logo}
-              onClick={sessionStorage.getItem("token") ? () => props.history.push("/listings") : () => props.history.push("/")}>Hostify</h1>
+          <h1 className={classes.logo} onClick={() => window.location.href = "/listings"}>Hostify</h1>
           {sessionStorage.getItem("token") ? <p>Welcome, {sessionStorage.getItem("username")}!</p> : null}
         </div>
         <nav className={classes.navBar}>

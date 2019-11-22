@@ -21,7 +21,6 @@ const ListingNeighborHood = props => {
 
 const ListingNeighborHoodGroup = props => {
   const {listing, classes} = props;
-  console.log(listing)
   return (
     <div>
       {
