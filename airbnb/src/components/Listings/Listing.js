@@ -100,7 +100,7 @@ const Listing = props => {
                 margin={"normal"}
                 variant={"contained"}
                 color={"primary"}
-                onClick={() => props.history.push('/listings')}
+                href={"/listings"}
               >
                 Return
               </Button>
