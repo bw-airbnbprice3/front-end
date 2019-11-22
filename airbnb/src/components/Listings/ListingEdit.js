@@ -27,10 +27,9 @@ const Edit = props => {
     props.postListingData(props.match.params.id);
   }, []);
 
-  console.log(props.listingData.room_type);
-  const [roomType, setRoomType] = useState(1);
-  const [neighborhoodGroup, setNeighborhoodGroup] = useState(1);
-  const [neighborhood, setNeighborhood] = useState(1);
+  const [roomType, setRoomType] = useState(0);
+  const [neighborhoodGroup, setNeighborhoodGroup] = useState(0);
+  const [neighborhood, setNeighborhood] = useState(0);
 
   const roomTypeHandleChange = event => {
     setRoomType(event.target.value);
@@ -116,6 +115,7 @@ const Edit = props => {
               type="text"
               name="room_type"
               value={roomType}
+              defaultValue={props.listingData.room_type}
               onChange={roomTypeHandleChange}
               helperText={"Please select the type of property"}
             >
@@ -148,6 +148,7 @@ const Edit = props => {
               label={"Neighborhood Group..."}
               type="text"
               name="neighborhood_group"
+              defaultValue={props.listingData.neighborhood_group}
               value={neighborhoodGroup}
               onChange={neighborhoodGroupHandleChange}
               helperText={"Please select your neighborhood group"}
@@ -168,6 +169,7 @@ const Edit = props => {
               label={"Neighborhood..."}
               type="text"
               name="neighborhood"
+              defaultValue={props.listingData.neighborhood}
               value={neighborhood}
               onChange={neighborhoodHandleChange}
               helperText={"Please select your neighborhood"}

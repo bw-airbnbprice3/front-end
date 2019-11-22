@@ -108,7 +108,7 @@ const Edit = props => {
       property_amenities: updatedValues.property_amenities,
       property_name: updatedValues.property_name,
       property_price: Number(updatedValues.property_price),
-      room_type: 2
+      room_type: Number(updatedValues.room_type)
     };
 
     // Sends the posted request to edit the listing ID, and then on successful completion, routes the user back to the listings page.
