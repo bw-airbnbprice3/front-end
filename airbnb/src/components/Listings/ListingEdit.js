@@ -115,7 +115,7 @@ const Edit = props => {
               label={"Property Type..."}
               type="text"
               name="room_type"
-              value={roomType}
+              defaultValue={props.listingData.room_type}
               onChange={roomTypeHandleChange}
               helperText={"Please select the type of property"}
             >
@@ -148,7 +148,7 @@ const Edit = props => {
               label={"Neighborhood Group..."}
               type="text"
               name="neighborhood_group"
-              value={neighborhoodGroup}
+              defaultValue={props.listingData.neighborhood_group}
               onChange={neighborhoodGroupHandleChange}
               helperText={"Please select your neighborhood group"}
             >
@@ -168,7 +168,7 @@ const Edit = props => {
               label={"Neighborhood..."}
               type="text"
               name="neighborhood"
-              value={neighborhood}
+              defaultValue={props.listingData.neighborhood}
               onChange={neighborhoodHandleChange}
               helperText={"Please select your neighborhood"}
             >

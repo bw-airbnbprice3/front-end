@@ -72,7 +72,7 @@ const NavBar = props => {
       <Toolbar className={`${classes.navContainer} nav-container`}>
         <div className={classes.navTitle}>
           <h1 className={classes.logo}
-              onClick={sessionStorage.getItem("token") ? () => props.history.push("/listings") : () => props.history.push("/")}>Hostify</h1>
+              onClick={sessionStorage.getItem("token") ? () => window.location.href = "/listings" : () => props.history.push("/")}>Hostify</h1>
           {sessionStorage.getItem("token") ? <p>Welcome, {sessionStorage.getItem("username")}!</p> : null}
         </div>
         <nav className={classes.navBar}>
