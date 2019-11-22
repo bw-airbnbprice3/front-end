@@ -64,8 +64,8 @@ const ViewAllListings = props => {
               />
               <CardMedia component="img" image={CardImg} className={classes.viewAllListingsCardMedia  } />
               <CardContent className={classes.veiwAllListingsCardContent}>
-                <ListingNeighborHoodGroup listing={listing} />
-                <ListingNeighborHood listing={listing} />
+                <ListingNeighborHoodGroup listing={listing} classes={classes.neighborhoodGroup} />
+                <ListingNeighborHood listing={listing}  classes={classes.neighborhood}/>
               </CardContent>
               <CardActions>
                 <ButtonGroup variant="contained" size="large" aria-label="small contained button group">
