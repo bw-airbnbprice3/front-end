@@ -38,6 +38,7 @@ const useStyles = makeStyles({
       margin: " 0 0 10px 0",
       padding: " 0",
       fontSize: "5rem",
+      overflow: "hidden",
       textOverflow: "ellipsis"
     },
     viewAllListingsCardMedia: {
@@ -47,6 +48,14 @@ const useStyles = makeStyles({
     veiwAllListingsCardContent:{
       width: "100%",
       margin: "10px 0"
+    },
+    neighborhoodGroup: {
+      width: "100%"
+    },
+    neighborhood: {
+      width: "100%",
+      overflow: "hidden",
+      textOverflow: "ellipsis"
     }
   });
 

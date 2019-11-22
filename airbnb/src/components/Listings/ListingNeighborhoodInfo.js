@@ -11,7 +11,7 @@ const ListingNeighborHood = props => {
       {
         neighborhoods.map((neighborhood, idx) => {
           if (neighborhood.value === listing.neighborhood) {
-            return <Typography variant="caption" key={idx} className={classes}>{neighborhood.label}</Typography>
+            return <Typography variant="body1" key={idx} className={classes}>{neighborhood.label}</Typography>
           }
         })
       }
