@@ -74,8 +74,14 @@ const ViewAllListings = props => {
                     className={`${classes.veiwAllListingsCardContent} fade-in`}
                   />
                   <CardContent className={classes.veiwAllListingsCardContent}>
-                    <ListingNeighborHoodGroup listing={listing} classes={classes.neighborhoodGroup}/>
-                    <ListingNeighborHood listing={listing} classes={classes.neighborhood}/>
+                    <ListingNeighborHoodGroup
+                      listing={listing}
+                      classes={classes.neighborhoodGroup}
+                    />
+                    <ListingNeighborHood
+                      listing={listing}
+                      classes={classes.neighborhood}
+                    />
                   </CardContent>
                   <CardActions>
                     <ButtonGroup
