@@ -265,9 +265,7 @@ const Edit = props => {
                 margin={"normal"}
                 variant={"contained"}
                 color={"secondary"}
-                onClick={() =>
-                  props.history.push(`/listing/${props.match.params.id}`)
-                }
+                href={`/listing/${props.match.params.id}`}
               >
                 Cancel
               </Button>{" "}
