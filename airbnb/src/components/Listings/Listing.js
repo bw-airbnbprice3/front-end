@@ -28,7 +28,7 @@ const Listing = props => {
     AxiosWithAuth().delete(
       `api/listings/${sessionStorageUsername}/${props.match.params.id}`
     );
-    props.history.push("/");
+    window.location.href = "/listings";
   };
 
   useEffect(() => {
