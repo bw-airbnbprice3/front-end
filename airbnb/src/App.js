@@ -41,7 +41,7 @@ function App() {
   
         {/*Private routes can be added here. Just follow the basic template below. This will automatically check if the token is saved in storage. If not, it will redirect them to the login page*/}
         <Switch>
-          <PrivateRoute path={"/listings"} component={ViewAllListings} />
+          <PrivateRoute exact path={"/listings"} component={ViewAllListings} />
           <PrivateRoute path={"/user/edit"} component={UserEdit} />
           <PrivateRoute path="/add" component={ListingAdd} />
           <PrivateRoute exact path="/listing/:id" component={Listing} />

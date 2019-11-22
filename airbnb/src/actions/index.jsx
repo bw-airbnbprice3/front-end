@@ -21,6 +21,8 @@ export const POST_PRICE_OPTIMIZER_START = "POST_PRICE_OPTIMIZER_START";
 export const POST_PRICE_OPTIMIZER_SUCCESS = "POST_PRICE_OPTIMIZER_SUCCESS";
 export const POST_PRICE_OPTIMIZER_FAILURE = "POST_PRICE_OPTIMIZER_FAILURE";
 
+export const IS_EDITING = "IS_EDITING";
+
 export const fetchListingsData = (listingUsername) => dispatch => {
   dispatch({type: FETCH_LISTINGS_START});
 
@@ -64,12 +66,15 @@ export const updateListingData = (listing) => dispatch => {
     .catch(error => dispatch({type: UPDATE_LISTINGS_FAILURE, payload: error.data}));
 };
 
-// this is a template URL until the data science end points are created. Using a fake template in the meantime
-export const postPriceOptimizer = () => dispatch => {
+export const postPriceOptimizer = (pricingModelData) => dispatch => {
   dispatch({type: POST_PRICE_OPTIMIZER_START});
 
   axios
-    .post('https://jsonplaceholder.typicode.com/posts')
+    .post('https://cors-anywhere.herokuapp.com/https://hostify.herokuapp.com/input', pricingModelData)
     .then(response => dispatch({type: POST_PRICE_OPTIMIZER_SUCCESS, payload: response.data}))
     .catch(error => dispatch({type: POST_PRICE_OPTIMIZER_FAILURE, payload: error.data}));
+};
+
+export const isEditingListing = () => dispatch => {
+  dispatch({type: IS_EDITING});
 };
